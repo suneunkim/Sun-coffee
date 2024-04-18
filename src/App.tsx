@@ -1,7 +1,14 @@
-import "./index.css";
+import './index.css'
+import Register from './pages/auth/Register'
 
 function App() {
-  return <div>시작하기</div>;
+  return (
+    <div>
+      <div>
+        <Register />
+      </div>
+    </div>
+  )
 }
 
-export default App;
+export default App
