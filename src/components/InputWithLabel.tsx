@@ -28,7 +28,7 @@ const InputUi = ({
   ...rest
 }: InputProps) => {
   return (
-    <div>
+    <div className="py-1">
       <Label
         className={`
       ${errors[id] && 'text-rose-500'}
@@ -40,7 +40,7 @@ const InputUi = ({
       <Input
         id={id}
         disabled={disabled}
-        {...register(id, { required: '내용을 입력해주세요' })}
+        {...register(id, { required: true })}
         type={type}
       />
     </div>

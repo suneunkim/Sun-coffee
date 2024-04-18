@@ -1,8 +1,8 @@
 interface ButtonProps {
   label: string
-  onClick: () => void
+  onClick?: () => void
   disabled?: boolean
-  outline: boolean // 흰 버튼에 테두리
+  outline?: boolean // 흰 버튼에 테두리
   small?: boolean
   rounded?: boolean
 }
