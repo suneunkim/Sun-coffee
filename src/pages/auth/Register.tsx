@@ -10,7 +10,7 @@ import InputUi from '@/components/InputWithLabel'
 import Button from '@/components/Button'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { addDoc, doc, setDoc } from 'firebase/firestore'
+import { doc, setDoc } from 'firebase/firestore'
 
 const Register = () => {
   const {
@@ -41,7 +41,6 @@ const Register = () => {
         email,
         isSeller,
       })
-
       alert('회원가입이 완료되었습니다.')
       navigate('/auth/login')
     } catch (error: any) {
