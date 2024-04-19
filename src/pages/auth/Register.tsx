@@ -1,4 +1,4 @@
-import { fireauth } from '@/firebase'
+import { db, fireauth } from '@/firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import {
   useForm,
@@ -9,6 +9,8 @@ import {
 import InputUi from '@/components/InputWithLabel'
 import Button from '@/components/Button'
 import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { addDoc, collection } from 'firebase/firestore'
 
 const Register = () => {
   const {
@@ -17,6 +19,7 @@ const Register = () => {
     formState: { errors },
   } = useForm<FieldValues, FieldErrors>()
 
+  const navigate = useNavigate()
   const [errorMessage, setErrorMessage] = useState('') // 회원가입 실패 메세지
   const [isLoading, setIsLoading] = useState(false)
 
@@ -30,7 +33,15 @@ const Register = () => {
         email,
         password
       )
-      const user = userCredential.user
+
+      const userRef = collection(db, 'users')
+      await addDoc(userRef, {
+        nickname,
+        isSeller: false,
+      })
+
+      alert('회원가입이 완료되었습니다.')
+      navigate('/auth/login')
     } catch (error: any) {
       const errorCode = error.code
       console.log('errorCode', errorCode)
@@ -102,11 +113,14 @@ const Register = () => {
           <p className="pt-3m text-sm text-rose-500">{errorMessage}</p>
         ) : null}
         {errors?.password?.message as string}
+
         <Button disabled={isLoading} label="가입하기" />
       </form>
       <div className="flex space-x-4 text-sm font-semibold">
         <p>이미 회원이신가요?</p>
-        <p className="border-black hover:border-b">로그인하러 가기</p>
+        <Link to="/auth/login">
+          <p className="border-black hover:border-b">로그인하러 하러가기</p>
+        </Link>
       </div>
     </div>
   )
