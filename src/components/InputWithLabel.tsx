@@ -1,4 +1,4 @@
-import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
+import { FieldErrors, UseFormRegisterReturn } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
@@ -8,8 +8,8 @@ interface InputProps {
   type: string
   disabled?: boolean
   formatPrice?: boolean
-  register: UseFormRegister<FieldValues>
-  required?: boolean
+  //register: <T extends string>(name: T, options?: RegisterOptions<FieldValues, T>) => any
+  register: UseFormRegisterReturn
   errors: FieldErrors
   textarea?: boolean
   [key: string]: any
@@ -22,7 +22,6 @@ const InputUi = ({
   disabled,
   formatPrice,
   register,
-  required,
   errors,
   textarea,
   ...rest
@@ -37,12 +36,7 @@ const InputUi = ({
       >
         {label}
       </Label>
-      <Input
-        id={id}
-        disabled={disabled}
-        {...register(id, { required: true })}
-        type={type}
-      />
+      <Input id={id} disabled={disabled} {...register} type={type} />
     </div>
   )
 }

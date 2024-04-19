@@ -31,7 +31,14 @@ const Register = () => {
       const errorMessage = error.message
       console.log('errorCode', errorCode)
       console.log('errorMessage', errorMessage)
-      setErrorMessage(errorMessage || '회원가입에 실패하였습니다.')
+
+      if (errorCode === 'auth/email-already-in-use') {
+        setErrorMessage('이미 가입된 이메일입니다.')
+      } else if (errorCode === 'auth/invalid-email') {
+        setErrorMessage('올바른 이메일 형식이 아닙니다.')
+      } else {
+        setErrorMessage('회원가입에 실패하였습니다.')
+      }
     } finally {
       setIsLoading(false)
     }
@@ -45,7 +52,7 @@ const Register = () => {
           id="nickname"
           type="text"
           label="닉네임"
-          register={register}
+          register={register('nickname', { required: true })}
           errors={errors}
           disabled={isLoading}
         />
@@ -53,7 +60,7 @@ const Register = () => {
           id="email"
           type="email"
           label="이메일"
-          register={register}
+          register={register('email', { required: true })}
           errors={errors}
           disabled={isLoading}
         />
@@ -61,12 +68,14 @@ const Register = () => {
           id="password"
           type="password"
           label="비밀번호"
-          register={register}
+          register={register('password', { required: true })}
           errors={errors}
           disabled={isLoading}
         />
-        {errorMessage ? <p>{errorMessage}</p> : null}
-        <Button label="제출" />
+        {errorMessage ? (
+          <p className="pt-3m text-sm text-rose-500">{errorMessage}</p>
+        ) : null}
+        <Button label="가입하기" />
       </form>
       <div className="flex space-x-4 text-sm font-semibold">
         <p>이미 회원이신가요?</p>
