@@ -10,7 +10,7 @@ import InputUi from '@/components/InputWithLabel'
 import Button from '@/components/Button'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, doc, setDoc } from 'firebase/firestore'
 
 const Register = () => {
   const {
@@ -33,10 +33,12 @@ const Register = () => {
         email,
         password
       )
-
-      const userRef = collection(db, 'users')
-      await addDoc(userRef, {
+      const user = userCredential.user
+      const userDoc = doc(db, 'users', user.uid)
+      await setDoc(userDoc, {
+        uid: user.uid,
         nickname,
+        email,
         isSeller,
       })
 

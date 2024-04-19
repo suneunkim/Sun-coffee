@@ -11,50 +11,31 @@ import {
 import { useEffect, useState } from 'react'
 
 const Home = () => {
+  const [isLogined, setIsLogined] = useState(false)
+  const user = fireauth.currentUser
+
+  if (user) {
+    const userDocRef = doc(db, 'users', user.uid)
+    console.log(userDocRef)
+  }
+
   useEffect(() => {
     onAuthStateChanged(fireauth, (user) => {
-      console.log('user', user)
+      user ? setIsLogined(true) : setIsLogined(false)
     })
-  }, [])
-
-  // 데이터 가져오기
-  useEffect(() => {
-    const fetchData = async () => {
-      const q = query(collection(db, 'todos'))
-      const querySnapshot = await getDocs(q)
-
-      const initailTodos: any[] = []
-
-      querySnapshot.forEach((doc) => {
-        const data = {
-          id: doc.id,
-          ...doc.data(),
-        }
-        initailTodos.push(data)
-      })
-      console.log(initailTodos)
-    }
-    fetchData()
-  }, [])
-
-  // 데이터 추가하기
-  const addData = async () => {
-    const newTodo = { text: '이거다', isDone: false }
-    const collectionRef = collection(db, 'todos')
-    await addDoc(collectionRef, newTodo)
+  }, [isLogined])
+  // 로그아웃 함수
+  const logOut = async (e: any) => {
+    e.preventDefault()
+    await signOut(fireauth)
   }
-  // 데이터 수정하기
-  const updateData = () => {
-    const currentTodo = { id: 'asd212312', text: '이거다', isDone: false }
-    const todoRef = doc(db, 'todos', currentTodo?.id)
-    updateDoc(todoRef, { ...currentTodo, isDone: !currentTodo.isDone })
-  }
-
   return (
     <div>
       Home
       <div>로그인 유무 확인하기</div>
-      <div></div>
+      <div>
+        <button onClick={logOut}>로그아웃</button>
+      </div>
     </div>
   )
 }
