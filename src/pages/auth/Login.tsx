@@ -6,8 +6,8 @@ import {
   FieldValues,
   FieldErrors,
 } from 'react-hook-form'
-import InputUi from '@/components/InputWithLabel'
-import Button from '@/components/Button'
+import InputUi from '@/components/elements/InputWithLabel'
+import Button from '@/components/elements/Button'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import useCurrentUser from '@/hooks/useCurrentUser'
