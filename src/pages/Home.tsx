@@ -1,10 +1,9 @@
 import { fireauth } from '@/firebase'
-import currentUser, { UserProfileType } from '@/hooks/currentUser'
+import useCurrentUser from '@/hooks/useCurrentUser'
 import { signOut } from 'firebase/auth'
-import { useEffect, useState } from 'react'
 
 const Home = () => {
-  const userProfile = currentUser()
+  const userProfile = useCurrentUser()
 
   console.log(userProfile)
 
@@ -22,7 +21,14 @@ const Home = () => {
       </div>
       <div>{userProfile?.nickname}</div>
       <div>{userProfile?.email}</div>
-      {userProfile?.isSeller ? (
+      <nav>
+        <ul>
+          <li>Home page</li>
+          <li>My orders</li>
+          <li>Setting</li>
+        </ul>
+      </nav>
+      {/* {userProfile?.isSeller ? (
         <nav>
           <ul>
             <li>Home page</li>
@@ -38,7 +44,7 @@ const Home = () => {
             <li>Setting</li>
           </ul>
         </nav>
-      )}
+      )} */}
     </div>
   )
 }

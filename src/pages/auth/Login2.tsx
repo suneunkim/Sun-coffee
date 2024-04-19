@@ -10,7 +10,7 @@ import InputUi from '@/components/InputWithLabel'
 import Button from '@/components/Button'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import currentUser from '@/hooks/currentUser'
+import currentUser from '@/hooks/useCurrentUser'
 
 const Login = () => {
   const {

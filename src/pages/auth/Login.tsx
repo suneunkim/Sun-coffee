@@ -1,9 +1,5 @@
 import { fireauth } from '@/firebase'
-import {
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-} from 'firebase/auth'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import {
   useForm,
   SubmitHandler,
@@ -12,8 +8,9 @@ import {
 } from 'react-hook-form'
 import InputUi from '@/components/InputWithLabel'
 import Button from '@/components/Button'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import useCurrentUser from '@/hooks/useCurrentUser'
 
 const Login = () => {
   const {
@@ -22,8 +19,10 @@ const Login = () => {
     formState: { errors },
   } = useForm<FieldValues, FieldErrors>()
 
+  const userProfile = useCurrentUser()
+  const navigate = useNavigate()
   const [errorMessage, setErrorMessage] = useState('') // 로그인 실패 메세지
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false) // form 중복 제출 방지
 
   const onSubmit: SubmitHandler<FieldValues> = async (formData) => {
     setIsLoading(true)
@@ -53,11 +52,11 @@ const Login = () => {
     }
   }
 
-  // 로그아웃 함수
-  const logOut = async (e: any) => {
-    e.preventDefault()
-    await signOut(fireauth)
-  }
+  useEffect(() => {
+    if (userProfile) {
+      navigate(userProfile?.isSeller ? '/seller-home' : '/')
+    }
+  }, [userProfile, navigate])
 
   return (
     <div className="flex flex-col justify-center items-center mt-32 text-[#3c3c3c]">
@@ -90,7 +89,6 @@ const Login = () => {
         ) : null}
         {errors?.password?.message as string}
         <Button disabled={isLoading} label="로그인 하기" />
-        <button onClick={logOut}>로그아웃</button>
       </form>
       <div className="flex space-x-4 text-sm font-semibold">
         <p>아직 회원이 아니신가요?</p>
