@@ -25,7 +25,7 @@ const Register = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (formData) => {
     setIsLoading(true)
-    const { nickname, email, password } = formData
+    const { nickname, email, password, isSeller } = formData
 
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -37,7 +37,7 @@ const Register = () => {
       const userRef = collection(db, 'users')
       await addDoc(userRef, {
         nickname,
-        isSeller: false,
+        isSeller,
       })
 
       alert('회원가입이 완료되었습니다.')
@@ -113,7 +113,15 @@ const Register = () => {
           <p className="pt-3m text-sm text-rose-500">{errorMessage}</p>
         ) : null}
         {errors?.password?.message as string}
-
+        <InputUi
+          label="판매자 계정 여부"
+          id="isSeller"
+          type="checkbox"
+          register={register('isSeller')}
+          errors={errors}
+          disabled={isLoading}
+          checkbox
+        />
         <Button disabled={isLoading} label="가입하기" />
       </form>
       <div className="flex space-x-4 text-sm font-semibold">

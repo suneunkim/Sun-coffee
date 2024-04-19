@@ -12,6 +12,7 @@ interface InputProps {
   register: UseFormRegisterReturn
   errors: FieldErrors
   textarea?: boolean
+  checkbox?: boolean
   [key: string]: any
 }
 
@@ -24,10 +25,16 @@ const InputUi = ({
   register,
   errors,
   textarea,
+  checkbox,
   ...rest
 }: InputProps) => {
   return (
-    <div className="py-1">
+    <div
+      className={`
+      p-1
+      ${checkbox && 'flex justify-end items-center space-x-2'}
+      `}
+    >
       <Label
         className={`
       ${errors[id] && 'text-rose-500'}
@@ -36,7 +43,15 @@ const InputUi = ({
       >
         {label}
       </Label>
-      <Input id={id} disabled={disabled} {...register} type={type} />
+      <Input
+        className={`
+      ${checkbox && 'w-4'}
+      `}
+        id={id}
+        disabled={disabled}
+        {...register}
+        type={type}
+      />
     </div>
   )
 }
