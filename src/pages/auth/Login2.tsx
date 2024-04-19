@@ -1,9 +1,5 @@
 import { fireauth } from '@/firebase'
-import {
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-} from 'firebase/auth'
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import {
   useForm,
   SubmitHandler,
@@ -12,8 +8,9 @@ import {
 } from 'react-hook-form'
 import InputUi from '@/components/InputWithLabel'
 import Button from '@/components/Button'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import currentUser from '@/hooks/currentUser'
 
 const Login = () => {
   const {
@@ -22,8 +19,10 @@ const Login = () => {
     formState: { errors },
   } = useForm<FieldValues, FieldErrors>()
 
+  const [userProfile, setUserProfile] = useState(null)
   const [errorMessage, setErrorMessage] = useState('') // 로그인 실패 메세지
   const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
 
   const onSubmit: SubmitHandler<FieldValues> = async (formData) => {
     setIsLoading(true)
@@ -35,7 +34,7 @@ const Login = () => {
         email,
         password
       )
-      console.log('로그인!', userCredential)
+      // 로그인 후 판매자 여부 확인
     } catch (error: any) {
       const errorCode = error.code
       console.log('errorCode', errorCode)
@@ -51,12 +50,6 @@ const Login = () => {
     } finally {
       setIsLoading(false)
     }
-  }
-
-  // 로그아웃 함수
-  const logOut = async (e: any) => {
-    e.preventDefault()
-    await signOut(fireauth)
   }
 
   return (
@@ -90,15 +83,13 @@ const Login = () => {
         ) : null}
         {errors?.password?.message as string}
         <Button disabled={isLoading} label="로그인 하기" />
-        <button onClick={logOut}>로그아웃</button>
       </form>
       <div className="flex space-x-4 text-sm font-semibold">
         <p>아직 회원이 아니신가요?</p>
-        <p className="border-black hover:border-b">회원가입 하러가기</p>
+        <Link to="/auth/register">
+          <p className="border-black hover:border-b">회원가입 하러가기</p>
+        </Link>
       </div>
-      <Link to="/">
-        <button>홈으로</button>
-      </Link>
     </div>
   )
 }
