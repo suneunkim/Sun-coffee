@@ -1,4 +1,5 @@
 import './index.css'
+import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <div>
       <div>
         <Register />
+        <Login />
       </div>
     </div>
   )

@@ -4,13 +4,11 @@ import {
   useForm,
   SubmitHandler,
   FieldValues,
-  UseFormReturn,
   FieldErrors,
 } from 'react-hook-form'
 import InputUi from '@/components/InputWithLabel'
 import Button from '@/components/Button'
 import { useState } from 'react'
-//import validatePassword from '@/utils/validatePassword'
 
 const Register = () => {
   const {
@@ -19,7 +17,6 @@ const Register = () => {
     formState: { errors },
   } = useForm<FieldValues, FieldErrors>()
 
-  //const [passwordError, setPasswordError] = useState<string | undefined>('')
   const [errorMessage, setErrorMessage] = useState('') // 회원가입 실패 메세지
   const [isLoading, setIsLoading] = useState(false)
 
@@ -27,11 +24,6 @@ const Register = () => {
     setIsLoading(true)
     const { nickname, email, password } = formData
 
-    // const validationResult = await validatePassword(password)
-    // if (!validationResult.valid) {
-    //   setPasswordError(validationResult.message)
-    //   return
-    // }
     try {
       const userCredential = await createUserWithEmailAndPassword(
         fireauth,
@@ -87,6 +79,10 @@ const Register = () => {
           label="비밀번호"
           register={register('password', {
             required: true,
+            minLength: {
+              value: 8,
+              message: '8자리 이상 비밀번호를 입력하세요',
+            },
             validate: {
               condition1: (value: string) => {
                 if (!/[!@#$%^&*()]/.test(value)) {
