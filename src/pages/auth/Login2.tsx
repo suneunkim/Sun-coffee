@@ -1,5 +1,5 @@
 import { fireauth } from '@/firebase'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import {
   useForm,
   SubmitHandler,
@@ -10,7 +10,7 @@ import InputUi from '@/components/InputWithLabel'
 import Button from '@/components/Button'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import useCurrentUser from '@/hooks/useCurrentUser'
+import currentUser from '@/hooks/useCurrentUser'
 
 const Login = () => {
   const {
@@ -19,11 +19,10 @@ const Login = () => {
     formState: { errors },
   } = useForm<FieldValues, FieldErrors>()
 
-  const userProfile = useCurrentUser()
-  const navigate = useNavigate()
+  const [userProfile, setUserProfile] = useState(null)
   const [errorMessage, setErrorMessage] = useState('') // 로그인 실패 메세지
-  const [isLoading, setIsLoading] = useState(false) // form 중복 제출 방지
-  const [isLogged, setIsLogged] = useState(false) // 회원가입 -> 바로 홈 이동 방지
+  const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
 
   const onSubmit: SubmitHandler<FieldValues> = async (formData) => {
     setIsLoading(true)
@@ -35,8 +34,7 @@ const Login = () => {
         email,
         password
       )
-      setIsLogged(true)
-      console.log('로그인!', userCredential)
+      // 로그인 후 판매자 여부 확인
     } catch (error: any) {
       const errorCode = error.code
       console.log('errorCode', errorCode)
@@ -53,12 +51,6 @@ const Login = () => {
       setIsLoading(false)
     }
   }
-
-  useEffect(() => {
-    if (isLogged && userProfile) {
-      navigate(userProfile?.isSeller ? '/seller-home' : '/')
-    }
-  }, [userProfile, navigate, isLogged])
 
   return (
     <div className="flex flex-col justify-center items-center mt-32 text-[#3c3c3c]">
@@ -98,9 +90,6 @@ const Login = () => {
           <p className="border-black hover:border-b">회원가입 하러가기</p>
         </Link>
       </div>
-      <Link to="/">
-        <button>홈으로</button>
-      </Link>
     </div>
   )
 }
