@@ -23,6 +23,7 @@ const Login = () => {
   const navigate = useNavigate()
   const [errorMessage, setErrorMessage] = useState('') // 로그인 실패 메세지
   const [isLoading, setIsLoading] = useState(false) // form 중복 제출 방지
+  const [isLogged, setIsLogged] = useState(false) // 회원가입 -> 바로 홈 이동 방지
 
   const onSubmit: SubmitHandler<FieldValues> = async (formData) => {
     setIsLoading(true)
@@ -34,6 +35,7 @@ const Login = () => {
         email,
         password
       )
+      setIsLogged(true)
       console.log('로그인!', userCredential)
     } catch (error: any) {
       const errorCode = error.code
@@ -53,10 +55,10 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (userProfile) {
+    if (isLogged && userProfile) {
       navigate(userProfile?.isSeller ? '/seller-home' : '/')
     }
-  }, [userProfile, navigate])
+  }, [userProfile, navigate, isLogged])
 
   return (
     <div className="flex flex-col justify-center items-center mt-32 text-[#3c3c3c]">
@@ -92,7 +94,9 @@ const Login = () => {
       </form>
       <div className="flex space-x-4 text-sm font-semibold">
         <p>아직 회원이 아니신가요?</p>
-        <p className="border-black hover:border-b">회원가입 하러가기</p>
+        <Link to="/auth/register">
+          <p className="border-black hover:border-b">회원가입 하러가기</p>
+        </Link>
       </div>
       <Link to="/">
         <button>홈으로</button>
