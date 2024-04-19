@@ -1,23 +1,37 @@
 import { fireauth } from '@/firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { useForm, SubmitHandler, FieldValues } from 'react-hook-form'
+import {
+  useForm,
+  SubmitHandler,
+  FieldValues,
+  UseFormReturn,
+  FieldErrors,
+} from 'react-hook-form'
 import InputUi from '@/components/InputWithLabel'
 import Button from '@/components/Button'
 import { useState } from 'react'
+//import validatePassword from '@/utils/validatePassword'
 
 const Register = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FieldValues>()
+  } = useForm<FieldValues, FieldErrors>()
 
-  const [errorMessage, setErrorMessage] = useState('')
+  //const [passwordError, setPasswordError] = useState<string | undefined>('')
+  const [errorMessage, setErrorMessage] = useState('') // 회원가입 실패 메세지
   const [isLoading, setIsLoading] = useState(false)
 
   const onSubmit: SubmitHandler<FieldValues> = async (formData) => {
     setIsLoading(true)
     const { nickname, email, password } = formData
+
+    // const validationResult = await validatePassword(password)
+    // if (!validationResult.valid) {
+    //   setPasswordError(validationResult.message)
+    //   return
+    // }
     try {
       const userCredential = await createUserWithEmailAndPassword(
         fireauth,
@@ -25,17 +39,20 @@ const Register = () => {
         password
       )
       const user = userCredential.user
-      console.log('유저 회원가입 완료', user)
     } catch (error: any) {
       const errorCode = error.code
-      const errorMessage = error.message
       console.log('errorCode', errorCode)
-      console.log('errorMessage', errorMessage)
+      console.log('errorMessage', error.message)
 
+      // firebase의 회원가입 시 오류 코드들
       if (errorCode === 'auth/email-already-in-use') {
         setErrorMessage('이미 가입된 이메일입니다.')
       } else if (errorCode === 'auth/invalid-email') {
         setErrorMessage('올바른 이메일 형식이 아닙니다.')
+      } else if (errorCode === 'auth/weak-password') {
+        setErrorMessage(
+          '비밀번호 8자리 이상은 //대문자, 소문자, 숫자, 특수문자 중 3종류 이상을 포함해야 합니다.'
+        )
       } else {
         setErrorMessage('회원가입에 실패하였습니다.')
       }
@@ -68,14 +85,28 @@ const Register = () => {
           id="password"
           type="password"
           label="비밀번호"
-          register={register('password', { required: true })}
+          register={register('password', {
+            required: true,
+            validate: {
+              condition1: (value: string) => {
+                if (!/[!@#$%^&*()]/.test(value)) {
+                  return '특수문자를 포함해주세요'
+                }
+                if (!/[A-Z]/.test(value)) {
+                  return '대문자를 포함해주세요'
+                }
+                return true
+              },
+            },
+          })}
           errors={errors}
           disabled={isLoading}
         />
         {errorMessage ? (
           <p className="pt-3m text-sm text-rose-500">{errorMessage}</p>
         ) : null}
-        <Button label="가입하기" />
+        {errors?.password?.message as string}
+        <Button disabled={isLoading} label="가입하기" />
       </form>
       <div className="flex space-x-4 text-sm font-semibold">
         <p>이미 회원이신가요?</p>
