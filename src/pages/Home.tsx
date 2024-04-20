@@ -5,7 +5,7 @@ const Home = () => {
   const userProfile = useCurrentUser()
 
   return (
-    <main>
+    <main className="bg-gray-100">
       <Nav />
     </main>
   )

@@ -1,16 +1,27 @@
 import { ReactElement } from 'react'
+import { NavLink } from 'react-router-dom'
 
 interface MenuItemProps {
   icon: ReactElement
   children: React.ReactNode
+  to: string
 }
 
-const MenuItem = ({ icon, children }: MenuItemProps) => {
+const MenuItem = ({ icon, children, to }: MenuItemProps) => {
   return (
-    <div className="flex items-center space-x-3">
-      {icon}
-      <li>{children}</li>
-    </div>
+    <li className=" py-2 ">
+      <NavLink
+        to={to}
+        className={({ isActive }) =>
+          isActive
+            ? 'flex items-center text-[#FFA16C] border-r-[3px] border-[#FFA16C]'
+            : 'flex'
+        }
+      >
+        {icon}
+        <span className="ml-2">{children}</span>
+      </NavLink>
+    </li>
   )
 }
 
