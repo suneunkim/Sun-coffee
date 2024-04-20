@@ -21,25 +21,28 @@ const Nav = () => {
     alert('로그아웃 하셨습니다.')
   }
   return (
-    <main className="w-1/4 border lg:w-[16rem] px-6 py-8 text-[#3c3c3c] font-bold h-screen flex flex-col">
+    <main className="w-1/4 min-w-[200px] lg:w-[16rem] py-8 text-[#3c3c3c] font-bold h-screen flex flex-col bg-[#FFFFFF]">
       <h2 className="text-4xl font-semibold mb-20 flex justify-center">
         <span className="text-[#FFA16C]">Sun' </span> Coffee
       </h2>
       <nav>
-        <ul className="space-y-6">
-          <MenuItem icon={<BiHomeSmile className="w-5 h-5" />}>
+        <ul className="space-y-4 ml-5">
+          <MenuItem to="/" icon={<BiHomeSmile className="w-5 h-5" />}>
             Home page
           </MenuItem>
-          <MenuItem icon={<CiBookmarkMinus className="w-5 h-5" />}>
-            <li>My orders</li>
+          <MenuItem to="myordes" icon={<CiBookmarkMinus className="w-5 h-5" />}>
+            My orders
           </MenuItem>
-          <MenuItem icon={<IoSettingsOutline className="w-5 h-5" />}>
-            <li>Setting</li>
+          <MenuItem
+            to="setting"
+            icon={<IoSettingsOutline className="w-5 h-5" />}
+          >
+            Setting
           </MenuItem>
         </ul>
       </nav>
 
-      <div className=" mt-auto mb-5 space-y-5">
+      <div className=" mt-auto mb-5 space-y-5 ml-5">
         {userProfile ? (
           <div className="flex space-x-3 items-center">
             <VscAccount className="w-8 h-8" />
