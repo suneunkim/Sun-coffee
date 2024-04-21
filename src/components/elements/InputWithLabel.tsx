@@ -8,7 +8,6 @@ interface InputProps {
   type: string
   disabled?: boolean
   formatPrice?: boolean
-  //register: <T extends string>(name: T, options?: RegisterOptions<FieldValues, T>) => any
   register: UseFormRegisterReturn
   errors: FieldErrors
   textarea?: boolean
@@ -43,16 +42,22 @@ const InputUi = ({
       >
         {label}
       </Label>
-      <Input
-        className={`
-      ${checkbox && 'w-4'}
-      focus:border-[#FFA16C] focus:outline-none focus:ring-1 focus:ring-[#FFA16C]
-      `}
-        id={id}
-        disabled={disabled}
-        {...register}
-        type={type}
-      />
+      <div className="relative flex items-center">
+        <Input
+          className={`
+        ${checkbox && 'w-4'}
+        ${formatPrice && 'pl-8'}
+        focus:border-[#FFA16C] focus:outline-none focus:ring-1 focus:ring-[#FFA16C]
+        `}
+          id={id}
+          disabled={disabled}
+          {...register}
+          type={type}
+        />
+        {formatPrice && (
+          <span className="absolute left-3 text-sm text-gray-600">₩</span>
+        )}
+      </div>
     </div>
   )
 }

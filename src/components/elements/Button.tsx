@@ -48,7 +48,10 @@ const Button = ({
       ${outline && 'bg-white hover:bg-gray-900 '}
       ${outline && 'border-gray-200 border-[1px]'}
       ${outline && 'py-[0.6rem]'}
-      ${category && 'bg-white border-gray-200 border-[1px] text-gray-700'}
+      ${
+        category &&
+        'bg-white border-gray-200 border-[1px] text-gray-700 hover:bg-gray-100'
+      }
     `}
     >
       {label}
