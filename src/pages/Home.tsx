@@ -7,7 +7,7 @@ import Category from '@/components/common/Category'
 
 const Home = () => {
   const userProfile = useCurrentUser()
-
+  console.log('home', userProfile)
   return (
     <main className="bg-gray-50 flex">
       <Nav />
