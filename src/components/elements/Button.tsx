@@ -6,6 +6,8 @@ interface ButtonProps {
   small?: boolean
   rounded?: boolean
   cart?: boolean
+  category?: boolean
+  [key: string]: any
 }
 
 const Button = ({
@@ -16,6 +18,8 @@ const Button = ({
   small,
   rounded,
   cart,
+  category,
+  ...rest
 }: ButtonProps) => {
   return (
     <button
@@ -36,11 +40,15 @@ const Button = ({
       bg-[#FFA16C] text-zinc-50
       ${rounded ? 'rounded-3xl' : 'rounded-md'}
       ${small && 'py-[6px] px-0 my-0'}
-      ${cart && 'my-0 py-2 font-semibold text-lg'}
+      ${cart && 'my-0 py-2 text-lg'}
       ${outline && 'text-gray-800  hover:text-white'}
       ${outline && 'bg-white hover:bg-gray-900 '}
       ${outline && 'border-gray-200 border-[1px]'}
       ${outline && 'py-[0.6rem]'}
+      ${
+        category &&
+        'bg-white text-gray-700 font-semibold w-28 mb-0 my-3 border-gray-200 border-[1px]'
+      }
     `}
     >
       {label}

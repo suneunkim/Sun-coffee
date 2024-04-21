@@ -3,6 +3,7 @@ import Nav from '@/components/common/Nav'
 import SearchBar from '@/components/common/SearchBar'
 import Cart from '@/components/Product/Cart'
 import ProductList from '@/components/Product/ProductList'
+import Category from '@/components/common/Category'
 
 const Home = () => {
   const userProfile = useCurrentUser()
@@ -12,6 +13,7 @@ const Home = () => {
       <Nav />
       <section className="flex flex-col w-full min-w-[600px] px-5">
         <SearchBar />
+        <Category />
         <ProductList />
       </section>
       <Cart />
