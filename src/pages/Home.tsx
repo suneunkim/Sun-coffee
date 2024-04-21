@@ -1,4 +1,3 @@
-import useCurrentUser from '@/hooks/useCurrentUser'
 import Nav from '@/components/common/Nav'
 import SearchBar from '@/components/common/SearchBar'
 import Cart from '@/components/Product/Cart'
@@ -7,8 +6,6 @@ import Category from '@/components/common/Category'
 import { customerMenu } from '@/components/common/MenuItem'
 
 const Home = () => {
-  const userProfile = useCurrentUser()
-  console.log('home', userProfile)
   return (
     <main className="bg-gray-50 flex">
       <Nav customerMenu={customerMenu} />
