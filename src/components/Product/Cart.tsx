@@ -31,7 +31,7 @@ const Cart = () => {
             <p>Total</p>
             <span>5,500원</span>
           </div>
-          <ElButton label="Place on order" rounded />
+          <ElButton label="Place on order" rounded textWhite />
         </div>
       </div>
     </div>

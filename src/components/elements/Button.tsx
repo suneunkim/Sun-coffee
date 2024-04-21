@@ -7,6 +7,7 @@ interface ButtonProps {
   rounded?: boolean
   cart?: boolean
   category?: boolean
+  textWhite?: boolean
   [key: string]: any
 }
 
@@ -19,6 +20,7 @@ const Button = ({
   rounded,
   cart,
   category,
+  textWhite,
   ...rest
 }: ButtonProps) => {
   return (
@@ -27,7 +29,7 @@ const Button = ({
       disabled={disabled}
       onClick={onClick}
       className={`
-      my-5
+      my-2
       w-full
       p-3
       transition
@@ -37,7 +39,8 @@ const Button = ({
       py-3
       text-sm
       border-2 border-[#FFA16C]
-      bg-[#FFA16C] text-zinc-50
+      bg-[#FFA16C]
+      ${textWhite && 'text-zinc-50'}
       ${rounded ? 'rounded-3xl' : 'rounded-md'}
       ${small && 'py-[6px] px-0 my-0'}
       ${cart && 'my-0 py-2 text-lg'}
@@ -45,10 +48,7 @@ const Button = ({
       ${outline && 'bg-white hover:bg-gray-900 '}
       ${outline && 'border-gray-200 border-[1px]'}
       ${outline && 'py-[0.6rem]'}
-      ${
-        category &&
-        'bg-white text-gray-700 font-semibold w-28 mb-0 my-3 border-gray-200 border-[1px]'
-      }
+      ${category && 'bg-white border-gray-200 border-[1px] text-gray-700'}
     `}
     >
       {label}
@@ -57,7 +57,3 @@ const Button = ({
 }
 
 export default Button
-
-// ${outline ? 'border-1 border-[#3c3c3c]' : 'border-[#FFA16C]'}
-// ${outline ? 'bg-white' : 'bg-[#FFA16C]'}
-// ${outline ? 'text-[#FFA16C]' : 'text-zinc-50'}

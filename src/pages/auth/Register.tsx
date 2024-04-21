@@ -123,7 +123,7 @@ const Register = () => {
           disabled={isLoading}
           checkbox
         />
-        <Button disabled={isLoading} label="가입하기" />
+        <Button textWhite disabled={isLoading} label="가입하기" />
       </form>
       <div className="flex space-x-4 text-sm font-semibold">
         <p>이미 회원이신가요?</p>
