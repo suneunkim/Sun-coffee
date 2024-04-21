@@ -8,7 +8,7 @@ const Home = () => {
   const userProfile = useCurrentUser()
 
   return (
-    <main className="bg-gray-100 flex w-full">
+    <main className="bg-gray-50 flex w-full">
       <Nav />
       <section className="flex flex-col w-full min-w-[600px] px-5">
         <SearchBar />

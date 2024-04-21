@@ -46,6 +46,7 @@ const InputUi = ({
       <Input
         className={`
       ${checkbox && 'w-4'}
+      focus:border-[#FFA16C] focus:outline-none focus:ring-1 focus:ring-[#FFA16C]
       `}
         id={id}
         disabled={disabled}

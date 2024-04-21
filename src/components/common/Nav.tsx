@@ -2,7 +2,6 @@ import { fireauth } from '@/firebase'
 import useCurrentUser from '@/hooks/useCurrentUser'
 import { signOut } from 'firebase/auth'
 
-import { PiCoffeeLight } from 'react-icons/pi'
 import { IoSettingsOutline } from 'react-icons/io5'
 import { CiBookmarkMinus } from 'react-icons/ci'
 import { VscAccount } from 'react-icons/vsc'
