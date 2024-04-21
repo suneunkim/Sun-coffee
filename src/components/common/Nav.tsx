@@ -2,15 +2,17 @@ import { fireauth } from '@/firebase'
 import useCurrentUser from '@/hooks/useCurrentUser'
 import { signOut } from 'firebase/auth'
 
-import { IoSettingsOutline } from 'react-icons/io5'
-import { CiBookmarkMinus } from 'react-icons/ci'
 import { VscAccount } from 'react-icons/vsc'
-import { BiHomeSmile } from 'react-icons/bi'
+
 import { SlLogin } from 'react-icons/sl'
 import { SlLogout } from 'react-icons/sl'
 import { Link } from 'react-router-dom'
-import MenuItem from './MenuItem'
-const Nav = () => {
+import MenuItem, { customerMenu } from './MenuItem'
+
+interface Props {
+  customerMenu: typeof customerMenu
+}
+const Nav = ({ customerMenu }: Props) => {
   const userProfile = useCurrentUser()
 
   // 로그아웃 함수
@@ -20,24 +22,17 @@ const Nav = () => {
     alert('로그아웃 하셨습니다.')
   }
   return (
-    <main className="w-1/4 min-w-[200px] lg:w-[16rem] py-8 text-[#3c3c3c] font-bold h-screen flex flex-col bg-[#FFFFFF]">
+    <main className="w-1/4 min-w-[220px] lg:w-[16rem] py-8 text-[#3c3c3c] font-bold h-screen flex flex-col bg-[#FFFFFF]">
       <h2 className="text-4xl font-semibold mb-20 flex justify-center">
         <span className="text-[#FFA16C]">Sun' </span> Coffee
       </h2>
       <nav>
         <ul className="space-y-4 ml-5">
-          <MenuItem to="/" icon={<BiHomeSmile className="w-5 h-5" />}>
-            Home page
-          </MenuItem>
-          <MenuItem to="myordes" icon={<CiBookmarkMinus className="w-5 h-5" />}>
-            My orders
-          </MenuItem>
-          <MenuItem
-            to="setting"
-            icon={<IoSettingsOutline className="w-5 h-5" />}
-          >
-            Setting
-          </MenuItem>
+          {customerMenu.map((item) => (
+            <MenuItem key={item.label} to={item.path} icon={item.icon}>
+              {item.label}
+            </MenuItem>
+          ))}
         </ul>
       </nav>
 
