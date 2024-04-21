@@ -1,9 +1,6 @@
 import Button from '../elements/Button'
 import CountButton from './CountButton'
 
-//TODO: 버튼 컴포넌트에서 스몰 사이즈를 상품리스트용으로 크기 수정하기
-// cart props는 Added to cart에 맞게끔 설정하기. 아웃라인을 기본으로, 호버시 아웃라인 해제하기
-
 const ProductCard = () => {
   return (
     <div className="w-[400px] h-[260px] rounded-lg bg-white p-4  shadow-sm">

@@ -3,7 +3,7 @@ import './index.css'
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import Home from './pages/Home'
-import SellerHome from './pages/SellerHome'
+import SellerHome from './pages/seller/SellerHome'
 import ProtectedRoute from './components/routing/ProtectedRoute'
 
 function App() {
