@@ -5,14 +5,20 @@ import InputFile from '@/components/elements/InputFile'
 import InputUi from '@/components/elements/InputWithLabel'
 import TextareaUi from '@/components/elements/TextareaUi'
 import { useState } from 'react'
-import { Button } from '@/components/ui/button'
+
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form'
 import useCurrentUser from '@/hooks/useCurrentUser'
+import { collection, doc, setDoc } from 'firebase/firestore'
+import { db } from '@/firebase'
+import UploadCategoryBtn from '@/components/Product/UploadCategoryBtn'
+import { useNavigate } from 'react-router-dom'
 
-// TODO: 상품 업로드시 userProfile로 isSeller true 확인하기
 const UploadProduct = () => {
   const userProfile = useCurrentUser()
+  const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false) // form 중복 제출 방지
+  const [category, setCategory] = useState('')
+  const categories = ['Coffee', 'Non Coffee', 'Food']
 
   const {
     register,
@@ -20,19 +26,53 @@ const UploadProduct = () => {
     formState: { errors },
     setValue,
     watch,
+    reset,
   } = useForm<FieldValues>({
     defaultValues: {
       name: '',
       description: '',
       price: '',
       imageURL: '',
+      category: '',
     },
   })
 
-  const styles = `rounded-3xl bg-white border-2 text-gray-800 hover:text-white hover:bg-gray-700`
   const imageURL = watch('imageURL')
+
   const onSubmit: SubmitHandler<FieldValues> = async (formData) => {
-    console.log(formData)
+    if (!userProfile?.isSeller) {
+      alert('판매자만 상품을 등록할 수 있습니다.')
+      return
+    }
+    if (!category) {
+      alert('카테고리를 선택하세요!')
+      return
+    }
+    if (imageURL.length === 0) {
+      alert('이미지를 등록해주세요!')
+      return
+    }
+
+    setIsLoading(true)
+    const { name, description, price } = formData
+    try {
+      const productDocRef = doc(collection(db, 'products'))
+      await setDoc(productDocRef, {
+        name,
+        description,
+        price,
+        imageURL,
+        category,
+        createdAt: new Date(),
+      })
+      alert('상품이 정상적으로 등록되었습니다.')
+      navigate('/seller-home')
+    } catch (error) {
+      console.log(error)
+      alert('상품 등록을 실패했습니다.')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const imageSetValue = (id: string, value: string) => {
@@ -67,13 +107,19 @@ const UploadProduct = () => {
             formatPrice
           />
           <InputFile
+            //register={register('imageURL', {required: true})}
             value={imageURL}
             onChange={(value) => imageSetValue('imageURL', value)}
           />
-          <div className="flex space-x-3">
-            <Button className={styles}>Coffee</Button>
-            <Button className={styles}>Non Coffee</Button>
-            <Button className={styles}>Food</Button>
+          <div className="flex space-x-3 justify-center gap-5">
+            {categories.map((item) => (
+              <UploadCategoryBtn
+                key={item}
+                category={item}
+                setCategory={setCategory}
+                isActive={category === item}
+              />
+            ))}
           </div>
           <ButtonUi label="등록하기" textWhite disabled={isLoading} />
         </form>
