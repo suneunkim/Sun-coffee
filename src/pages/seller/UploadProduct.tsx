@@ -6,7 +6,7 @@ import InputUi from '@/components/elements/InputWithLabel'
 import TextareaUi from '@/components/elements/TextareaUi'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { useForm } from 'react-hook-form'
+import { useForm, SubmitHandler, FieldValues } from 'react-hook-form'
 
 const UploadProduct = () => {
   const [isLoading, setIsLoading] = useState(false) // form 중복 제출 방지
@@ -16,7 +16,9 @@ const UploadProduct = () => {
     formState: { errors },
   } = useForm()
   const styles = `rounded-3xl bg-white border-2 text-gray-800 hover:text-white hover:bg-gray-700`
-  const onSubmit = () => {}
+  const onSubmit: SubmitHandler<FieldValues> = async (formData) => {
+    console.log(formData)
+  }
   return (
     <main className="bg-gray-50 flex">
       <Nav customerMenu={sellerMenu} />
@@ -33,7 +35,7 @@ const UploadProduct = () => {
           <TextareaUi
             label="상품 설명"
             id="description"
-            register={register('descriptions')}
+            register={register('descriptions', { required: true })}
             errors={errors}
           />
           <InputFile />
