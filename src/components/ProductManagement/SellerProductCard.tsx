@@ -1,5 +1,4 @@
 import Button from '../elements/Button'
-import CountButton from './CountButton'
 
 interface Product {
   id: string
@@ -16,11 +15,10 @@ interface Product {
 
 interface ProductCardProps {
   data: Product
+  onEdit: (data: Product) => void
 }
 
-const ProductCard = ({ data }: ProductCardProps) => {
-  {
-  }
+const SellerProductCard = ({ data, onEdit }: ProductCardProps) => {
   return (
     <div className="w-[400px] h-[260px] rounded-lg bg-white p-4  shadow-sm">
       <section className="flex">
@@ -33,25 +31,23 @@ const ProductCard = ({ data }: ProductCardProps) => {
             <p>{data.price}</p>
           </div>
           <p>{data.description}</p>
-          <div className="flex gap-2 items-center">
-            <p className="font-semibold pr-2 text-gray-800">Size</p>
-            <Button label="Small" rounded small outline />
-            <Button label="Large" rounded small outline />
-          </div>
         </div>
       </section>
       <div className="flex items-center">
-        <div className="flex w-60 pl-4 items-center gap-3 font-semibold text-gray-600">
-          <CountButton label="-" />
-          <span>3</span>
-          <CountButton label="+" />
-        </div>
+        <div className="flex w-60 pl-4 items-center gap-3 font-semibold text-gray-600"></div>
         <div className="w-[90%]">
-          <Button textWhite cart rounded label="Added to cart" />
+          <Button
+            onClick={() => onEdit(data)}
+            textWhite
+            cart
+            rounded
+            label="Edit"
+            type="button"
+          />
         </div>
       </div>
     </div>
   )
 }
 
-export default ProductCard
+export default SellerProductCard

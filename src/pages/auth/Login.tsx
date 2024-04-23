@@ -30,13 +30,8 @@ const Login = () => {
     const { email, password } = formData
 
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        fireauth,
-        email,
-        password
-      )
+      await signInWithEmailAndPassword(fireauth, email, password)
       setIsLogged(true)
-      console.log('로그인!', userCredential)
     } catch (error: any) {
       const errorCode = error.code
       console.log('errorCode', errorCode)

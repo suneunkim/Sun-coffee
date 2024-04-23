@@ -8,7 +8,7 @@ import {
   uploadBytes,
 } from 'firebase/storage'
 import useCurrentUser from '@/hooks/useCurrentUser'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
 
 interface Props {
@@ -19,6 +19,10 @@ interface Props {
 function InputFile({ onChange, value }: Props) {
   const userProfile = useCurrentUser()
   const [isUploaded, setisUploaded] = useState(false) // 파일 선택 중복 금지
+
+  useEffect(() => {
+    value ? setisUploaded(true) : setisUploaded(false)
+  }, [value])
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
