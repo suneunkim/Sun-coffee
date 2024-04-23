@@ -337,12 +337,3 @@ const initailFood: Product[] = [
 export default function initailUpload() {
   initialDataUpload(initailCoffee)
 }
-
-// {
-//   name: '',
-//   description: '',
-//   price: '',
-//   imageURL: '',
-//   category: 'Non Coffee',
-//   createdAt: new Date(),
-// },
