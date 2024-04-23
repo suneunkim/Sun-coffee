@@ -58,7 +58,7 @@ const SellerProductList = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="grid grid-cols-2 gap-5 mt-10 min-w-[830px] min-h-[600px] max-h-[620px] overflow-y-auto">
+      <div className="grid grid-cols-2 gap-5 mt-10 min-w-[870px] min-h-[600px] max-h-[620px] overflow-y-auto">
         {products.length === 0 && (
           <div className="flex justify-center">
             아직 등록된 상품이 없습니다.

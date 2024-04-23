@@ -28,7 +28,7 @@ const ProductList = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="grid grid-cols-2 gap-5 mt-10 min-w-[830px] min-h-[600px] max-h-[620px] overflow-y-auto">
+      <div className="grid grid-cols-2 gap-5 mt-10 min-w-[870px] min-h-[600px] max-h-[620px] overflow-y-auto">
         {products.map((product) => (
           <ProductCard data={product} key={product.id} />
         ))}
