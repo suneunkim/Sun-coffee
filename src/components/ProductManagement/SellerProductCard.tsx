@@ -16,9 +16,10 @@ interface Product {
 interface ProductCardProps {
   data: Product
   onEdit: (data: Product) => void
+  onDelete: (data: Product) => void
 }
 
-const SellerProductCard = ({ data, onEdit }: ProductCardProps) => {
+const SellerProductCard = ({ data, onEdit, onDelete }: ProductCardProps) => {
   return (
     <div className="w-[400px] h-[260px] rounded-lg bg-white p-4  shadow-sm">
       <section className="flex">
@@ -35,13 +36,21 @@ const SellerProductCard = ({ data, onEdit }: ProductCardProps) => {
       </section>
       <div className="flex items-center">
         <div className="flex w-60 pl-4 items-center gap-3 font-semibold text-gray-600"></div>
-        <div className="w-[90%]">
+        <div className="flex w-full">
           <Button
             onClick={() => onEdit(data)}
             textWhite
             cart
             rounded
             label="Edit"
+            type="button"
+          />
+          <Button
+            onClick={() => onDelete(data)}
+            textWhite
+            cart
+            rounded
+            label="Delete"
             type="button"
           />
         </div>
