@@ -101,13 +101,12 @@ const UploadProduct = () => {
           <InputUi
             label="가격"
             id="price"
-            type="price"
+            type="number"
             register={register('price', { required: true })}
             errors={errors}
             formatPrice
           />
           <InputFile
-            //register={register('imageURL', {required: true})}
             value={imageURL}
             onChange={(value) => imageSetValue('imageURL', value)}
           />
