@@ -2,6 +2,9 @@ import fetchProducts from '@/api/fetchProducts'
 import { useEffect, useState } from 'react'
 import SellerProductCard from './SellerProductCard'
 import EditProduct from './EditProduct'
+import { deleteDoc, doc } from 'firebase/firestore'
+import { db, storage } from '@/firebase'
+import { deleteObject, ref } from 'firebase/storage'
 
 interface ProductProps {
   id: string
@@ -31,9 +34,23 @@ const SellerProductList = () => {
     loadProducts()
   }, [])
 
-  const handleEditClick = (data: any) => {
+  const handleEditClick = (data: ProductProps) => {
     setSelectedProduct(data)
     setShowEditModal(true)
+  }
+
+  const handleDeleteClick = async (data: ProductProps) => {
+    const productDocRef = doc(db, 'products', data.id)
+    const imageRef = ref(storage, data.imageURL)
+
+    try {
+      await deleteDoc(productDocRef)
+      await deleteObject(imageRef)
+      alert('상품이 삭제되었습니다.')
+    } catch (error) {
+      console.error('삭제 실패', error)
+      alert('상품 삭제에 실패했습니다.')
+    }
   }
 
   return (
@@ -49,6 +66,7 @@ const SellerProductList = () => {
             data={product}
             key={product.id}
             onEdit={(data) => handleEditClick(data)}
+            onDelete={(data) => handleDeleteClick(data)}
           />
         ))}
       </div>
