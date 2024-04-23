@@ -3,8 +3,9 @@ import './index.css'
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import Home from './pages/Home'
-import SellerHome from './pages/SellerHome'
+import SellerHome from './pages/seller/SellerHome'
 import ProtectedRoute from './components/routing/ProtectedRoute'
+import UploadProduct from './pages/seller/UploadProduct'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/auth/register" element={<Register />} />
       <Route path="/auth/login" element={<Login />} />
+      <Route path="/upload" element={<UploadProduct />} />
     </Routes>
   )
 }
