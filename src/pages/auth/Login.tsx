@@ -6,8 +6,8 @@ import {
   FieldValues,
   FieldErrors,
 } from 'react-hook-form'
-import InputUi from '@/components/InputWithLabel'
-import Button from '@/components/Button'
+import InputUi from '@/components/elements/InputWithLabel'
+import Button from '@/components/elements/Button'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import useCurrentUser from '@/hooks/useCurrentUser'
@@ -30,13 +30,8 @@ const Login = () => {
     const { email, password } = formData
 
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        fireauth,
-        email,
-        password
-      )
+      await signInWithEmailAndPassword(fireauth, email, password)
       setIsLogged(true)
-      console.log('로그인!', userCredential)
     } catch (error: any) {
       const errorCode = error.code
       console.log('errorCode', errorCode)
@@ -90,7 +85,7 @@ const Login = () => {
           <p className="pt-3m text-sm text-rose-500">{errorMessage}</p>
         ) : null}
         {errors?.password?.message as string}
-        <Button disabled={isLoading} label="로그인 하기" />
+        <Button textWhite disabled={isLoading} label="로그인 하기" />
       </form>
       <div className="flex space-x-4 text-sm font-semibold">
         <p>아직 회원이 아니신가요?</p>
