@@ -10,19 +10,31 @@ import {
 import useCurrentUser from '@/hooks/useCurrentUser'
 import { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
-
+interface ProductProps {
+  id: string
+  name: string
+  description: string
+  price: string
+  imageURL: string
+  category: string
+  createdAt: {
+    seconds: number
+    nanoseconds: number
+  }
+}
 interface Props {
   onChange: (vaule: string) => void
-  value: string
+  imageURL: string
+  data: any
 }
 
-function InputFile({ onChange, value }: Props) {
+function InputFile({ onChange, imageURL, data }: Props) {
   const userProfile = useCurrentUser()
   const [isUploaded, setisUploaded] = useState(false) // 파일 선택 중복 금지
 
   useEffect(() => {
-    value ? setisUploaded(true) : setisUploaded(false)
-  }, [value])
+    imageURL ? setisUploaded(true) : setisUploaded(false)
+  }, [imageURL])
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -39,11 +51,13 @@ function InputFile({ onChange, value }: Props) {
   }
 
   const handleCancleUpload = async () => {
-    if (!value) return
+    if (!imageURL) return
 
-    const imageRef = ref(storage, value)
     try {
-      await deleteObject(imageRef)
+      if (data.imageURL.startsWith('https://firebasestorage.googleapis.com')) {
+        const imageRef = ref(storage, imageURL)
+        await deleteObject(imageRef)
+      }
       onChange('')
       setisUploaded(false)
     } catch (error) {
@@ -67,9 +81,9 @@ function InputFile({ onChange, value }: Props) {
           취소
         </Button>
       </div>
-      {value && (
+      {imageURL && (
         <div className="flex justify-center ">
-          <img className="w-[300px] rounded-lg" src={value} />
+          <img className="w-[300px] rounded-lg" src={imageURL} />
         </div>
       )}
     </div>
