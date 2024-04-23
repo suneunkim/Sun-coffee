@@ -19,28 +19,28 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ data }: ProductCardProps) => {
-  {
-  }
   return (
-    <div className="w-[400px] h-[260px] rounded-lg bg-white p-4  shadow-sm">
-      <section className="flex">
-        <div className="bg-gray-100 w-[130px] h-[170px] rounded-xl relative overflow-hidden">
-          <img src={data.imageURL} className="w-[150px] h-full object-cover " />
+    <div className="w-[420px] h-[280px] rounded-lg bg-white p-4 shadow-sm">
+      <section className="flex justify-center">
+        <div className="bg-gray-100/60 w-[130px] h-[170px] rounded-xl relative overflow-hidden flex items-center">
+          <img src={data.imageURL} />
         </div>
-        <div className="p-4 space-y-2 w-[190px]">
-          <div className="flex gap-4">
-            <h3>{data.name}</h3>
-            <p>{data.price}</p>
+        <article className="flex flex-col justify-center pl-4 space-y-2 w-[75%]">
+          <div className="flex gap-4 items-center">
+            <h3 className="font-semibold w-[170px]">{data.name}</h3>
+            <p className="text-[#FFA16C] font-bold text-sm">
+              {Number(data.price).toLocaleString('ko-KR')}원
+            </p>
           </div>
-          <p>{data.description}</p>
+          <p className="text-sm text-gray-600 h-[70px]">{data.description}</p>
           <div className="flex gap-2 items-center">
-            <p className="font-semibold pr-2 text-gray-800">Size</p>
+            <p className="font-semibold pr-2 text-gray-800 mr-3">Size</p>
             <Button label="Small" rounded small outline />
             <Button label="Large" rounded small outline />
           </div>
-        </div>
+        </article>
       </section>
-      <div className="flex items-center">
+      <section className="flex items-center">
         <div className="flex w-60 pl-4 items-center gap-3 font-semibold text-gray-600">
           <CountButton label="-" />
           <span>3</span>
@@ -49,7 +49,7 @@ const ProductCard = ({ data }: ProductCardProps) => {
         <div className="w-[90%]">
           <Button textWhite cart rounded label="Added to cart" />
         </div>
-      </div>
+      </section>
     </div>
   )
 }

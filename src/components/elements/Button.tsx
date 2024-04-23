@@ -25,6 +25,7 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <button
+      {...rest}
       type="submit"
       disabled={disabled}
       onClick={onClick}
@@ -42,7 +43,7 @@ const Button = ({
       bg-[#FFA16C]
       ${textWhite && 'text-zinc-50'}
       ${rounded ? 'rounded-3xl' : 'rounded-md'}
-      ${small && 'py-[6px] px-0 my-0'}
+      ${small && 'py-[8px] my-0 w-20'}
       ${cart && 'my-0 py-2 text-lg'}
       ${outline && 'text-gray-800  hover:text-white'}
       ${outline && 'bg-white hover:bg-gray-900 '}

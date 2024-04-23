@@ -11,7 +11,7 @@ const SearchBar = () => {
         <Input
           type="text"
           placeholder="Search"
-          className="rounded-xl pl-8 w-[98%] focus:border-gray-600"
+          className="rounded-xl pl-8 w-[98%] focus:border-gray-300"
         />
         <Button className="bg-[#FFA16C] absolute right-0 rounded-full">
           <PiCoffeeLight className="mr-2 w-5 h-5" />
