@@ -41,11 +41,14 @@ const SellerProductList = () => {
 
   const handleDeleteClick = async (data: ProductProps) => {
     const productDocRef = doc(db, 'products', data.id)
-    const imageRef = ref(storage, data.imageURL)
 
     try {
+      if (data.imageURL.startsWith('https://firebasestorage.googleapis.com')) {
+        const imageRef = ref(storage, data.imageURL)
+        await deleteDoc(productDocRef)
+        await deleteObject(imageRef)
+      }
       await deleteDoc(productDocRef)
-      await deleteObject(imageRef)
       alert('상품이 삭제되었습니다.')
     } catch (error) {
       console.error('삭제 실패', error)

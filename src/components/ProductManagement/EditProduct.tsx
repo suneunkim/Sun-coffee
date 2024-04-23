@@ -95,6 +95,7 @@ const EditProduct = ({ selectedProduct, onClose }: EditProps) => {
         createdAt: new Date(),
       })
       alert('상품 정보가 수정되었습니다.')
+      onClose()
     } catch (error) {
       console.log(error)
       alert('상품 정보 수정이 실패했습니다.')
@@ -139,7 +140,8 @@ const EditProduct = ({ selectedProduct, onClose }: EditProps) => {
           formatPrice
         />
         <InputFile
-          value={imageURL}
+          data={selectedProduct}
+          imageURL={imageURL}
           onChange={(value) => imageSetValue('imageURL', value)}
         />
         <div className="flex space-x-3 justify-center gap-5">
