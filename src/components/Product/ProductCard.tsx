@@ -1,21 +1,12 @@
 import Button from '../elements/Button'
 import CountButton from './CountButton'
-
-interface Product {
+import { fetchProductProps } from '@/api/fetchProducts'
+interface ProductWithId extends fetchProductProps {
   id: string
-  name: string
-  description: string
-  price: string
-  imageURL: string
-  category: string
-  createdAt: {
-    seconds: number
-    nanoseconds: number
-  }
 }
 
 interface ProductCardProps {
-  data: Product
+  data: ProductWithId
 }
 
 const ProductCard = ({ data }: ProductCardProps) => {

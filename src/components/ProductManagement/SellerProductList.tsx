@@ -1,38 +1,22 @@
-import fetchProducts from '@/api/fetchProducts'
-import { useEffect, useState } from 'react'
+import { fetchProductProps } from '@/api/fetchProducts'
+import { useState } from 'react'
 import SellerProductCard from './SellerProductCard'
 import EditProduct from './EditProduct'
 import { deleteDoc, doc } from 'firebase/firestore'
 import { db, storage } from '@/firebase'
 import { deleteObject, ref } from 'firebase/storage'
+import useQueryProducts from '@/api/fetchProducts'
 
-interface ProductProps {
+interface ProductProps extends fetchProductProps {
   id: string
-  name: string
-  description: string
-  price: string
-  imageURL: string
-  category: string
-  createdAt: {
-    seconds: number
-    nanoseconds: number
-  }
 }
 
 const SellerProductList = () => {
-  const [products, setProducts] = useState<ProductProps[]>([])
+  const { data: products } = useQueryProducts()
   const [selectedProduct, setSelectedProduct] = useState<ProductProps | null>(
     null
   )
   const [showEditModal, setShowEditModal] = useState(false)
-
-  useEffect(() => {
-    const loadProducts = async () => {
-      const fetchedproducts = await fetchProducts()
-      setProducts(fetchedproducts)
-    }
-    loadProducts()
-  }, [])
 
   const handleEditClick = (data: ProductProps) => {
     setSelectedProduct(data)
@@ -59,12 +43,12 @@ const SellerProductList = () => {
   return (
     <div className="flex justify-center">
       <div className="grid grid-cols-2 gap-5 mt-10 min-w-[870px] min-h-[600px] max-h-[620px] overflow-y-auto">
-        {products.length === 0 && (
+        {products?.length === 0 && (
           <div className="flex justify-center">
             아직 등록된 상품이 없습니다.
           </div>
         )}
-        {products.map((product) => (
+        {products?.map((product) => (
           <SellerProductCard
             data={product}
             key={product.id}

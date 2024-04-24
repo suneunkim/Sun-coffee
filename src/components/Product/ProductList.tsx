@@ -1,35 +1,14 @@
-import fetchProducts from '@/api/fetchProducts'
+import { useInView } from 'react-intersection-observer'
 import ProductCard from './ProductCard'
-import { useEffect, useState } from 'react'
-
-interface ProductProps {
-  id: string
-  name: string
-  description: string
-  price: string
-  imageURL: string
-  category: string
-  createdAt: {
-    seconds: number
-    nanoseconds: number
-  }
-}
+import useQueryProducts from '@/api/fetchProducts'
 
 const ProductList = () => {
-  const [products, setProducts] = useState<ProductProps[]>([])
-
-  useEffect(() => {
-    const loadProducts = async () => {
-      const fetchedproducts = await fetchProducts()
-      setProducts(fetchedproducts)
-    }
-    loadProducts()
-  }, [])
+  const { data: products } = useQueryProducts()
 
   return (
     <div className="flex justify-center">
       <div className="grid grid-cols-2 gap-5 mt-10 min-w-[870px] min-h-[600px] max-h-[620px] overflow-y-auto">
-        {products.map((product) => (
+        {products?.map((product) => (
           <ProductCard data={product} key={product.id} />
         ))}
       </div>

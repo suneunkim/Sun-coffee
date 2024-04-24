@@ -1,7 +1,8 @@
 import { db } from '@/firebase'
+import { useQuery } from '@tanstack/react-query'
 import { collection, query, getDocs, orderBy } from 'firebase/firestore'
 
-interface fetchProductsProduct {
+export type fetchProductProps = {
   name: string
   description: string
   price: string
@@ -20,10 +21,14 @@ const fetchProducts = async () => {
   const querySnapshot = await getDocs(q)
   const products = querySnapshot.docs.map((doc) => ({
     id: doc.id,
-    ...(doc.data() as fetchProductsProduct),
+    ...(doc.data() as fetchProductProps),
   }))
 
   return products
 }
 
-export default fetchProducts
+const useQueryProducts = () => {
+  return useQuery({ queryKey: ['products'], queryFn: fetchProducts })
+}
+
+export default useQueryProducts
