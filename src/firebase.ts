@@ -7,8 +7,8 @@ import { getStorage } from 'firebase/storage'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyDTHb0HxKklITnY2ZCDMSn_SRjHKsoMrME',
-  authDomain: 'sun-coffee-9078a.firebaseapp.com',
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
   projectId: 'sun-coffee-9078a',
   storageBucket: 'sun-coffee-9078a.appspot.com',
   messagingSenderId: '785555173432',
