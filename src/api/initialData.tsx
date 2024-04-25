@@ -1,7 +1,7 @@
 import { db } from '@/firebase'
 import { collection, doc, writeBatch } from 'firebase/firestore'
 
-type Category = 'Coffee' | 'Non Coffee' | 'Food'
+type Category = 'Coffee' | 'Non-Coffee' | 'Food'
 
 type Product = {
   name: string
@@ -100,42 +100,42 @@ const initailCoffee: Product[] = [
     category: 'Coffee',
     createdAt: new Date(),
   },
-  {
-    name: '콜드브루 라떼',
-    description:
-      '콜드브루의 깔끔하고 쌉싸름한 풍미가 고소한 우유와 만나 누구나 부담없이 즐길 수 있는 음료',
-    price: '4500',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1647320848557.png',
-    category: 'Coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: '아포가토 오리지널',
-    description:
-      '대중들에게 가장 친숙한 타입의 아포가토로 에스프레소와 아몬드를 토핑한 제품',
-    price: '4700',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1691731083701.png',
-    category: 'Coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: '토피넛 라떼',
-    description:
-      '고소한 아몬드의 맛과 달콤한 코코아가 조화롭게 어우러진 달콤한 음료 ',
-    price: '',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1694414746800.png',
-    category: 'Coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: 'HOT 토피넛 라떼',
-    description:
-      '고소한 아몬드의 맛과 달콤한 코코아가 조화롭게 어우러진 달콤한 음료 ',
-    price: '',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1694414812893.png',
-    category: 'Coffee',
-    createdAt: new Date(),
-  },
+  // {
+  //   name: '콜드브루 라떼',
+  //   description:
+  //     '콜드브루의 깔끔하고 쌉싸름한 풍미가 고소한 우유와 만나 누구나 부담없이 즐길 수 있는 음료',
+  //   price: '4500',
+  //   imageURL: 'https://www.ediya.com/files/menu/IMG_1647320848557.png',
+  //   category: 'Coffee',
+  //   createdAt: new Date(),
+  // },
+  // {
+  //   name: '아포가토 오리지널',
+  //   description:
+  //     '대중들에게 가장 친숙한 타입의 아포가토로 에스프레소와 아몬드를 토핑한 제품',
+  //   price: '4700',
+  //   imageURL: 'https://www.ediya.com/files/menu/IMG_1691731083701.png',
+  //   category: 'Coffee',
+  //   createdAt: new Date(),
+  // },
+  // {
+  //   name: '토피넛 라떼',
+  //   description:
+  //     '고소한 아몬드의 맛과 달콤한 코코아가 조화롭게 어우러진 달콤한 음료 ',
+  //   price: '',
+  //   imageURL: 'https://www.ediya.com/files/menu/IMG_1694414746800.png',
+  //   category: 'Coffee',
+  //   createdAt: new Date(),
+  // },
+  // {
+  //   name: 'HOT 토피넛 라떼',
+  //   description:
+  //     '고소한 아몬드의 맛과 달콤한 코코아가 조화롭게 어우러진 달콤한 음료 ',
+  //   price: '',
+  //   imageURL: 'https://www.ediya.com/files/menu/IMG_1694414812893.png',
+  //   category: 'Coffee',
+  //   createdAt: new Date(),
+  // },
 ]
 const initialNonCoffee: Product[] = [
   {
@@ -144,7 +144,7 @@ const initialNonCoffee: Product[] = [
       '홍차의 깊은 맛과 풍부한 복숭아 향이 어우러진 달콤한 여름철 인기 음료',
     price: '2900',
     imageURL: 'https://www.ediya.com/files/menu/IMG_1647322929626.png',
-    category: 'Non Coffee',
+    category: 'Non-Coffee',
     createdAt: new Date(),
   },
   {
@@ -153,7 +153,7 @@ const initialNonCoffee: Product[] = [
       '호박고구마를 활용하여 달콤하고 고소한 고구마의 풍미가 진하게 느껴지는 음료',
     price: '4200',
     imageURL: 'https://www.ediya.com/files/menu/IMG_1647322131838.png',
-    category: 'Non Coffee',
+    category: 'Non-Coffee',
     createdAt: new Date(),
   },
   {
@@ -162,7 +162,7 @@ const initialNonCoffee: Product[] = [
       '호박고구마를 활용하여 달콤하고 고소한 고구마의 풍미가 진하게 느껴지는 음료',
     price: '3800',
     imageURL: 'https://www.ediya.com/files/menu/IMG_1647322145592.png',
-    category: 'Non Coffee',
+    category: 'Non-Coffee',
     createdAt: new Date(),
   },
   {
@@ -170,7 +170,7 @@ const initialNonCoffee: Product[] = [
     description: '녹차에 우유가 더해져 부담없이 즐길 수 있는 음료',
     price: '3900',
     imageURL: 'https://www.ediya.com/files/menu/IMG_1647321741180.png',
-    category: 'Non Coffee',
+    category: 'Non-Coffee',
     createdAt: new Date(),
   },
   {
@@ -178,7 +178,7 @@ const initialNonCoffee: Product[] = [
     description: '녹차에 우유가 더해져 부담없이 즐길 수 있는 음료',
     price: '3900',
     imageURL: 'https://www.ediya.com/files/menu/IMG_1647321755481.png',
-    category: 'Non Coffee',
+    category: 'Non-Coffee',
     createdAt: new Date(),
   },
   {
@@ -187,7 +187,7 @@ const initialNonCoffee: Product[] = [
       '진한 모카시럽과 부드러운 우유, 그리고 달콤한 휘핑크림의 삼박자가 조화를 이루는 음료',
     price: '3900',
     imageURL: 'https://www.ediya.com/files/menu/IMG_1647321814289.png',
-    category: 'Non Coffee',
+    category: 'Non-Coffee',
     createdAt: new Date(),
   },
   {
@@ -196,7 +196,7 @@ const initialNonCoffee: Product[] = [
       '진한 모카시럽과 부드러운 우유, 그리고 달콤한 휘핑크림의 삼박자가 조화를 이루는 음료',
     price: '3900',
     imageURL: 'https://www.ediya.com/files/menu/IMG_1647321755481.png',
-    category: 'Non Coffee',
+    category: 'Non-Coffee',
     createdAt: new Date(),
   },
   {
@@ -205,36 +205,36 @@ const initialNonCoffee: Product[] = [
       '생강 특유의 진하고 풍부한 맛과 향미를 느낄 수 있으며, 은은하고 부드러운 단맛의 유자와 꿀이 더해진 음료',
     price: '4200',
     imageURL: 'https://www.ediya.com/files/menu/IMG_1647322677153.png',
-    category: 'Non Coffee',
+    category: 'Non-Coffee',
     createdAt: new Date(),
   },
-  {
-    name: 'HOT 생강차',
-    description:
-      '생강 특유의 진하고 풍부한 맛과 향미를 느낄 수 있으며, 은은하고 부드러운 단맛의 유자와 꿀이 더해진 음료',
-    price: '4200',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1647322669524.png',
-    category: 'Non Coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: '쌍화차',
-    description:
-      '전통 쌍화차의 느낌을 재해석하여 다양한 연령층이 즐길 수 있도록 은은한 향과 고소함을 강조한 음료',
-    price: '4200',
-    imageURL: '	https://www.ediya.com/files/menu/IMG_1647322778699.png',
-    category: 'Non Coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: 'HOT 쌍화차',
-    description:
-      '전통 쌍화차의 느낌을 재해석하여 다양한 연령층이 즐길 수 있도록 은은한 향과 고소함을 강조한 음료',
-    price: '4200',
-    imageURL: '	https://www.ediya.com/files/menu/IMG_1647322753151.png',
-    category: 'Non Coffee',
-    createdAt: new Date(),
-  },
+  // {
+  //   name: 'HOT 생강차',
+  //   description:
+  //     '생강 특유의 진하고 풍부한 맛과 향미를 느낄 수 있으며, 은은하고 부드러운 단맛의 유자와 꿀이 더해진 음료',
+  //   price: '4200',
+  //   imageURL: 'https://www.ediya.com/files/menu/IMG_1647322669524.png',
+  //   category: 'Non-Coffee',
+  //   createdAt: new Date(),
+  // },
+  // {
+  //   name: '쌍화차',
+  //   description:
+  //     '전통 쌍화차의 느낌을 재해석하여 다양한 연령층이 즐길 수 있도록 은은한 향과 고소함을 강조한 음료',
+  //   price: '4200',
+  //   imageURL: '	https://www.ediya.com/files/menu/IMG_1647322778699.png',
+  //   category: 'Non-Coffee',
+  //   createdAt: new Date(),
+  // },
+  // {
+  //   name: 'HOT 쌍화차',
+  //   description:
+  //     '전통 쌍화차의 느낌을 재해석하여 다양한 연령층이 즐길 수 있도록 은은한 향과 고소함을 강조한 음료',
+  //   price: '4200',
+  //   imageURL: '	https://www.ediya.com/files/menu/IMG_1647322753151.png',
+  //   category: 'Non-Coffee',
+  //   createdAt: new Date(),
+  // },
 ]
 const initailFood: Product[] = [
   {
@@ -335,5 +335,5 @@ const initailFood: Product[] = [
 ]
 
 export default function initailUpload() {
-  initialDataUpload(initailCoffee)
+  initialDataUpload(initialNonCoffee)
 }

@@ -7,33 +7,45 @@ import {
   orderBy,
   startAfter,
   limit,
+  where,
 } from 'firebase/firestore'
+
+type Category = 'Coffee' | 'Non Coffee' | 'Food'
 
 export type fetchProductProps = {
   name: string
   description: string
   price: string
   imageURL: string
-  category: string
+  category: Category
   createdAt: {
     seconds: number
     nanoseconds: number
   }
 }
 
-export const fetchProducts = async ({ pageParam = null }) => {
+export const fetchCategoryProducts = async (
+  category: Category,
+  pageParam: string | null
+) => {
   const productsCol = collection(db, 'products')
-  let q
 
+  let q
   if (pageParam) {
     q = query(
       productsCol,
+      where('category', '==', category),
       orderBy('createdAt', 'desc'),
       startAfter(pageParam || 0),
       limit(4)
     )
   } else {
-    q = query(productsCol, orderBy('createdAt', 'desc'), limit(4))
+    q = query(
+      productsCol,
+      where('category', '==', category),
+      orderBy('createdAt', 'desc'),
+      limit(4)
+    )
   }
 
   const querySnapshot = await getDocs(q)
@@ -46,10 +58,20 @@ export const fetchProducts = async ({ pageParam = null }) => {
   return { products, nextPage: lastVisible }
 }
 
-export const useQueryProducts = () => {
+// 첫 홈 화면의 useQuery
+export const useQueryInitialProducts = (category: Category) => {
+  return useQuery({
+    queryKey: ['initial-products', category],
+    queryFn: () => fetchCategoryProducts(category, null),
+    refetchOnWindowFocus: false,
+  })
+}
+
+// 카테고리 별 무한 스크롤 useInfiniteQuery
+export const useCategoryQueryProducts = (category: Category) => {
   return useInfiniteQuery({
-    queryKey: ['products'],
-    queryFn: fetchProducts,
+    queryKey: ['products', category],
+    queryFn: ({ pageParam }) => fetchCategoryProducts(category, pageParam),
     getNextPageParam: (lastPage) => {
       return lastPage.nextPage ? lastPage.nextPage : undefined
     },
