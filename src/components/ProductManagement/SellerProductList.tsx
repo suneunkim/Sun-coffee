@@ -5,14 +5,14 @@ import EditProduct from './EditProduct'
 import { deleteDoc, doc } from 'firebase/firestore'
 import { db, storage } from '@/firebase'
 import { deleteObject, ref } from 'firebase/storage'
-import useQueryProducts from '@/api/fetchProducts'
+import { useQuerySellerProducts } from '@/api/fetchProducts'
 
 interface ProductProps extends fetchProductProps {
   id: string
 }
 
 const SellerProductList = () => {
-  const { data: products } = useQueryProducts()
+  const { data: products } = useQuerySellerProducts()
   const [selectedProduct, setSelectedProduct] = useState<ProductProps | null>(
     null
   )
@@ -43,11 +43,11 @@ const SellerProductList = () => {
   return (
     <div className="flex justify-center">
       <div className="grid grid-cols-2 gap-5 mt-10 min-w-[870px] min-h-[600px] max-h-[620px] overflow-y-auto">
-        {products?.length === 0 && (
+        {/* {products?.length === 0 && (
           <div className="flex justify-center">
             아직 등록된 상품이 없습니다.
           </div>
-        )}
+        )} */}
         {products?.map((product) => (
           <SellerProductCard
             data={product}
