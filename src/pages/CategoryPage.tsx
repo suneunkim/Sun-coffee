@@ -1,5 +1,5 @@
 import { useInView } from 'react-intersection-observer'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useCategoryQueryProducts } from '@/api/fetchProducts'
 import { Navigate, useParams } from 'react-router-dom'
 import ProductCard from '@/components/Product/ProductCard'
@@ -12,6 +12,7 @@ const CategoryPage = () => {
     threshold: 0.1,
   })
   const { category } = useParams()
+  const [orderByPrice, setOrderByPrice] = useState(false)
 
   const validCategories: TypeCategory[] = ['coffee', 'food', 'non-coffee']
   if (!category || !validCategories.includes(category as TypeCategory)) {
@@ -19,7 +20,7 @@ const CategoryPage = () => {
   }
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useCategoryQueryProducts(category as TypeCategory)
+    useCategoryQueryProducts(category as TypeCategory, orderByPrice)
 
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
@@ -29,6 +30,8 @@ const CategoryPage = () => {
 
   return (
     <PageLayout>
+      <button onClick={() => setOrderByPrice(false)}>최신순</button>
+      <button onClick={() => setOrderByPrice(true)}>가격순</button>
       <div className="flex justify-center">
         <div className="grid grid-cols-2 gap-5 mt-10 min-w-[870px] min-h-[600px] max-h-[620px] overflow-y-auto">
           {data?.pages &&

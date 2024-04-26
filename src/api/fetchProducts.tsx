@@ -12,6 +12,7 @@ import {
 import { TypeCategory } from '@/types/common'
 
 export type fetchProductProps = {
+  id: string
   name: string
   description: string
   price: string
@@ -25,7 +26,8 @@ export type fetchProductProps = {
 
 export const fetchCategoryProducts = async (
   category: TypeCategory,
-  pageParam: string | null
+  pageParam: string | null,
+  orderByPrice: boolean = false
 ) => {
   const productsCol = collection(db, 'products')
 
@@ -34,7 +36,10 @@ export const fetchCategoryProducts = async (
     q = query(
       productsCol,
       where('category', '==', category),
-      orderBy('createdAt', 'desc'),
+      orderBy(
+        orderByPrice ? 'price' : 'createdAt',
+        orderByPrice ? 'asc' : 'desc'
+      ), // 가격순은 오름차순으로 설정
       startAfter(pageParam || 0),
       limit(4)
     )
@@ -42,19 +47,22 @@ export const fetchCategoryProducts = async (
     q = query(
       productsCol,
       where('category', '==', category),
-      orderBy('createdAt', 'desc'),
+      orderBy(
+        orderByPrice ? 'price' : 'createdAt',
+        orderByPrice ? 'asc' : 'desc'
+      ),
       limit(4)
     )
   }
 
   const querySnapshot = await getDocs(q)
+  console.log(querySnapshot)
   const lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1]
   const products = querySnapshot.docs.map((doc) => ({
-    id: doc.id,
     ...(doc.data() as fetchProductProps),
   }))
   //console.log('Last Visible Document:', lastVisible)
-  console.log('querySnapshot', querySnapshot)
+  //console.log('querySnapshot', querySnapshot)
   return { products, nextPage: lastVisible }
 }
 
@@ -68,10 +76,14 @@ export const useQueryInitialProducts = (category: TypeCategory) => {
 }
 
 // 카테고리 별 무한 스크롤 useInfiniteQuery
-export const useCategoryQueryProducts = (category: TypeCategory) => {
+export const useCategoryQueryProducts = (
+  category: TypeCategory,
+  orderByPrice: boolean
+) => {
   return useInfiniteQuery({
-    queryKey: ['products', category],
-    queryFn: ({ pageParam }) => fetchCategoryProducts(category, pageParam),
+    queryKey: ['products', category, { orderByPrice }],
+    queryFn: ({ pageParam }) =>
+      fetchCategoryProducts(category, pageParam, orderByPrice),
     getNextPageParam: (lastPage) => {
       return lastPage.nextPage ? lastPage.nextPage : undefined
     },
@@ -79,7 +91,7 @@ export const useCategoryQueryProducts = (category: TypeCategory) => {
   })
 }
 
-// 판매자 페이지는 무한 스크롤 적용 X
+// 판매자 페이지. 무한 스크롤 적용 X
 
 export const fetchSellerProducts = async () => {
   const productsCol = collection(db, 'products')
@@ -87,7 +99,6 @@ export const fetchSellerProducts = async () => {
 
   const querySnapshot = await getDocs(q)
   const products = querySnapshot.docs.map((doc) => ({
-    id: doc.id,
     ...(doc.data() as fetchProductProps),
   }))
 
