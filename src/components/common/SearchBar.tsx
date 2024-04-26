@@ -6,7 +6,7 @@ import { Button } from '../ui/button'
 const SearchBar = () => {
   return (
     <form className="py-5">
-      <div className="flex items-center relative w-[55%]">
+      <div className="flex items-center relative w-[450px]">
         <CiSearch className="absolute left-2" />
         <Input
           type="text"
