@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import SellerHome from './pages/seller/SellerHome'
 import ProtectedRoute from './components/routing/ProtectedRoute'
 import UploadProduct from './pages/seller/UploadProduct'
+import CategoryPage from './pages/CategoryPage'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         }
       />
       <Route path="/" element={<Home />} />
+      <Route path="/:category" element={<CategoryPage />} />
       <Route path="/auth/register" element={<Register />} />
       <Route path="/auth/login" element={<Login />} />
       <Route path="/upload" element={<UploadProduct />} />

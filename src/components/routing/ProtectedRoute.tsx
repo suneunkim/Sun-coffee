@@ -1,8 +1,9 @@
 import useCurrentUser from '@/hooks/useCurrentUser'
 import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
+import { ChildrenProps } from '../common/PageLayout'
 
-const ProtectedRoute = ({ children }: any) => {
+const ProtectedRoute = ({ children }: ChildrenProps) => {
   const userProfile = useCurrentUser()
   const [redirect, setRedirect] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
