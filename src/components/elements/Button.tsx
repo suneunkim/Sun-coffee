@@ -8,7 +8,6 @@ interface ButtonProps {
   cart?: boolean
   category?: boolean
   textWhite?: boolean
-  match?: boolean
   [key: string]: any
 }
 
@@ -22,7 +21,6 @@ const Button = ({
   cart,
   category,
   textWhite,
-  match,
   ...rest
 }: ButtonProps) => {
   return (
@@ -55,7 +53,6 @@ const Button = ({
         category &&
         'bg-white border-gray-200 border-[1px] text-gray-700 hover:bg-gray-100'
       }
-      ${match ? 'bg-[#FFA16C]' : ''}
     `}
     >
       {label}

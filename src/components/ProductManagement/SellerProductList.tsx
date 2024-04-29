@@ -1,13 +1,13 @@
-import { TypeProduct } from '@/types/common'
+import { fetchProductProps } from '@/api/fetchProducts'
 import { useState } from 'react'
 import SellerProductCard from './SellerProductCard'
 import EditProduct from './EditProduct'
 import { deleteDoc, doc } from 'firebase/firestore'
 import { db, storage } from '@/firebase'
 import { deleteObject, ref } from 'firebase/storage'
-import { useQuerySellerProducts } from '@/api/productQueries'
+import { useQuerySellerProducts } from '@/api/fetchProducts'
 
-interface ProductProps extends TypeProduct {
+interface ProductProps extends fetchProductProps {
   id: string
 }
 
@@ -48,7 +48,6 @@ const SellerProductList = () => {
             아직 등록된 상품이 없습니다.
           </div>
         )} */}
-        {/*         
         {products?.map((product) => (
           <SellerProductCard
             data={product}
@@ -56,7 +55,7 @@ const SellerProductList = () => {
             onEdit={(data) => handleEditClick(data)}
             onDelete={(data) => handleDeleteClick(data)}
           />
-        ))} */}
+        ))}
       </div>
       {showEditModal && (
         <div>
