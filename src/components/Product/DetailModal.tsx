@@ -1,5 +1,6 @@
 import { useQueryRecommendProduct } from '@/api/productQueries'
 import { TypeProduct } from '@/types/common'
+import { Badge } from '../ui/badge'
 interface Props {
   product: TypeProduct | null
   onClose: () => void
@@ -19,8 +20,11 @@ const DetailModal = ({ product, onClose, onModal }: Props) => {
             src={product?.imageURL}
             className=" object-contain bg-gray-100"
           />
-          <article className="flex flex-col py-5 px-7">
-            <h2 className="font-semibold text-2xl">{product?.name}</h2>
+          <article className="flex flex-col pt-5 px-7">
+            <div className="flex justify-between">
+              <h2 className="font-semibold text-2xl">{product?.name}</h2>
+              <Badge>{product?.category}</Badge>
+            </div>
             <div className="border-b border-black border-[1.1px] my-3" />
             <div className="mb-5">{product?.description}</div>
 
@@ -68,7 +72,7 @@ const DetailModal = ({ product, onClose, onModal }: Props) => {
                 </li>
               </ul>
             </div>
-            <div className="flex justify-between mt-auto">
+            <div className="flex gap-5 mt-auto">
               <button className="w-52 border p-3">장바구니에 담기</button>
               <button className="w-24 border p-3" onClick={onClose}>
                 닫기

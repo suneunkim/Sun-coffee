@@ -1,4 +1,5 @@
 import Button from '../elements/Button'
+import { Badge } from '../ui/badge'
 import CountButton from './CountButton'
 import { TypeProduct } from '@/types/common'
 
@@ -19,6 +20,9 @@ const ProductCard = ({ data, onModal }: ProductCardProps) => {
             className="hover:scale-125 transition hover:cursor-pointer"
             src={data.imageURL}
           />
+          <Badge className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-slate-400 whitespace-nowrap">
+            {data.category}
+          </Badge>
         </div>
         <article className="flex flex-col justify-center pl-4 space-y-2 w-[75%]">
           <div className="flex gap-4 items-center">
