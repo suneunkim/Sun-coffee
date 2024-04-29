@@ -1,20 +1,28 @@
 import Button from '../elements/Button'
+import { Badge } from '../ui/badge'
 import CountButton from './CountButton'
-import { fetchProductProps } from '@/api/fetchProducts'
-interface ProductWithId extends fetchProductProps {
-  id: string
-}
+import { TypeProduct } from '@/types/common'
 
 interface ProductCardProps {
-  data: ProductWithId
+  data: TypeProduct
+  onModal: (data: TypeProduct) => void
 }
 
-const ProductCard = ({ data }: ProductCardProps) => {
+const ProductCard = ({ data, onModal }: ProductCardProps) => {
   return (
     <div className="w-[420px] h-[280px] rounded-lg bg-white p-4 shadow-md mb-4">
       <section className="flex justify-center">
-        <div className="bg-gray-100/60 w-[130px] h-[170px] rounded-xl relative overflow-hidden flex items-center">
-          <img src={data.imageURL} />
+        <div
+          onClick={() => onModal(data)}
+          className="bg-gray-100/60 w-[130px] h-[170px] rounded-xl relative overflow-hidden flex items-center"
+        >
+          <img
+            className="hover:scale-125 transition hover:cursor-pointer"
+            src={data.imageURL}
+          />
+          <Badge className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-slate-400 whitespace-nowrap">
+            {data.category}
+          </Badge>
         </div>
         <article className="flex flex-col justify-center pl-4 space-y-2 w-[75%]">
           <div className="flex gap-4 items-center">
