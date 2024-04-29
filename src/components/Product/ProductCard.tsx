@@ -1,13 +1,9 @@
 import Button from '../elements/Button'
 import CountButton from './CountButton'
-import { fetchProductProps } from '@/api/fetchProducts'
 import { TypeProduct } from '@/types/common'
-interface ProductWithId extends fetchProductProps {
-  id: string
-}
 
 interface ProductCardProps {
-  data: ProductWithId
+  data: TypeProduct
   onModal: (data: TypeProduct) => void
 }
 

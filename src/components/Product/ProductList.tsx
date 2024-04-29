@@ -1,21 +1,15 @@
-import { useQueryInitialProducts } from '@/api/fetchProducts'
+import { useQueryInitialProducts } from '@/api/productQueries'
 import ProductCard from './ProductCard'
 import { Link } from 'react-router-dom'
 import { TypeCategory, TypeProduct } from '@/types/common'
-
 import ProductCardSkelton from './ProductCardSkelton'
-import { useState } from 'react'
 import DetailModal from './DetailModal'
+import useProductModal from '@/hooks/useProductModal'
 
 const ProductList = () => {
-  const [selectedProduct, setSelectedProduct] = useState<TypeProduct | null>(
-    null
-  )
-  const [showDetailModal, setShowDetailModal] = useState(false)
-  const handleProductSelect = (data: TypeProduct) => {
-    setSelectedProduct(data)
-    setShowDetailModal(true)
-  }
+  const { selectedProduct, showDetailModal, handleProductSelect, closeModal } =
+    useProductModal()
+
   const categories: TypeCategory[] = ['coffee', 'non-coffee', 'food']
   const categoryHeader = {
     coffee: '에스프레소',
@@ -42,7 +36,8 @@ const ProductList = () => {
       {showDetailModal && (
         <DetailModal
           product={selectedProduct}
-          onClose={() => setShowDetailModal(false)}
+          onClose={() => closeModal()}
+          onModal={(data) => handleProductSelect(data)}
         />
       )}
     </div>
@@ -61,13 +56,14 @@ const ProductPreview: React.FC<ProductPreviwProps> = ({
   handleProductSelect,
 }) => {
   const { data, isLoading } = useQueryInitialProducts(category)
+
   return (
     <div className="grid grid-cols-2 gap-1">
       {isLoading && <ProductCardSkelton productsPerRow={4} />}
       {data?.products.map((product) => (
         <ProductCard
           data={product}
-          key={product.id}
+          key={product.name}
           onModal={(data) => handleProductSelect(data)}
         />
       ))}

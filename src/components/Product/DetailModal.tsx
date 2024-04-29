@@ -1,13 +1,15 @@
+import { useQueryRecommendProduct } from '@/api/productQueries'
 import { TypeProduct } from '@/types/common'
-
 interface Props {
   product: TypeProduct | null
   onClose: () => void
+  onModal: (data: TypeProduct) => void
 }
 
 // TODO: section은 추천 상품들 보여주기. 같은 카테고리 군에서 3개 뽑아서 보여주기
 
-const DetailModal = ({ product, onClose }: Props) => {
+const DetailModal = ({ product, onClose, onModal }: Props) => {
+  const { data } = useQueryRecommendProduct(product?.category!, product?.name!)
   return (
     <>
       <div className="fixed inset-0 z-10 bg-black opacity-40 w-screen h-screen"></div>
@@ -77,27 +79,15 @@ const DetailModal = ({ product, onClose }: Props) => {
         <section className="p-5">
           <p className="text-lg p-2 text-gray-700">이런 상품은 어떠신가요?</p>
           <div className="flex justify-between">
-            <div>
-              <img
-                src={product?.imageURL}
-                className="w-[270px] object-contain bg-gray-100"
-              />
-              <h4 className="text-center p-2">{product?.name}</h4>
-            </div>
-            <div>
-              <img
-                src={product?.imageURL}
-                className="w-[270px] object-contain bg-gray-100"
-              />
-              <h4 className="text-center p-2">{product?.name}</h4>{' '}
-            </div>
-            <div>
-              <img
-                src={product?.imageURL}
-                className="w-[270px] object-contain bg-gray-100"
-              />
-              <h4 className="text-center p-2">{product?.name}</h4>{' '}
-            </div>
+            {data?.map((product) => (
+              <div key={product.name} onClick={() => onModal(product)}>
+                <img
+                  src={product?.imageURL}
+                  className="w-[270px] object-contain bg-gray-100"
+                />
+                <h4 className="text-center p-2">{product?.name}</h4>
+              </div>
+            ))}
           </div>
         </section>
       </div>
