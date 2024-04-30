@@ -16,6 +16,12 @@ export const CartProvider = ({ children }: TypeChildren) => {
     return JSON.parse(localStorage.getItem('cart') || '[]')
   })
 
+  // 장바구니 보여주는 상태와 토글 함수
+  const [isCartVisible, setIsCartVisible] = useState(false)
+  const toggleCart = () => {
+    setIsCartVisible(() => !isCartVisible)
+  }
+
   useEffect(() => {
     // 장바구니 상태가 변경되면 로컬 스토리지 업데이트
     localStorage.setItem('cart', JSON.stringify(cart))
@@ -59,7 +65,12 @@ export const CartProvider = ({ children }: TypeChildren) => {
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, changeQuantity }}
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        changeQuantity,
+      }}
     >
       {children}
     </CartContext.Provider>
