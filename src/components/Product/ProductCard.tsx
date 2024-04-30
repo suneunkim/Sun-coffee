@@ -2,6 +2,7 @@ import Button from '../elements/Button'
 import { Badge } from '../ui/badge'
 import CountButton from './CountButton'
 import { TypeProduct } from '@/types/common'
+import { useCart } from '@/context/CartContext'
 
 interface ProductCardProps {
   data: TypeProduct
@@ -9,6 +10,12 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ data, onModal }: ProductCardProps) => {
+  const cartContext = useCart()
+  if (!cartContext) {
+    return
+  }
+  const { addToCart } = cartContext
+
   return (
     <div className="w-[420px] h-[280px] rounded-lg bg-white p-4 shadow-md mb-4">
       <section className="flex justify-center">
@@ -46,7 +53,13 @@ const ProductCard = ({ data, onModal }: ProductCardProps) => {
           <CountButton label="+" />
         </div>
         <div className="w-[90%]">
-          <Button textWhite cart rounded label="Added to cart" />
+          <Button
+            onClick={() => addToCart(data)}
+            textWhite
+            cart
+            rounded
+            label="Added to cart"
+          />
         </div>
       </section>
     </div>

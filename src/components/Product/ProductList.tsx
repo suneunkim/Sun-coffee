@@ -18,7 +18,7 @@ const ProductList = () => {
   }
 
   return (
-    <div className="flex justify-center">
+    <div className="flex">
       <div className="min-w-[880px] h-[770px] overflow-y-auto">
         {categories.map((category) => (
           <div key={category}>

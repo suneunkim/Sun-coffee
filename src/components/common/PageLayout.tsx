@@ -1,13 +1,11 @@
+import Cart from '../Product/Cart'
 import Category from './Category'
 import { customerMenu } from './MenuItem'
 import Nav from './Nav'
 import SearchBar from './SearchBar'
+import { TypeChildren } from './../../types/common'
 
-export interface ChildrenProps {
-  children: React.ReactNode
-}
-
-const PageLayout = ({ children }: ChildrenProps) => {
+const PageLayout = ({ children }: TypeChildren) => {
   return (
     <main className="bg-gray-50 flex">
       <Nav customerMenu={customerMenu} />
@@ -16,6 +14,9 @@ const PageLayout = ({ children }: ChildrenProps) => {
         <Category />
         {children}
       </section>
+      <div className="flex items-center ">
+        <Cart />
+      </div>
     </main>
   )
 }

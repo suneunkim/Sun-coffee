@@ -12,3 +12,10 @@ export type TypeProduct = {
     nanoseconds: number
   }
 }
+export interface TypeChildren {
+  children: React.ReactNode
+}
+export interface cartItem {
+  product: TypeProduct
+  quantity: number
+}
