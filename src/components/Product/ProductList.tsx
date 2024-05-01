@@ -5,6 +5,7 @@ import { TypeCategory, TypeProduct } from '@/types/common'
 import ProductCardSkelton from './ProductCardSkelton'
 import DetailModal from './DetailModal'
 import useProductModal from '@/hooks/useProductModal'
+import { AnimatePresence } from 'framer-motion'
 
 const ProductList = () => {
   const { selectedProduct, showDetailModal, handleProductSelect, closeModal } =
@@ -33,13 +34,15 @@ const ProductList = () => {
           </div>
         ))}
       </div>
-      {showDetailModal && (
-        <DetailModal
-          product={selectedProduct}
-          onClose={() => closeModal()}
-          onModal={(data) => handleProductSelect(data)}
-        />
-      )}
+      <AnimatePresence>
+        {showDetailModal ? (
+          <DetailModal
+            product={selectedProduct}
+            onClose={() => closeModal()}
+            onModal={(data) => handleProductSelect(data)}
+          />
+        ) : null}
+      </AnimatePresence>
     </div>
   )
 }

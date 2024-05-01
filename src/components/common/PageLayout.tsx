@@ -5,6 +5,8 @@ import Nav from './Nav'
 import SearchBar from './SearchBar'
 import { TypeChildren } from './../../types/common'
 import { useEffect, useState } from 'react'
+import { Toaster } from '@/components/ui/toaster'
+import { AnimatePresence } from 'framer-motion'
 
 const PageLayout = ({ children }: TypeChildren) => {
   const [isCartVisible, setIsCartVisible] = useState(false)
@@ -17,13 +19,6 @@ const PageLayout = ({ children }: TypeChildren) => {
     setIsCartVisible(isCartVisible)
   }, [isCartVisible])
 
-  // 애니메이션이 끝나면 상태를 갱신
-  const handleAnimationEnd = () => {
-    if (!isCartVisible) {
-      setIsCartVisible(false)
-    }
-  }
-
   return (
     <main className="bg-gray-50 flex">
       <Nav customerMenu={customerMenu} toggleCart={toggleCart} />
@@ -32,11 +27,12 @@ const PageLayout = ({ children }: TypeChildren) => {
         <Category />
         {children}
       </section>
-      <div className="flex items-center ">
-        {isCartVisible && (
-          <Cart isCartVisible handleAnimationEnd={handleAnimationEnd} />
-        )}
+      <div className="flex items-center fixed top-1/2 transform -translate-y-1/2 right-0 xl:relative xl:right-auto xl:-translate-y-0">
+        <AnimatePresence>
+          {isCartVisible && <Cart isCartVisible />}
+        </AnimatePresence>
       </div>
+      <Toaster />
     </main>
   )
 }

@@ -3,6 +3,7 @@ import { Badge } from '../ui/badge'
 import CountButton from './CountButton'
 import { TypeProduct } from '@/types/common'
 import { useCart } from '@/context/CartContext'
+import { useToast } from '../ui/use-toast'
 
 interface ProductCardProps {
   data: TypeProduct
@@ -15,6 +16,15 @@ const ProductCard = ({ data, onModal }: ProductCardProps) => {
     return
   }
   const { addToCart } = cartContext
+  const { toast } = useToast()
+
+  const handlerAddToCart = () => {
+    addToCart(data)
+    toast({
+      title: `${data.name}를 장바구니에 추가 했습니다.`,
+      description: 'Cart 탭을 선택하면 장바구니가 표시됩니다.',
+    })
+  }
 
   return (
     <div className="w-[420px] h-[280px] rounded-lg bg-white p-4 shadow-md mb-4">
@@ -54,7 +64,7 @@ const ProductCard = ({ data, onModal }: ProductCardProps) => {
         </div>
         <div className="w-[90%]">
           <Button
-            onClick={() => addToCart(data)}
+            onClick={handlerAddToCart}
             textWhite
             cart
             rounded

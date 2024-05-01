@@ -1,5 +1,6 @@
 import CountButton from './CountButton'
 import { cartItem } from '@/types/common'
+import { RiCloseCircleLine } from 'react-icons/ri'
 interface Props {
   data: cartItem[] | null
   onRemove: (id: string) => void
@@ -18,9 +19,14 @@ const CartItem = ({ data, onRemove, onChangeQuantity }: Props) => {
               <img src={data.product.imageURL} className="" />
             </div>
             <div className="p-3">
-              <div className="flex justify-between">
-                <h3>{data.product?.name}</h3>
-                <button onClick={() => onRemove(data.product.name)}>x</button>
+              <div className="flex border">
+                <h3 className="">{data.product?.name}</h3>
+                <button
+                  className="ml-auto"
+                  onClick={() => onRemove(data.product.name)}
+                >
+                  <RiCloseCircleLine />
+                </button>
               </div>
               <p>Small</p>
               <div className="flex items-center space-x-3 mt-5">

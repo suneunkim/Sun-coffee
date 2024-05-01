@@ -3,15 +3,15 @@ import CartItem from './CartItem'
 import ElButton from '../elements/Button'
 import { useCart } from '@/context/CartContext'
 import './cart.css'
+import { motion } from 'framer-motion'
 
 const styles = `rounded-3xl bg-white border text-gray-800 hover:text-white`
 
 interface Props {
-  isCartVisible: boolean
-  handleAnimationEnd: () => void
+  isCartVisible?: boolean
 }
 
-const Cart = ({ isCartVisible, handleAnimationEnd }: Props) => {
+const Cart = ({ isCartVisible }: Props) => {
   const cartContext = useCart()
   if (!cartContext) {
     return
@@ -23,11 +23,11 @@ const Cart = ({ isCartVisible, handleAnimationEnd }: Props) => {
   }, 0)
 
   return (
-    <section
-      onAnimationEnd={handleAnimationEnd}
-      className={`cart ${isCartVisible ? 'visible' : ''} ${
-        !isCartVisible ? 'hidden' : ''
-      }`}
+    <motion.div
+      initial={{ x: 300 }}
+      animate={{ x: isCartVisible ? 0 : 100 }}
+      exit={{ x: isCartVisible ? 100 : 0, opacity: 0 }}
+      transition={{ type: 'spring', stiffness: 100 }}
     >
       <div className="min-h-[600px] max-h-[800px] bg-[#FFFFFF] py-10 rounded-lg shadow-lg w-[350px] px-6 overflow-y-auto">
         <div className="flex items-end justify-between mb-5">
@@ -64,7 +64,7 @@ const Cart = ({ isCartVisible, handleAnimationEnd }: Props) => {
           )}
         </div>
       </div>
-    </section>
+    </motion.div>
   )
 }
 

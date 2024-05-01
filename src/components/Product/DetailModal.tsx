@@ -1,6 +1,7 @@
 import { useQueryRecommendProduct } from '@/api/productQueries'
 import { TypeProduct } from '@/types/common'
 import { Badge } from '../ui/badge'
+import { motion } from 'framer-motion'
 interface Props {
   product: TypeProduct | null
   onClose: () => void
@@ -12,8 +13,14 @@ interface Props {
 const DetailModal = ({ product, onClose, onModal }: Props) => {
   const { data } = useQueryRecommendProduct(product?.category!, product?.name!)
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.4 }}
+    >
       <div className="fixed inset-0 z-10 bg-black opacity-40 w-screen h-screen"></div>
+
       <div className="absolute z-10 left-0 top-[5%] bg-white w-[99%] h-[800px]">
         <div className=" bg-white w-[99%] h-[400px] flex">
           <img
@@ -95,7 +102,7 @@ const DetailModal = ({ product, onClose, onModal }: Props) => {
           </div>
         </section>
       </div>
-    </>
+    </motion.div>
   )
 }
 
