@@ -10,22 +10,12 @@ import {
 import useCurrentUser from '@/hooks/useCurrentUser'
 import { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
-interface ProductProps {
-  id: string
-  name: string
-  description: string
-  price: string
-  imageURL: string
-  category: string
-  createdAt: {
-    seconds: number
-    nanoseconds: number
-  }
-}
+import { TypeProduct } from '@/types/common'
+
 interface Props {
   onChange: (vaule: string) => void
   imageURL: string
-  data: any
+  data?: TypeProduct
 }
 
 function InputFile({ onChange, imageURL, data }: Props) {
@@ -54,7 +44,7 @@ function InputFile({ onChange, imageURL, data }: Props) {
     if (!imageURL) return
 
     try {
-      if (data.imageURL.startsWith('https://firebasestorage.googleapis.com')) {
+      if (data?.imageURL.startsWith('https://firebasestorage.googleapis.com')) {
         const imageRef = ref(storage, imageURL)
         await deleteObject(imageRef)
       }

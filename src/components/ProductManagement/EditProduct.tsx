@@ -3,28 +3,15 @@ import InputFile from '@/components/elements/InputFile'
 import InputUi from '@/components/elements/InputWithLabel'
 import TextareaUi from '@/components/elements/TextareaUi'
 import { useEffect, useState } from 'react'
-
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form'
 import useCurrentUser from '@/hooks/useCurrentUser'
 import { doc, updateDoc } from 'firebase/firestore'
 import { db } from '@/firebase'
 import UploadCategoryBtn from '@/components/Product/UploadCategoryBtn'
-
-interface ProductProps {
-  id: string
-  name: string
-  description: string
-  price: string
-  imageURL: string
-  category: string
-  createdAt: {
-    seconds: number
-    nanoseconds: number
-  }
-}
+import { TypeProduct } from '@/types/common'
 
 interface EditProps {
-  selectedProduct: ProductProps | null
+  selectedProduct: TypeProduct | undefined
   onClose: () => void
 }
 
@@ -85,7 +72,7 @@ const EditProduct = ({ selectedProduct, onClose }: EditProps) => {
     setIsLoading(true)
     const { name, description, price } = formData
     try {
-      const productDocRef = doc(db, 'products', selectedProduct.id)
+      const productDocRef = doc(db, 'products', selectedProduct.name)
       await updateDoc(productDocRef, {
         name,
         description,

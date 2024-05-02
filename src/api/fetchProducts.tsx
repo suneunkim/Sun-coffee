@@ -43,7 +43,6 @@ export const fetchCategoryProducts = async (
   }
 
   const querySnapshot = await getDocs(q)
-  console.log(querySnapshot)
   const lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1]
   const products = querySnapshot.docs.map((doc) => ({
     ...(doc.data() as TypeProduct),
