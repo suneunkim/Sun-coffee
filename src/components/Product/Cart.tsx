@@ -2,25 +2,74 @@ import { Button } from '../ui/button'
 import CartItem from './CartItem'
 import ElButton from '../elements/Button'
 import { useCart } from '@/context/CartContext'
-import './cart.css'
 import { motion } from 'framer-motion'
-
-const styles = `rounded-3xl bg-white border text-gray-800 hover:text-white`
+import { usePayment } from '@/context/PaymentContext'
+import useCurrentUser from '@/hooks/useCurrentUser'
+import { collection, doc, setDoc } from 'firebase/firestore'
+import { db } from '@/firebase'
 
 interface Props {
   isCartVisible?: boolean
 }
 
 const Cart = ({ isCartVisible }: Props) => {
+  const userProfile = useCurrentUser()
   const cartContext = useCart()
   if (!cartContext) {
     return
   }
-  const { removeFromCart, cart, changeQuantity } = cartContext
+  const { removeFromCart, cart, changeQuantity, orderType, handlerOrderType } =
+    cartContext
+
+  const paymentContext = usePayment()
+  if (!paymentContext) {
+    return
+  }
+  const { openModal, paymentCompleted } = paymentContext
 
   const totalAmount = cart.reduce((total, item) => {
     return total + Number(item.product.price) * item.quantity
   }, 0)
+
+  // 주문 타입에 따른 버튼 스타일
+  const getButtonStyle = (type: string) => {
+    return orderType === type
+      ? 'bg-[#1f2937] text-white'
+      : 'bg-white text-gray-800'
+  }
+  // 장바구니 정보를 DB로 (결제 과정없이 테스트)
+  const handlePlaceOrder = async () => {
+    if (orderType === null) {
+      alert('주문 방식을 선택해주세요.')
+      return
+    }
+    const orderData = {
+      products: cart.map((item) => ({
+        name: item.product.name,
+        quantity: item.quantity,
+        subtotal: Number(item.product.price) * item.quantity,
+      })),
+      total_amount: totalAmount,
+      order_status: '주문 완료',
+      order_type: orderType,
+      timestamp: new Date(),
+      customer_name: userProfile?.nickname,
+      customer_email: userProfile?.email,
+    }
+    if (paymentCompleted) {
+      try {
+        const orderCollection = collection(db, 'orders')
+        const docRef = doc(orderCollection) // 새 문서 참조 생성
+
+        await setDoc(docRef, {
+          ...orderData,
+          order_id: docRef.id,
+        })
+      } catch (error) {
+        console.error('주문 실패', error)
+      }
+    }
+  }
 
   return (
     <motion.div
@@ -42,9 +91,28 @@ const Cart = ({ isCartVisible }: Props) => {
           ) : (
             <>
               <div className="flex gap-2">
-                <Button className={styles}>Dine in</Button>
-                <Button className={styles}>Take away</Button>
-                <Button className={styles} disabled>
+                <Button
+                  onClick={() => handlerOrderType('Dine in')}
+                  className={`rounded-3xl b border hover:text-white ${getButtonStyle(
+                    'Dine in'
+                  )}`}
+                >
+                  Dine in
+                </Button>
+                <Button
+                  onClick={() => handlerOrderType('Take out')}
+                  className={`rounded-3xl b border hover:text-white ${getButtonStyle(
+                    'Take out'
+                  )}`}
+                >
+                  Take away
+                </Button>
+                <Button
+                  className={`rounded-3xl b border hover:text-white ${getButtonStyle(
+                    'Delivery'
+                  )}`}
+                  disabled
+                >
                   Delivery
                 </Button>
               </div>
@@ -58,7 +126,12 @@ const Cart = ({ isCartVisible }: Props) => {
                   <p>Total</p>
                   <span>{totalAmount.toLocaleString('ko-KR')}원</span>
                 </div>
-                <ElButton label="Place on order" rounded textWhite />
+                <ElButton
+                  onClick={openModal}
+                  label="Place on order"
+                  rounded
+                  textWhite
+                />
               </div>
             </>
           )}

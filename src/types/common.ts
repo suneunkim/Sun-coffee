@@ -19,3 +19,5 @@ export interface cartItem {
   product: TypeProduct
   quantity: number
 }
+
+export type TypeOrder = 'Dine in' | 'Take out'

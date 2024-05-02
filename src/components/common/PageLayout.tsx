@@ -7,6 +7,8 @@ import { TypeChildren } from './../../types/common'
 import { useEffect, useState } from 'react'
 import { Toaster } from '@/components/ui/toaster'
 import { AnimatePresence } from 'framer-motion'
+import PaymentModal from '../Payment/PaymentModal'
+import { usePayment } from '@/context/PaymentContext'
 
 const PageLayout = ({ children }: TypeChildren) => {
   const [isCartVisible, setIsCartVisible] = useState(false)
@@ -18,6 +20,13 @@ const PageLayout = ({ children }: TypeChildren) => {
   useEffect(() => {
     setIsCartVisible(isCartVisible)
   }, [isCartVisible])
+
+  // 결제 모달창
+  const paymentContext = usePayment()
+  if (!paymentContext) {
+    return
+  }
+  const { isOpen } = paymentContext
 
   return (
     <main className="bg-gray-50 flex">
@@ -32,6 +41,7 @@ const PageLayout = ({ children }: TypeChildren) => {
           {isCartVisible && <Cart isCartVisible />}
         </AnimatePresence>
       </div>
+      <AnimatePresence>{isOpen && <PaymentModal />}</AnimatePresence>
       <Toaster />
     </main>
   )
