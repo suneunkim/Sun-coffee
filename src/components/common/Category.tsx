@@ -1,5 +1,4 @@
 import { Link, useMatch } from 'react-router-dom'
-import Button from '../elements/Button'
 
 interface Props {
   to: any
@@ -36,7 +35,3 @@ const CategoryButton = ({ to, label }: Props) => {
   )
 }
 export default Category
-
-{
-  /* <Button category rounded label={label} match={match} /> */
-}

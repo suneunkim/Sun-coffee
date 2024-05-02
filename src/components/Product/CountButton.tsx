@@ -1,15 +1,19 @@
+import { CiCircleMinus } from 'react-icons/ci'
+import { CiCirclePlus } from 'react-icons/ci'
+
 interface Props {
-  label: string
+  plus: boolean
   [key: string]: any
 }
 
-const CountButton = ({ label, ...rest }: Props) => {
+const CountButton = ({ plus, ...rest }: Props) => {
   return (
-    <button
-      {...rest}
-      className="w-7 aspect-square border border-gray-300 rounded-full flex justify-center items-center text-xl"
-    >
-      {label}
+    <button {...rest}>
+      {plus ? (
+        <CiCircleMinus className="w-6 h-6" />
+      ) : (
+        <CiCirclePlus className="w-6 h-6" />
+      )}
     </button>
   )
 }

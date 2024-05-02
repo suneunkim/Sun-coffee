@@ -1,6 +1,5 @@
 import Button from '../elements/Button'
 import { Badge } from '../ui/badge'
-import CountButton from './CountButton'
 import { TypeProduct } from '@/types/common'
 import { useCart } from '@/context/CartContext'
 import { useToast } from '../ui/use-toast'
@@ -41,7 +40,7 @@ const ProductCard = ({ data, onModal }: ProductCardProps) => {
             {data.category}
           </Badge>
         </div>
-        <article className="flex flex-col justify-center pl-4 space-y-2 w-[75%]">
+        <article className="flex flex-col justify-center pl-4 space-y-2 w-[75%] h-[170px]">
           <div className="flex gap-4 items-center">
             <h3 className="font-semibold w-[170px]">{data.name}</h3>
             <p className="text-[#FFA16C] font-bold text-sm">
@@ -56,13 +55,8 @@ const ProductCard = ({ data, onModal }: ProductCardProps) => {
           </div>
         </article>
       </section>
-      <section className="flex items-center">
-        <div className="flex w-60 pl-4 items-center gap-3 font-semibold text-gray-600">
-          <CountButton label="-" />
-          <span>3</span>
-          <CountButton label="+" />
-        </div>
-        <div className="w-[90%]">
+      <section className="flex items-center justify-end pt-3">
+        <div className="w-[65%]">
           <Button
             onClick={handlerAddToCart}
             textWhite

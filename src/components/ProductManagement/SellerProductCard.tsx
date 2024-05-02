@@ -1,22 +1,10 @@
 import { Button } from '../ui/button'
-
-interface Product {
-  id: string
-  name: string
-  description: string
-  price: string
-  imageURL: string
-  category: string
-  createdAt: {
-    seconds: number
-    nanoseconds: number
-  }
-}
+import { TypeProduct } from '@/types/common'
 
 interface ProductCardProps {
-  data: Product
-  onEdit: (data: Product) => void
-  onDelete: (data: Product) => void
+  data: TypeProduct
+  onEdit: (data: TypeProduct) => void
+  onDelete: (data: TypeProduct) => void
 }
 
 const SellerProductCard = ({ data, onEdit, onDelete }: ProductCardProps) => {

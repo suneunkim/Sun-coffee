@@ -8,10 +8,10 @@ import { Link } from 'react-router-dom'
 import MenuItem, { customerMenu } from './MenuItem'
 import { PiShoppingCartLight } from 'react-icons/pi'
 import { useCart } from '@/context/CartContext'
-
+//TODO: 판매자 동작 다시 한번 해보고, dev로 머지하기. main으로 pr하기.
 interface Props {
   customerMenu: typeof customerMenu
-  toggleCart: () => void
+  toggleCart?: () => void
 }
 const Nav = ({ customerMenu, toggleCart }: Props) => {
   const userProfile = useCurrentUser()
@@ -40,16 +40,18 @@ const Nav = ({ customerMenu, toggleCart }: Props) => {
               {item.label}
             </MenuItem>
           ))}
-          <button
-            className="flex items-center hover:text-[#FFA16C]"
-            onClick={toggleCart}
-          >
-            <PiShoppingCartLight className="w-5 h-5" />
-            <span className="ml-2">Cart</span>
-            <span className="ml-2 bg-[#FFA16C] text-white w-5 h-5 flex items-center justify-center rounded-full text-xs">
-              {cart.length}
-            </span>
-          </button>
+          {toggleCart && (
+            <button
+              className="flex items-center hover:text-[#FFA16C]"
+              onClick={toggleCart}
+            >
+              <PiShoppingCartLight className="w-5 h-5" />
+              <span className="ml-2">Cart</span>
+              <span className="ml-2 bg-[#FFA16C] text-white w-5 h-5 flex items-center justify-center rounded-full text-xs">
+                {cart.length}
+              </span>
+            </button>
+          )}
         </ul>
       </nav>
 

@@ -56,7 +56,7 @@ const UploadProduct = () => {
     setIsLoading(true)
     const { name, description, price } = formData
     try {
-      const productDocRef = doc(collection(db, 'products'))
+      const productDocRef = doc(db, 'products', name)
       await setDoc(productDocRef, {
         name,
         description,
@@ -107,7 +107,7 @@ const UploadProduct = () => {
             formatPrice
           />
           <InputFile
-            value={imageURL}
+            imageURL={imageURL}
             onChange={(value) => imageSetValue('imageURL', value)}
           />
           <div className="flex space-x-3 justify-center gap-5">

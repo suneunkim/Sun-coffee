@@ -7,24 +7,20 @@ import { db, storage } from '@/firebase'
 import { deleteObject, ref } from 'firebase/storage'
 import { useQuerySellerProducts } from '@/api/productQueries'
 
-interface ProductProps extends TypeProduct {
-  id: string
-}
-
 const SellerProductList = () => {
   const { data: products } = useQuerySellerProducts()
-  const [selectedProduct, setSelectedProduct] = useState<ProductProps | null>(
+  const [selectedProduct, setSelectedProduct] = useState<TypeProduct | null>(
     null
   )
   const [showEditModal, setShowEditModal] = useState(false)
 
-  const handleEditClick = (data: ProductProps) => {
+  const handleEditClick = (data: TypeProduct) => {
     setSelectedProduct(data)
     setShowEditModal(true)
   }
 
-  const handleDeleteClick = async (data: ProductProps) => {
-    const productDocRef = doc(db, 'products', data.id)
+  const handleDeleteClick = async (data: TypeProduct) => {
+    const productDocRef = doc(db, 'products', data.name)
 
     try {
       if (data.imageURL.startsWith('https://firebasestorage.googleapis.com')) {
@@ -43,20 +39,20 @@ const SellerProductList = () => {
   return (
     <div className="flex justify-center">
       <div className="grid grid-cols-2 gap-5 mt-10 min-w-[870px] min-h-[600px] max-h-[620px] overflow-y-auto">
-        {/* {products?.length === 0 && (
+        {products?.length === 0 && (
           <div className="flex justify-center">
             아직 등록된 상품이 없습니다.
           </div>
-        )} */}
-        {/*         
+        )}
+
         {products?.map((product) => (
           <SellerProductCard
             data={product}
-            key={product.id}
+            key={product.name}
             onEdit={(data) => handleEditClick(data)}
             onDelete={(data) => handleDeleteClick(data)}
           />
-        ))} */}
+        ))}
       </div>
       {showEditModal && (
         <div>

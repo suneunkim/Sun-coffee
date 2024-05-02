@@ -10,7 +10,7 @@ const SellerHome = () => {
       <Nav customerMenu={sellerMenu} />
       <section className="flex flex-col px-5">
         <SearchBar />
-        <Category />
+        {/* <Category /> 구매자 홈에서 쓰는 Link 사용중이라 판매자에게 부적절함*/}
         <SellerProductList />
       </section>
     </main>
