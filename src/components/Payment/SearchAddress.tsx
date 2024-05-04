@@ -19,12 +19,12 @@ const SearchAddress = ({ register, setValue, errors }: Props) => {
     <>
       <div className="flex justify-between items-center">
         <TextInput
-          id="postcode"
+          id="buyer_postcode"
           type="number"
           label="우편번호"
           register={register}
           errors={errors}
-          errorMsg={errors.email?.message}
+          errorMsg={errors.buyer_postcode?.message}
         />
         <button
           className="w-48 p-[10px] mb-1 border text-sm mt-auto bg-slate-400 text-white rounded-lg hover:bg-slate-500"
@@ -35,21 +35,21 @@ const SearchAddress = ({ register, setValue, errors }: Props) => {
       </div>
       <div>
         <TextInput
-          id="address"
+          id="buyer_addr"
           type="text"
           label="주소"
           register={register}
           errors={errors}
-          errorMsg={errors.email?.message}
+          errorMsg={errors.buyer_addr?.message}
         />
-        <TextInput
+        {/* <TextInput
           id="detailaddress"
           type="text"
           label="상세 주소"
           register={register}
           errors={errors}
           errorMsg={errors.email?.message}
-        />
+        /> */}
       </div>
     </>
   )

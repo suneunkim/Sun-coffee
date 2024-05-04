@@ -4,24 +4,36 @@ import TextInput from '../elements/TextInput'
 import { useForm } from 'react-hook-form'
 import SearchAddress from './SearchAddress'
 import { Button } from '@/components/ui/button'
+import { TypeOrderUserData } from '@/types/common'
+import { useEffect } from 'react'
 
 const PaymentModal = () => {
   const paymentContext = usePayment()
   if (!paymentContext) {
     return
   }
-  const { closeModal } = paymentContext
+  const { closeModal, updateOrderUserData, handlePayment, orderUserData } =
+    paymentContext
 
   const {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors },
-  } = useForm()
+  } = useForm<TypeOrderUserData>()
 
-  const onSubmit = (data: any) => {
-    console.log(data)
+  // 입력값을 PG사에 보낼 data로 사용하기 위해 PaymentProvider의 updateOrderUserData로 전달
+  const onSubmit = (data: TypeOrderUserData) => {
+    updateOrderUserData(data)
+    //reset()
   }
+
+  useEffect(() => {
+    if (orderUserData) {
+      handlePayment()
+    }
+  }, [orderUserData, handlePayment])
 
   return (
     <>
@@ -42,29 +54,29 @@ const PaymentModal = () => {
           <form onSubmit={handleSubmit(onSubmit)} className=" space-y-2">
             <div className="flex">
               <TextInput
-                id="name"
+                id="buyer_name"
                 type="text"
                 label="이름"
                 register={register}
                 errors={errors}
-                errorMsg={errors.name?.message}
+                errorMsg={errors.buyer_name?.message}
               />
               <TextInput
-                id="phone"
+                id="buyer_tel"
                 type="number"
                 label="전화번호"
                 register={register}
                 errors={errors}
-                errorMsg={errors.name?.message}
+                errorMsg={errors.buyer_tel?.message}
               />
             </div>
             <TextInput
-              id="email"
+              id="buyer_email"
               type="email"
               label="이메일"
               register={register}
               errors={errors}
-              errorMsg={errors.email?.message}
+              errorMsg={errors.buyer_email?.message}
             />
             <SearchAddress
               register={register}

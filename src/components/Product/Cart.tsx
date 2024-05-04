@@ -5,8 +5,6 @@ import { useCart } from '@/context/CartContext'
 import { motion } from 'framer-motion'
 import { usePayment } from '@/context/PaymentContext'
 import useCurrentUser from '@/hooks/useCurrentUser'
-import { collection, doc, setDoc } from 'firebase/firestore'
-import { db } from '@/firebase'
 
 interface Props {
   isCartVisible?: boolean
@@ -25,7 +23,7 @@ const Cart = ({ isCartVisible }: Props) => {
   if (!paymentContext) {
     return
   }
-  const { openModal, paymentCompleted } = paymentContext
+  const { openModal, updateOrderData } = paymentContext
 
   const totalAmount = cart.reduce((total, item) => {
     return total + Number(item.product.price) * item.quantity
@@ -37,13 +35,13 @@ const Cart = ({ isCartVisible }: Props) => {
       ? 'bg-[#1f2937] text-white'
       : 'bg-white text-gray-800'
   }
-  // 장바구니 정보를 DB로 (결제 과정없이 테스트)
-  const handlePlaceOrder = async () => {
+  // 장바구니 정보를 DB에 담을 데이터로 가공하고 PaymentProvider의 updateOrderData함수로 전달
+  const handlePlaceOrder = () => {
     if (orderType === null) {
       alert('주문 방식을 선택해주세요.')
       return
     }
-    const orderData = {
+    const newOrderData = {
       products: cart.map((item) => ({
         name: item.product.name,
         quantity: item.quantity,
@@ -56,19 +54,8 @@ const Cart = ({ isCartVisible }: Props) => {
       customer_name: userProfile?.nickname,
       customer_email: userProfile?.email,
     }
-    if (paymentCompleted) {
-      try {
-        const orderCollection = collection(db, 'orders')
-        const docRef = doc(orderCollection) // 새 문서 참조 생성
-
-        await setDoc(docRef, {
-          ...orderData,
-          order_id: docRef.id,
-        })
-      } catch (error) {
-        console.error('주문 실패', error)
-      }
-    }
+    updateOrderData(newOrderData)
+    openModal()
   }
 
   return (
@@ -127,7 +114,7 @@ const Cart = ({ isCartVisible }: Props) => {
                   <span>{totalAmount.toLocaleString('ko-KR')}원</span>
                 </div>
                 <ElButton
-                  onClick={openModal}
+                  onClick={handlePlaceOrder}
                   label="Place on order"
                   rounded
                   textWhite
