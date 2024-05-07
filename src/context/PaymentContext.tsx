@@ -6,6 +6,7 @@ import {
   paymentDataProps,
 } from '@/types/common'
 import startPayment from '@/components/Payment/Payment'
+import { useCart } from './CartContext'
 
 interface PaymentContextProps {
   isOpen: boolean
@@ -22,6 +23,13 @@ const PaymentContext = createContext<PaymentContextProps | null>(null)
 export const usePayment = () => useContext(PaymentContext)
 
 export const PaymentProvider = ({ children }: TypeChildren) => {
+  // 장바구니 비우기 위한 함수를 handlePayment의 콜백함수에 넣기 위함
+  const cartContext = useCart()
+  if (!cartContext) {
+    return
+  }
+  const { clearCart, closeCart } = cartContext
+
   const [isOpen, setIsOpen] = useState(false)
   const [orderData, setOrderData] = useState<TypeOrderData | null>(null) // DB에 저장할 데이터
   const [orderUserData, setOrderUserData] = useState<TypeOrderUserData | null>(
@@ -57,6 +65,7 @@ export const PaymentProvider = ({ children }: TypeChildren) => {
 
     const paymentData: paymentDataProps = {
       ...orderUserData,
+      buyer_email: orderUserData.buyer_email || '',
       pg: 'html5_inicis', // KG 이니시스
       pay_method: 'card',
       merchant_uid: `merchant_${new Date().getTime()}`, // 고유 주문번호
@@ -69,7 +78,13 @@ export const PaymentProvider = ({ children }: TypeChildren) => {
   const handlePayment = () => {
     const paymentData = createPaymentData()
     if (paymentData && orderData) {
-      startPayment(paymentData, orderData)
+      startPayment(paymentData, orderData, () => {
+        setOrderData(null)
+        setOrderData(null)
+        closeModal()
+        clearCart()
+        closeCart()
+      })
     } else {
       console.error('결제 데이터 또는 주문 데이터가 누락되었습니다')
     }

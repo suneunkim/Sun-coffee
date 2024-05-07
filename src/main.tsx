@@ -13,11 +13,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <PaymentProvider>
-          <CartProvider>
+        <CartProvider>
+          <PaymentProvider>
             <App />
-          </CartProvider>
-        </PaymentProvider>
+          </PaymentProvider>
+        </CartProvider>
       </BrowserRouter>
     </QueryClientProvider>
   </React.StrictMode>

@@ -11,16 +11,15 @@ import { useCart } from '@/context/CartContext'
 //TODO: 판매자 동작 다시 한번 해보고, dev로 머지하기. main으로 pr하기.
 interface Props {
   customerMenu: typeof customerMenu
-  toggleCart?: () => void
 }
-const Nav = ({ customerMenu, toggleCart }: Props) => {
+const Nav = ({ customerMenu }: Props) => {
   const userProfile = useCurrentUser()
 
   const cartContext = useCart()
   if (!cartContext) {
     return
   }
-  const { cart } = cartContext
+  const { cart, toggleCart } = cartContext
 
   const logOut = async (e: any) => {
     e.preventDefault()

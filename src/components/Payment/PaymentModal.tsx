@@ -2,7 +2,6 @@ import { usePayment } from '@/context/PaymentContext'
 import { motion } from 'framer-motion'
 import TextInput from '../elements/TextInput'
 import { useForm } from 'react-hook-form'
-import SearchAddress from './SearchAddress'
 import { Button } from '@/components/ui/button'
 import { TypeOrderUserData } from '@/types/common'
 import { useEffect } from 'react'
@@ -18,7 +17,6 @@ const PaymentModal = () => {
   const {
     register,
     handleSubmit,
-    setValue,
     reset,
     formState: { errors },
   } = useForm<TypeOrderUserData>()
@@ -26,14 +24,14 @@ const PaymentModal = () => {
   // 입력값을 PG사에 보낼 data로 사용하기 위해 PaymentProvider의 updateOrderUserData로 전달
   const onSubmit = (data: TypeOrderUserData) => {
     updateOrderUserData(data)
-    //reset()
+    reset()
   }
 
   useEffect(() => {
     if (orderUserData) {
       handlePayment()
     }
-  }, [orderUserData, handlePayment])
+  }, [orderUserData])
 
   return (
     <>
@@ -70,19 +68,19 @@ const PaymentModal = () => {
                 errorMsg={errors.buyer_tel?.message}
               />
             </div>
-            <TextInput
+            {/* <TextInput
               id="buyer_email"
               type="email"
               label="이메일"
               register={register}
               errors={errors}
               errorMsg={errors.buyer_email?.message}
-            />
-            <SearchAddress
+            /> */}
+            {/* <SearchAddress
               register={register}
               setValue={setValue}
               errors={errors}
-            />
+            /> */}
             <div>
               <Button className="w-[70%] mx-auto flex mt-4">제출하기</Button>
             </div>

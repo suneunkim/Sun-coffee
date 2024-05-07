@@ -14,13 +14,15 @@ const initialzeIMP = () => {
 // PG사 KG 이니시스에 결제 요청
 const startPayment = (
   paymentData: paymentDataProps,
-  orderData: TypeOrderData
+  orderData: TypeOrderData,
+  onSuccess: () => void
 ) => {
   initialzeIMP()
 
   IMP.request_pay(paymentData, function (response: any) {
     if (response.success) {
-      alert('결제 성공')
+      alert('결제가 완료되었습니다.')
+      onSuccess()
 
       const orderDataDB = async () => {
         try {
@@ -31,12 +33,11 @@ const startPayment = (
             order_id: docRef.id,
           })
         } catch (error) {
+          alert('결제가 실패하였습니다.')
           console.error('주문 실패', error)
         }
       }
-
       orderDataDB()
-      //TODO: 결제모달창 리셋하고 닫기
     } else {
       console.error('결제 실패', response.error)
     }

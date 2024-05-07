@@ -44,9 +44,9 @@ export type TypeOrderData = {
 export type TypeOrderUserData = {
   buyer_name: string
   buyer_tel: string
-  buyer_email: string
-  buyer_addr: string
-  buyer_postcode: string
+  buyer_email?: string
+  buyer_addr?: string
+  buyer_postcode?: string
 }
 
 export interface paymentDataProps extends TypeOrderUserData {
