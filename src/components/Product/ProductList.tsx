@@ -6,6 +6,7 @@ import ProductCardSkelton from './ProductCardSkelton'
 import DetailModal from './DetailModal'
 import useProductModal from '@/hooks/useProductModal'
 import { AnimatePresence } from 'framer-motion'
+import React from 'react'
 
 const ProductList = () => {
   const { selectedProduct, showDetailModal, handleProductSelect, closeModal } =
@@ -54,22 +55,21 @@ type ProductPreviwProps = {
   handleProductSelect: (data: TypeProduct) => void
 }
 
-const ProductPreview: React.FC<ProductPreviwProps> = ({
-  category,
-  handleProductSelect,
-}) => {
-  const { data, isLoading } = useQueryInitialProducts(category)
+const ProductPreview = React.memo(
+  ({ category, handleProductSelect }: ProductPreviwProps) => {
+    const { data, isLoading } = useQueryInitialProducts(category)
 
-  return (
-    <div className="grid grid-cols-2 gap-1">
-      {isLoading && <ProductCardSkelton productsPerRow={4} />}
-      {data?.products.map((product) => (
-        <ProductCard
-          data={product}
-          key={product.name}
-          onModal={(data) => handleProductSelect(data)}
-        />
-      ))}
-    </div>
-  )
-}
+    return (
+      <div className="grid grid-cols-2 gap-1">
+        {isLoading && <ProductCardSkelton productsPerRow={4} />}
+        {data?.products.map((product) => (
+          <ProductCard
+            data={product}
+            key={product.name}
+            onModal={(data) => handleProductSelect(data)}
+          />
+        ))}
+      </div>
+    )
+  }
+)
