@@ -28,8 +28,8 @@ const Nav = ({ customerMenu }: Props) => {
   }
 
   return (
-    <main className="w-1/4 min-w-[220px] lg:w-[16rem] py-8 text-[#3c3c3c] font-bold h-screen flex flex-col bg-[#FFFFFF]">
-      <h2 className="text-4xl font-semibold mb-20 flex justify-center">
+    <main className="min-w-[200px] py-8 text-[#3c3c3c] font-bold h-screen flex flex-col bg-[#FFFFFF]">
+      <h2 className="text-3xl font-semibold mb-20 flex justify-center">
         <span className="text-[#FFA16C]">Sun' </span> Coffee
       </h2>
       <nav>

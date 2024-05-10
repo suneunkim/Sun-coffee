@@ -9,8 +9,9 @@ import {
   where,
   documentId,
 } from 'firebase/firestore'
-import { TypeCategory, TypeProduct } from '@/types/common'
+import { TypeCategory, TypeOrderData, TypeProduct } from '@/types/common'
 
+// 일반 홈 상품 조회
 export const fetchCategoryProducts = async (
   category: TypeCategory,
   pageParam: string | null,
@@ -87,4 +88,17 @@ export const fetchSellerProducts = async () => {
   }))
 
   return products
+}
+
+// ORDER
+export const fetchOrderList = async () => {
+  const orderCol = collection(db, 'orders')
+  const q = query(orderCol, orderBy('timestamp', 'desc'))
+
+  const querySnapshot = await getDocs(q)
+  const orderlist = querySnapshot.docs.map((doc) => ({
+    ...(doc.data() as TypeOrderData),
+  }))
+
+  return orderlist
 }

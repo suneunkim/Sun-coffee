@@ -2,6 +2,7 @@ import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { TypeCategory } from '@/types/common'
 import {
   fetchCategoryProducts,
+  fetchOrderList,
   fetchRecommendProduct,
   fetchSellerProducts,
 } from './fetchProducts'
@@ -45,5 +46,18 @@ export const useQueryRecommendProduct = (
 
 // 판매자 홈에서 사용하는 useQuery
 export const useQuerySellerProducts = () => {
-  return useQuery({ queryKey: ['products'], queryFn: fetchSellerProducts })
+  return useQuery({
+    queryKey: ['products'],
+    queryFn: fetchSellerProducts,
+    refetchOnWindowFocus: false,
+  })
+}
+
+// ORDER
+export const useQueryOrderList = () => {
+  return useQuery({
+    queryKey: ['orders'],
+    queryFn: fetchOrderList,
+    refetchOnWindowFocus: false,
+  })
 }

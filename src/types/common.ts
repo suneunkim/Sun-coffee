@@ -1,3 +1,5 @@
+import { Timestamp } from 'firebase/firestore'
+
 export interface TypeChildren {
   children: React.ReactNode
 }
@@ -30,13 +32,15 @@ export type TypeOrderData = {
     name: string
     quantity: number
     subtotal: number
+    imageURL: string
   }[]
   total_amount: number
   order_status: string
   order_type: TypeOrder
-  timestamp: Date
+  timestamp: Timestamp
   customer_name: string | undefined
   customer_email: string | undefined
+  order_id?: string
 }
 
 // 결제
