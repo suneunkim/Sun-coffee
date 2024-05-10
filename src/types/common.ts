@@ -37,7 +37,7 @@ export type TypeOrderData = {
   total_amount: number
   order_status: string
   order_type: TypeOrder
-  timestamp: Timestamp
+  timestamp: Timestamp | Date
   customer_name: string | undefined
   customer_email: string | undefined
   order_id?: string
@@ -60,3 +60,10 @@ export interface paymentDataProps extends TypeOrderUserData {
   name: string
   amount: number
 }
+
+// 주문 조회
+export type TypeOrderStatus =
+  | '주문 완료'
+  | '주문 취소'
+  | '제조 대기'
+  | '제조 완료'
