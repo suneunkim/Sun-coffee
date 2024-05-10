@@ -62,8 +62,4 @@ export interface paymentDataProps extends TypeOrderUserData {
 }
 
 // 주문 조회
-export type TypeOrderStatus =
-  | '주문 완료'
-  | '주문 취소'
-  | '제조 대기'
-  | '제조 완료'
+export type TypeOrderStatus = '주문 취소' | '제조 대기' | '제조 완료'

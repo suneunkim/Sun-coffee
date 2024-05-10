@@ -1,5 +1,4 @@
 import { TypeOrderData } from '@/types/common'
-import DetailList from './DetailList'
 import formattedDate from '@/utils/formattedDate'
 import useOrderStatus from '@/api/updateOrderStatus'
 
@@ -7,7 +6,7 @@ interface Props {
   data: TypeOrderData
 }
 
-const OrderList = ({ data }: Props) => {
+const SellerOrderHistory = ({ data }: Props) => {
   const { updateOrderStatus } = useOrderStatus()
 
   return (
@@ -30,19 +29,6 @@ const OrderList = ({ data }: Props) => {
             >
               {data.order_status}
             </span>
-            {data.order_status === '주문 완료' ? (
-              <div className="flex space-x-2 items-center">
-                <p className="text-xs">주문을 취소할 수 있습니다.</p>
-                <button
-                  onClick={() => updateOrderStatus(data.order_id!, '주문 취소')}
-                  className="bg-gray-300 p-1 rounded-md"
-                >
-                  주문 취소하기
-                </button>
-              </div>
-            ) : (
-              <p className="text-xs">지금은 주문을 취소할 수 없습니다.</p>
-            )}
           </div>
           <h3 className="font-semibold">{`주문번호 : ${data.order_id
             ?.toUpperCase()
@@ -62,10 +48,51 @@ const OrderList = ({ data }: Props) => {
         </div>
       </div>
       <section>
-        <DetailList products={data?.products} id={data?.order_id!} />
+        {data?.products.map((product, i) => (
+          <div key={data.order_id! + i}>
+            <div className="flex items-start">
+              <div className="w-12 h-12 bg-orange-100 rounded-lg my-2 mr-2">
+                {product.imageURL ? (
+                  <img src={product.imageURL} alt={product.name} className="" />
+                ) : (
+                  <div />
+                )}
+              </div>
+              <div className="flex flex-col my-2">
+                <h4>{product.name}</h4>
+                <div className="space-x-5">
+                  <span>{product.subtotal.toLocaleString('ko-kr')}원</span>
+                  <span className="text-gray-600">{`x ${product.quantity}`}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+        {data?.order_status !== '주문 취소' && (
+          <div className="flex gap-5 mt-3">
+            <button
+              onClick={() => updateOrderStatus(data.order_id!, '주문 취소')}
+              className="p-2 rounded-md bg-red-100"
+            >
+              주문 취소하기
+            </button>
+            <button
+              onClick={() => updateOrderStatus(data.order_id!, '제조 대기')}
+              className="p-2 rounded-md bg-yellow-100"
+            >
+              제조 대기로 변경하기
+            </button>
+            <button
+              onClick={() => updateOrderStatus(data.order_id!, '제조 완료')}
+              className="p-2 rounded-md bg-green-100"
+            >
+              제조 완료로 변경하기
+            </button>
+          </div>
+        )}
       </section>
     </div>
   )
 }
 
-export default OrderList
+export default SellerOrderHistory

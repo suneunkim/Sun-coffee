@@ -11,7 +11,7 @@ import UploadCategoryBtn from '@/components/Product/UploadCategoryBtn'
 import { TypeProduct } from '@/types/common'
 
 interface EditProps {
-  selectedProduct: TypeProduct | undefined
+  selectedProduct: TypeProduct | null
   onClose: () => void
 }
 
@@ -127,7 +127,7 @@ const EditProduct = ({ selectedProduct, onClose }: EditProps) => {
           formatPrice
         />
         <InputFile
-          data={selectedProduct}
+          data={selectedProduct!}
           imageURL={imageURL}
           onChange={(value) => imageSetValue('imageURL', value)}
         />
