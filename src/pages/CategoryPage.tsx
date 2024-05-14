@@ -1,13 +1,12 @@
 import { useInView } from 'react-intersection-observer'
-import { useEffect, useState } from 'react'
+import { Suspense, lazy, useEffect, useState } from 'react'
 import { useCategoryQueryProducts } from '@/api/productQueries'
 import { Navigate, useParams } from 'react-router-dom'
 import ProductCard from '@/components/Product/ProductCard'
 import PageLayout from '@/components/common/PageLayout'
 import { TypeCategory } from '@/types/common'
-import DetailModal from '@/components/Product/DetailModal'
 import useProductModal from '@/hooks/useProductModal'
-// TODO: 페이지 옮겨질때(캐싱 된 이후 말고) 떨리는 현상 수정
+const DetailModal = lazy(() => import('@/components/Product/DetailModal'))
 
 const CategoryPage = () => {
   const { selectedProduct, showDetailModal, handleProductSelect, closeModal } =
@@ -50,11 +49,13 @@ const CategoryPage = () => {
           {isFetchingNextPage && <p>Loading more...</p>}
         </div>
         {showDetailModal && (
-          <DetailModal
-            product={selectedProduct}
-            onClose={() => closeModal()}
-            onModal={(data) => handleProductSelect(data)}
-          />
+          <Suspense>
+            <DetailModal
+              product={selectedProduct}
+              onClose={() => closeModal()}
+              onModal={(data) => handleProductSelect(data)}
+            />
+          </Suspense>
         )}
       </div>
     </PageLayout>

@@ -8,8 +8,6 @@ interface Props {
   onModal: (data: TypeProduct) => void
 }
 
-// TODO: section은 추천 상품들 보여주기. 같은 카테고리 군에서 3개 뽑아서 보여주기
-
 const DetailModal = ({ product, onClose, onModal }: Props) => {
   const { data } = useQueryRecommendProduct(product?.category!, product?.name!)
   return (

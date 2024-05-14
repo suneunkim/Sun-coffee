@@ -1,4 +1,3 @@
-import Cart from '../Product/Cart'
 import Category from './Category'
 import { customerMenu } from './MenuItem'
 import Nav from './Nav'
@@ -6,9 +5,11 @@ import SearchBar from './SearchBar'
 import { TypeChildren } from './../../types/common'
 import { Toaster } from '@/components/ui/toaster'
 import { AnimatePresence } from 'framer-motion'
-import PaymentModal from '../Payment/PaymentModal'
 import { usePayment } from '@/context/PaymentContext'
 import { useCart } from '@/context/CartContext'
+import { Suspense, lazy } from 'react'
+const Cart = lazy(() => import('../Product/Cart'))
+const PaymentModal = lazy(() => import('../Payment/PaymentModal'))
 
 const PageLayout = ({ children }: TypeChildren) => {
   const cartContext = useCart()
@@ -34,10 +35,20 @@ const PageLayout = ({ children }: TypeChildren) => {
       </section>
       <div className="flex items-center fixed top-1/2 transform -translate-y-1/2 right-0 xl:relative xl:right-auto xl:-translate-y-0">
         <AnimatePresence>
-          {isCartVisible && <Cart isCartVisible />}
+          {isCartVisible && (
+            <Suspense>
+              <Cart isCartVisible />
+            </Suspense>
+          )}
         </AnimatePresence>
       </div>
-      <AnimatePresence>{isOpen && <PaymentModal />}</AnimatePresence>
+      <AnimatePresence>
+        {isOpen && (
+          <Suspense>
+            <PaymentModal />
+          </Suspense>
+        )}
+      </AnimatePresence>
       <Toaster />
     </main>
   )

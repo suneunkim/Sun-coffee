@@ -1,7 +1,9 @@
 import { TypeOrderData } from '@/types/common'
-import DetailList from './DetailList'
 import formattedDate from '@/utils/formattedDate'
 import useOrderStatus from '@/api/updateOrderStatus'
+import { Suspense, lazy } from 'react'
+
+const DetailList = lazy(() => import('./DetailList'))
 
 interface Props {
   data: TypeOrderData
@@ -62,7 +64,9 @@ const MyOrderList = ({ data }: Props) => {
         </div>
       </div>
       <section>
-        <DetailList products={data?.products} id={data?.order_id!} />
+        <Suspense>
+          <DetailList products={data?.products} id={data?.order_id!} />
+        </Suspense>
       </section>
     </div>
   )
