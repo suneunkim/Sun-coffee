@@ -11,8 +11,9 @@ import { useCart } from '@/context/CartContext'
 //TODO: 판매자 동작 다시 한번 해보고, dev로 머지하기. main으로 pr하기.
 interface Props {
   customerMenu: typeof customerMenu
+  sellerHome: boolean
 }
-const Nav = ({ customerMenu }: Props) => {
+const Nav = ({ customerMenu, sellerHome }: Props) => {
   const userProfile = useCurrentUser()
 
   const cartContext = useCart()
@@ -28,8 +29,8 @@ const Nav = ({ customerMenu }: Props) => {
   }
 
   return (
-    <main className="w-1/4 min-w-[220px] lg:w-[16rem] py-8 text-[#3c3c3c] font-bold h-screen flex flex-col bg-[#FFFFFF]">
-      <h2 className="text-4xl font-semibold mb-20 flex justify-center">
+    <main className="min-w-[200px] py-8 text-[#3c3c3c] font-bold h-screen flex flex-col bg-[#FFFFFF]">
+      <h2 className="text-3xl font-semibold mb-20 flex justify-center">
         <span className="text-[#FFA16C]">Sun' </span> Coffee
       </h2>
       <nav>
@@ -39,7 +40,7 @@ const Nav = ({ customerMenu }: Props) => {
               {item.label}
             </MenuItem>
           ))}
-          {toggleCart && (
+          {!sellerHome && toggleCart && (
             <button
               className="flex items-center hover:text-[#FFA16C]"
               onClick={toggleCart}

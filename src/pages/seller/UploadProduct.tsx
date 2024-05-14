@@ -8,7 +8,7 @@ import { useState } from 'react'
 
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form'
 import useCurrentUser from '@/hooks/useCurrentUser'
-import { collection, doc, setDoc } from 'firebase/firestore'
+import { doc, setDoc } from 'firebase/firestore'
 import { db } from '@/firebase'
 import UploadCategoryBtn from '@/components/Product/UploadCategoryBtn'
 import { useNavigate } from 'react-router-dom'

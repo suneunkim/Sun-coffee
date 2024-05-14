@@ -35,9 +35,9 @@ export const sellerMenu = [
     label: 'Home Page',
   },
   {
-    path: '/order-list',
+    path: '/orders-history',
     icon: <CiBookmarkMinus className="w-5 h-5" />,
-    label: 'Order List',
+    label: 'Order History',
   },
   {
     path: '/upload',

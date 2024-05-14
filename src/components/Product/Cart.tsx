@@ -46,6 +46,7 @@ const Cart = ({ isCartVisible }: Props) => {
         name: item.product.name,
         quantity: item.quantity,
         subtotal: Number(item.product.price) * item.quantity,
+        imageURL: item.product.imageURL,
       })),
       total_amount: totalAmount,
       order_status: '주문 완료',

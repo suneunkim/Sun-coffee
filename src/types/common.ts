@@ -1,3 +1,5 @@
+import { Timestamp } from 'firebase/firestore'
+
 export interface TypeChildren {
   children: React.ReactNode
 }
@@ -30,13 +32,15 @@ export type TypeOrderData = {
     name: string
     quantity: number
     subtotal: number
+    imageURL: string
   }[]
   total_amount: number
   order_status: string
   order_type: TypeOrder
-  timestamp: Date
+  timestamp: Timestamp | Date
   customer_name: string | undefined
   customer_email: string | undefined
+  order_id?: string
 }
 
 // 결제
@@ -56,3 +60,6 @@ export interface paymentDataProps extends TypeOrderUserData {
   name: string
   amount: number
 }
+
+// 주문 조회
+export type TypeOrderStatus = '주문 취소' | '제조 대기' | '제조 완료'
