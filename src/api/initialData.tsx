@@ -26,215 +26,217 @@ const initialDataUpload = async (products: Product[]) => {
   }
 }
 
-const initailCoffee: Product[] = [
-  {
-    name: '아메리카노',
-    description:
-      '구운 견과류의 고소한 향미와 다크초콜렛의 깊고 깔끔한 애프터테이스트가 특징인 커피',
-    price: '3200',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1647320805422.png',
-    category: 'coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: 'HOT 아메리카노',
-    description:
-      '구운 견과류의 고소한 향미와 다크초콜렛의 깊고 깔끔한 애프터테이스트가 특징인 커피',
-    price: '3200',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1671581625569.png',
-    category: 'coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: '카페 라떼',
-    description:
-      '진한 에스프레소와 부드러운 우유가 만나 고소한 풍미를 더하는 메뉴 가장 대중적인 메뉴',
-    price: '4200',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1645073339534.png',
-    category: 'coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: 'HOT 카페 라떼',
-    description:
-      '진한 에스프레소와 부드러운 우유가 만나 고소한 풍미를 더하는 메뉴 가장 대중적인 메뉴',
-    price: '4200',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1645073265123.png',
-    category: 'coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: '연유 콜드브루',
-    description:
-      '베트남풍 연유의 달콤한 맛과 밸런스 잡힌 콜드브루가 어우러져 특색있게 즐길 수 있는 음료',
-    price: '4700',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1647320780643.png',
-    category: 'coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: '흑당 콜드브루',
-    description:
-      '콜드브루에 진하고 달콤한 흑당과 고소한 우유가 어우러진 커피음료 ',
-    price: '4700',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1647320738273.png',
-    category: 'coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: '콜드브루 화이트 비엔나',
-    description:
-      '달콤한 크림과 화이트 초콜릿향, 아이리쉬크림향이 더해진 콜드브루',
-    price: '4900',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1647320860534.png',
-    category: 'coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: '콜드브루 니트로',
-    description:
-      '질소투입방식을 통해 신선하고 부드러운 거품과 목넘김, 풍미를 느낄 수 있는 커피',
-    price: '4200',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1647320870899.png',
-    category: 'coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: '콜드브루 라떼',
-    description:
-      '콜드브루의 깔끔하고 쌉싸름한 풍미가 고소한 우유와 만나 누구나 부담없이 즐길 수 있는 음료',
-    price: '4500',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1647320848557.png',
-    category: 'coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: '아포가토 오리지널',
-    description:
-      '대중들에게 가장 친숙한 타입의 아포가토로 에스프레소와 아몬드를 토핑한 제품',
-    price: '4700',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1691731083701.png',
-    category: 'coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: '토피넛 라떼',
-    description:
-      '고소한 아몬드의 맛과 달콤한 코코아가 조화롭게 어우러진 달콤한 음료 ',
-    price: '',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1694414746800.png',
-    category: 'coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: 'HOT 토피넛 라떼',
-    description:
-      '고소한 아몬드의 맛과 달콤한 코코아가 조화롭게 어우러진 달콤한 음료 ',
-    price: '',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1694414812893.png',
-    category: 'coffee',
-    createdAt: new Date(),
-  },
-]
-const initialNonCoffee: Product[] = [
-  {
-    name: '아이스티 복숭아',
-    description:
-      '홍차의 깊은 맛과 풍부한 복숭아 향이 어우러진 달콤한 여름철 인기 음료',
-    price: '2900',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1647322929626.png',
-    category: 'non-coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: '고구마 라떼',
-    description:
-      '호박고구마를 활용하여 달콤하고 고소한 고구마의 풍미가 진하게 느껴지는 음료',
-    price: '4200',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1647322131838.png',
-    category: 'non-coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: 'HOT 고구마 라떼',
-    description:
-      '호박고구마를 활용하여 달콤하고 고소한 고구마의 풍미가 진하게 느껴지는 음료',
-    price: '3800',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1647322145592.png',
-    category: 'non-coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: '녹차 라떼',
-    description: '녹차에 우유가 더해져 부담없이 즐길 수 있는 음료',
-    price: '3900',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1647321741180.png',
-    category: 'non-coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: 'HOT 녹차 라떼',
-    description: '녹차에 우유가 더해져 부담없이 즐길 수 있는 음료',
-    price: '3900',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1647321755481.png',
-    category: 'non-coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: '아이스 초코',
-    description:
-      '진한 모카시럽과 부드러운 우유, 그리고 달콤한 휘핑크림의 삼박자가 조화를 이루는 음료',
-    price: '3900',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1647321814289.png',
-    category: 'non-coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: 'HOT 초코',
-    description:
-      '진한 모카시럽과 부드러운 우유, 그리고 달콤한 휘핑크림의 삼박자가 조화를 이루는 음료',
-    price: '3900',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1647321825736.png',
-    category: 'non-coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: '생강차',
-    description:
-      '생강 특유의 진하고 풍부한 맛과 향미를 느낄 수 있으며, 은은하고 부드러운 단맛의 유자와 꿀이 더해진 음료',
-    price: '4200',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1647322677153.png',
-    category: 'non-coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: 'HOT 생강차',
-    description:
-      '생강 특유의 진하고 풍부한 맛과 향미를 느낄 수 있으며, 은은하고 부드러운 단맛의 유자와 꿀이 더해진 음료',
-    price: '4200',
-    imageURL: 'https://www.ediya.com/files/menu/IMG_1647322669524.png',
-    category: 'non-coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: '쌍화차',
-    description:
-      '전통 쌍화차의 느낌을 재해석하여 다양한 연령층이 즐길 수 있도록 은은한 향과 고소함을 강조한 음료',
-    price: '4200',
-    imageURL: '	https://www.ediya.com/files/menu/IMG_1647322778699.png',
-    category: 'non-coffee',
-    createdAt: new Date(),
-  },
-  {
-    name: 'HOT 쌍화차',
-    description:
-      '전통 쌍화차의 느낌을 재해석하여 다양한 연령층이 즐길 수 있도록 은은한 향과 고소함을 강조한 음료',
-    price: '4200',
-    imageURL: '	https://www.ediya.com/files/menu/IMG_1647322753151.png',
-    category: 'non-coffee',
-    createdAt: new Date(),
-  },
-]
+// const initailCoffee: Product[] = [
+//   {
+//     name: '아메리카노',
+//     description:
+//       '구운 견과류의 고소한 향미와 다크초콜렛의 깊고 깔끔한 애프터테이스트가 특징인 커피',
+//     price: '3200',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1647320805422.png',
+//     category: 'coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: 'HOT 아메리카노',
+//     description:
+//       '구운 견과류의 고소한 향미와 다크초콜렛의 깊고 깔끔한 애프터테이스트가 특징인 커피',
+//     price: '3200',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1671581625569.png',
+//     category: 'coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: '카페 라떼',
+//     description:
+//       '진한 에스프레소와 부드러운 우유가 만나 고소한 풍미를 더하는 메뉴 가장 대중적인 메뉴',
+//     price: '4200',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1645073339534.png',
+//     category: 'coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: 'HOT 카페 라떼',
+//     description:
+//       '진한 에스프레소와 부드러운 우유가 만나 고소한 풍미를 더하는 메뉴 가장 대중적인 메뉴',
+//     price: '4200',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1645073265123.png',
+//     category: 'coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: '연유 콜드브루',
+//     description:
+//       '베트남풍 연유의 달콤한 맛과 밸런스 잡힌 콜드브루가 어우러져 특색있게 즐길 수 있는 음료',
+//     price: '4700',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1647320780643.png',
+//     category: 'coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: '흑당 콜드브루',
+//     description:
+//       '콜드브루에 진하고 달콤한 흑당과 고소한 우유가 어우러진 커피음료 ',
+//     price: '4700',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1647320738273.png',
+//     category: 'coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: '콜드브루 화이트 비엔나',
+//     description:
+//       '달콤한 크림과 화이트 초콜릿향, 아이리쉬크림향이 더해진 콜드브루',
+//     price: '4900',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1647320860534.png',
+//     category: 'coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: '콜드브루 니트로',
+//     description:
+//       '질소투입방식을 통해 신선하고 부드러운 거품과 목넘김, 풍미를 느낄 수 있는 커피',
+//     price: '4200',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1647320870899.png',
+//     category: 'coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: '콜드브루 라떼',
+//     description:
+//       '콜드브루의 깔끔하고 쌉싸름한 풍미가 고소한 우유와 만나 누구나 부담없이 즐길 수 있는 음료',
+//     price: '4500',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1647320848557.png',
+//     category: 'coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: '아포가토 오리지널',
+//     description:
+//       '대중들에게 가장 친숙한 타입의 아포가토로 에스프레소와 아몬드를 토핑한 제품',
+//     price: '4700',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1691731083701.png',
+//     category: 'coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: '토피넛 라떼',
+//     description:
+//       '고소한 아몬드의 맛과 달콤한 코코아가 조화롭게 어우러진 달콤한 음료 ',
+//     price: '',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1694414746800.png',
+//     category: 'coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: 'HOT 토피넛 라떼',
+//     description:
+//       '고소한 아몬드의 맛과 달콤한 코코아가 조화롭게 어우러진 달콤한 음료 ',
+//     price: '',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1694414812893.png',
+//     category: 'coffee',
+//     createdAt: new Date(),
+//   },
+// ]
+
+// const initialNonCoffee: Product[] = [
+//   {
+//     name: '아이스티 복숭아',
+//     description:
+//       '홍차의 깊은 맛과 풍부한 복숭아 향이 어우러진 달콤한 여름철 인기 음료',
+//     price: '2900',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1647322929626.png',
+//     category: 'non-coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: '고구마 라떼',
+//     description:
+//       '호박고구마를 활용하여 달콤하고 고소한 고구마의 풍미가 진하게 느껴지는 음료',
+//     price: '4200',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1647322131838.png',
+//     category: 'non-coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: 'HOT 고구마 라떼',
+//     description:
+//       '호박고구마를 활용하여 달콤하고 고소한 고구마의 풍미가 진하게 느껴지는 음료',
+//     price: '3800',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1647322145592.png',
+//     category: 'non-coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: '녹차 라떼',
+//     description: '녹차에 우유가 더해져 부담없이 즐길 수 있는 음료',
+//     price: '3900',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1647321741180.png',
+//     category: 'non-coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: 'HOT 녹차 라떼',
+//     description: '녹차에 우유가 더해져 부담없이 즐길 수 있는 음료',
+//     price: '3900',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1647321755481.png',
+//     category: 'non-coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: '아이스 초코',
+//     description:
+//       '진한 모카시럽과 부드러운 우유, 그리고 달콤한 휘핑크림의 삼박자가 조화를 이루는 음료',
+//     price: '3900',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1647321814289.png',
+//     category: 'non-coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: 'HOT 초코',
+//     description:
+//       '진한 모카시럽과 부드러운 우유, 그리고 달콤한 휘핑크림의 삼박자가 조화를 이루는 음료',
+//     price: '3900',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1647321825736.png',
+//     category: 'non-coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: '생강차',
+//     description:
+//       '생강 특유의 진하고 풍부한 맛과 향미를 느낄 수 있으며, 은은하고 부드러운 단맛의 유자와 꿀이 더해진 음료',
+//     price: '4200',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1647322677153.png',
+//     category: 'non-coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: 'HOT 생강차',
+//     description:
+//       '생강 특유의 진하고 풍부한 맛과 향미를 느낄 수 있으며, 은은하고 부드러운 단맛의 유자와 꿀이 더해진 음료',
+//     price: '4200',
+//     imageURL: 'https://www.ediya.com/files/menu/IMG_1647322669524.png',
+//     category: 'non-coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: '쌍화차',
+//     description:
+//       '전통 쌍화차의 느낌을 재해석하여 다양한 연령층이 즐길 수 있도록 은은한 향과 고소함을 강조한 음료',
+//     price: '4200',
+//     imageURL: '	https://www.ediya.com/files/menu/IMG_1647322778699.png',
+//     category: 'non-coffee',
+//     createdAt: new Date(),
+//   },
+//   {
+//     name: 'HOT 쌍화차',
+//     description:
+//       '전통 쌍화차의 느낌을 재해석하여 다양한 연령층이 즐길 수 있도록 은은한 향과 고소함을 강조한 음료',
+//     price: '4200',
+//     imageURL: '	https://www.ediya.com/files/menu/IMG_1647322753151.png',
+//     category: 'non-coffee',
+//     createdAt: new Date(),
+//   },
+// ]
+
 const initailFood: Product[] = [
   {
     name: '소금빵',

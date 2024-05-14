@@ -1,4 +1,4 @@
-import { FieldErrors, UseFormRegister } from 'react-hook-form'
+import { FieldErrors } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
@@ -25,7 +25,6 @@ const TextInput = ({
   errors,
   checkbox,
   errorMsg,
-  ...rest
 }: InputProps) => {
   return (
     <div
@@ -55,6 +54,7 @@ const TextInput = ({
           {...register(id, { required: true })}
           type={type}
         />
+        {errorMsg && <p>{errorMsg}</p>}
         {formatPrice && (
           <span className="absolute left-3 text-sm text-gray-600">₩</span>
         )}

@@ -23,9 +23,7 @@ const InputUi = ({
   formatPrice,
   register,
   errors,
-  textarea,
   checkbox,
-  ...rest
 }: InputProps) => {
   return (
     <div
