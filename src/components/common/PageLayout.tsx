@@ -8,6 +8,7 @@ import { AnimatePresence } from 'framer-motion'
 import { usePayment } from '@/context/PaymentContext'
 import { useCart } from '@/context/CartContext'
 import { Suspense, lazy } from 'react'
+import Loading from './Loading'
 const Cart = lazy(() => import('../Product/Cart'))
 const PaymentModal = lazy(() => import('../Payment/PaymentModal'))
 
@@ -36,7 +37,7 @@ const PageLayout = ({ children }: TypeChildren) => {
       <div className="flex items-center fixed top-1/2 transform -translate-y-1/2 right-0 xl:relative xl:right-auto xl:-translate-y-0">
         <AnimatePresence>
           {isCartVisible && (
-            <Suspense>
+            <Suspense fallback={<Loading />}>
               <Cart isCartVisible />
             </Suspense>
           )}
@@ -44,7 +45,7 @@ const PageLayout = ({ children }: TypeChildren) => {
       </div>
       <AnimatePresence>
         {isOpen && (
-          <Suspense>
+          <Suspense fallback={<Loading />}>
             <PaymentModal />
           </Suspense>
         )}

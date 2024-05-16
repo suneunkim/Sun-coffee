@@ -7,6 +7,7 @@ import { AnimatePresence } from 'framer-motion'
 import { Suspense, lazy } from 'react'
 import ProductCardSkelton from './ProductCardSkelton'
 import React from 'react'
+import Loading from '../common/Loading'
 const DetailModal = lazy(() => import('./DetailModal'))
 
 const ProductList = () => {
@@ -38,7 +39,7 @@ const ProductList = () => {
       </div>
       <AnimatePresence>
         {showDetailModal ? (
-          <Suspense>
+          <Suspense fallback={<Loading />}>
             <DetailModal
               product={selectedProduct}
               onClose={() => closeModal()}

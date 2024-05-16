@@ -6,6 +6,7 @@ import ProductCard from '@/components/Product/ProductCard'
 import PageLayout from '@/components/common/PageLayout'
 import { TypeCategory } from '@/types/common'
 import useProductModal from '@/hooks/useProductModal'
+import Loading from '@/components/common/Loading'
 const DetailModal = lazy(() => import('@/components/Product/DetailModal'))
 
 const CategoryPage = () => {
@@ -49,7 +50,7 @@ const CategoryPage = () => {
           {isFetchingNextPage && <p>Loading more...</p>}
         </div>
         {showDetailModal && (
-          <Suspense>
+          <Suspense fallback={<Loading />}>
             <DetailModal
               product={selectedProduct}
               onClose={() => closeModal()}

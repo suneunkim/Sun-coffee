@@ -2,6 +2,7 @@ import { TypeOrderData } from '@/types/common'
 import formattedDate from '@/utils/formattedDate'
 import useOrderStatus from '@/api/updateOrderStatus'
 import { Suspense, lazy } from 'react'
+import Loading from '../common/Loading'
 
 const DetailList = lazy(() => import('./DetailList'))
 
@@ -64,7 +65,7 @@ const MyOrderList = ({ data }: Props) => {
         </div>
       </div>
       <section>
-        <Suspense>
+        <Suspense fallback={<Loading />}>
           <DetailList products={data?.products} id={data?.order_id!} />
         </Suspense>
       </section>
