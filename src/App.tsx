@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import './index.css'
 import { Suspense, lazy } from 'react'
+import Loading from './components/common/Loading'
 const Home = lazy(() => import('./pages/Home'))
 const Login = lazy(() => import('./pages/auth/Login'))
 const Register = lazy(() => import('./pages/auth/Register'))
@@ -13,7 +14,7 @@ const OrderHistory = lazy(() => import('./pages/seller/OrderHistory'))
 
 function App() {
   return (
-    <Suspense fallback={<div>서스펜스 로딩중</div>}>
+    <Suspense fallback={<Loading />}>
       <Routes>
         <Route
           path="/seller-home"
