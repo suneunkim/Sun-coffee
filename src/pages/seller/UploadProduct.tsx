@@ -26,7 +26,6 @@ const UploadProduct = () => {
     formState: { errors },
     setValue,
     watch,
-    reset,
   } = useForm<FieldValues>({
     defaultValues: {
       name: '',
@@ -81,7 +80,7 @@ const UploadProduct = () => {
 
   return (
     <main className="bg-gray-50 flex">
-      <Nav customerMenu={sellerMenu} />
+      <Nav customerMenu={sellerMenu} sellerHome />
       <section className="flex flex-col px-5 w-[30rem] bg-white p-9 ml-10 rounded-xl shadow-lg">
         <h3 className="font-semibold mb-5">상품 등록하기</h3>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">

@@ -8,8 +8,6 @@ interface Props {
   onModal: (data: TypeProduct) => void
 }
 
-// TODO: section은 추천 상품들 보여주기. 같은 카테고리 군에서 3개 뽑아서 보여주기
-
 const DetailModal = ({ product, onClose, onModal }: Props) => {
   const { data } = useQueryRecommendProduct(product?.category!, product?.name!)
   return (
@@ -26,6 +24,9 @@ const DetailModal = ({ product, onClose, onModal }: Props) => {
           <img
             src={product?.imageURL}
             className=" object-contain bg-gray-100"
+            alt={product?.name}
+            width={400}
+            height={400}
           />
           <article className="flex flex-col pt-5 px-7">
             <div className="flex justify-between">

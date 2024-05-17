@@ -35,6 +35,9 @@ const ProductCard = ({ data, onModal }: ProductCardProps) => {
           <img
             className="hover:scale-125 transition hover:cursor-pointer"
             src={data.imageURL}
+            alt={data.name}
+            width={119}
+            height={119}
           />
           <Badge className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-slate-400 whitespace-nowrap">
             {data.category}

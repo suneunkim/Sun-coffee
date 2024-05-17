@@ -2,11 +2,13 @@ import { useQueryInitialProducts } from '@/api/productQueries'
 import ProductCard from './ProductCard'
 import { Link } from 'react-router-dom'
 import { TypeCategory, TypeProduct } from '@/types/common'
-import ProductCardSkelton from './ProductCardSkelton'
-import DetailModal from './DetailModal'
 import useProductModal from '@/hooks/useProductModal'
 import { AnimatePresence } from 'framer-motion'
+import { Suspense, lazy } from 'react'
+import ProductCardSkelton from './ProductCardSkelton'
 import React from 'react'
+import Loading from '../common/Loading'
+const DetailModal = lazy(() => import('./DetailModal'))
 
 const ProductList = () => {
   const { selectedProduct, showDetailModal, handleProductSelect, closeModal } =
@@ -37,11 +39,13 @@ const ProductList = () => {
       </div>
       <AnimatePresence>
         {showDetailModal ? (
-          <DetailModal
-            product={selectedProduct}
-            onClose={() => closeModal()}
-            onModal={(data) => handleProductSelect(data)}
-          />
+          <Suspense fallback={<Loading />}>
+            <DetailModal
+              product={selectedProduct}
+              onClose={() => closeModal()}
+              onModal={(data) => handleProductSelect(data)}
+            />
+          </Suspense>
         ) : null}
       </AnimatePresence>
     </div>

@@ -5,7 +5,7 @@ import {
   deleteObject,
   getDownloadURL,
   ref,
-  uploadBytes,
+  uploadString,
 } from 'firebase/storage'
 import useCurrentUser from '@/hooks/useCurrentUser'
 import { useEffect, useState } from 'react'
@@ -33,11 +33,32 @@ function InputFile({ onChange, imageURL, data }: Props) {
   }
 
   const handleImageUpload = async (file: File) => {
-    const imageRef = ref(storage, `${userProfile?.uid}/${file.name}`)
-    await uploadBytes(imageRef, file)
+    const webpImage = await convertToWebP(file) // 이미지 파일 webP로 변환
+    const imageRef = ref(storage, `${userProfile?.uid}/${file.name}.webp`)
+    await uploadString(imageRef, webpImage, 'data_url')
     const downloadURL = await getDownloadURL(imageRef)
     onChange(downloadURL)
     setisUploaded(true)
+  }
+
+  const convertToWebP = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.readAsDataURL(file) // 파일을 읽어서 Data URL 형식으로 변환
+      reader.onload = () => {
+        const img = new Image()
+        img.src = reader.result as string // 이미지 소스로 설정
+        img.onload = () => {
+          const canvas = document.createElement('canvas')
+          canvas.width = img.width
+          canvas.height = img.height
+          const ctx = canvas.getContext('2d')
+          ctx?.drawImage(img, 0, 0)
+          resolve(canvas.toDataURL('image/webp', 0.8)) // webP 이미지로 변환
+        }
+      }
+      reader.onerror = (error) => reject(error)
+    })
   }
 
   const handleCancleUpload = async () => {
