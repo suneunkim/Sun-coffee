@@ -2,6 +2,7 @@ import useCurrentUser from '@/hooks/useCurrentUser'
 import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { TypeChildren } from './../../types/common'
+import Loading from '../common/Loading'
 
 const ProtectedRoute = ({ children }: TypeChildren) => {
   const userProfile = useCurrentUser()
@@ -19,7 +20,7 @@ const ProtectedRoute = ({ children }: TypeChildren) => {
   }, [userProfile])
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loading />
   }
   if (redirect) {
     return <Navigate to="/" replace />
