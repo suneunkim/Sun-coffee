@@ -24,6 +24,9 @@ const DetailModal = ({ product, onClose, onModal }: Props) => {
           <img
             src={product?.imageURL}
             className=" object-contain bg-gray-100"
+            alt={product?.name}
+            width={400}
+            height={400}
           />
           <article className="flex flex-col pt-5 px-7">
             <div className="flex justify-between">
