@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { visualizer } from 'rollup-plugin-visualizer'
+import viteCompression from 'vite-plugin-compression'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -14,6 +15,10 @@ export default defineConfig({
     visualizer({
       filename: './dist/stats.html',
       open: true, // 빌드 후 자동으로 브라우저에서 열기
+    }),
+    viteCompression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
     }),
   ],
   resolve: {
@@ -34,6 +39,7 @@ export default defineConfig({
         },
       },
     },
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 500,
+    minify: 'terser',
   },
 })
