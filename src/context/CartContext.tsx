@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react'
 import { TypeProduct, TypeChildren, cartItem, TypeOrder } from '@/types/common'
 
 interface CartContextProps {
@@ -21,12 +27,12 @@ export const useCart = () => useContext(CartContext)
 export const CartProvider = ({ children }: TypeChildren) => {
   // 카트 모달 뷰 관련 함수
   const [isCartVisible, setIsCartVisible] = useState(false)
-  const toggleCart = () => {
+  const toggleCart = useCallback(() => {
     setIsCartVisible(!isCartVisible)
-  }
-  const closeCart = () => {
+  }, [isCartVisible])
+  const closeCart = useCallback(() => {
     setIsCartVisible(false)
-  }
+  }, [isCartVisible])
 
   const [cart, setCart] = useState<cartItem[]>(() => {
     // 로컬 스토리지에서 장바구니 불러오기

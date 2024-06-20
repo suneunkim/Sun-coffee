@@ -8,12 +8,14 @@ import { Link } from 'react-router-dom'
 import MenuItem, { customerMenu } from './MenuItem'
 import { PiShoppingCartLight } from 'react-icons/pi'
 import { useCart } from '@/context/CartContext'
+import React from 'react'
 //TODO: 판매자 동작 다시 한번 해보고, dev로 머지하기. main으로 pr하기.
 interface Props {
   customerMenu: typeof customerMenu
   sellerHome?: boolean
 }
 const Nav = ({ customerMenu, sellerHome }: Props) => {
+  console.log('Nav 컴포넌트 렌더링')
   const userProfile = useCurrentUser()
 
   const cartContext = useCart()
@@ -89,4 +91,4 @@ const Nav = ({ customerMenu, sellerHome }: Props) => {
   )
 }
 
-export default Nav
+export default React.memo(Nav)

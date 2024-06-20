@@ -6,6 +6,7 @@ interface Props {
 }
 
 const Category = () => {
+  console.log('Category 컴포넌트 렌더링')
   return (
     <div className="w-[350px] flex gap-3">
       <CategoryButton to="/coffee" label="Coffee" />
