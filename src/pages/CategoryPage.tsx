@@ -7,6 +7,7 @@ import PageLayout from '@/components/common/PageLayout'
 import { TypeCategory } from '@/types/common'
 import useProductModal from '@/hooks/useProductModal'
 import Loading from '@/components/common/Loading'
+import SEO from '@/components/common/SEO'
 const DetailModal = lazy(() => import('@/components/Product/DetailModal'))
 
 const CategoryPage = () => {
@@ -32,6 +33,7 @@ const CategoryPage = () => {
 
   return (
     <PageLayout>
+      <SEO title={category} description={`${category}를 둘러보세요!`} />
       <button onClick={() => setOrderByPrice(false)}>최신순</button>
       <button onClick={() => setOrderByPrice(true)}>가격순</button>
       <div className="flex justify-center">
