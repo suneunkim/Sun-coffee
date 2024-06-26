@@ -15,7 +15,7 @@ import { TypeCategory, TypeOrderData, TypeProduct } from '@/types/common'
 export const fetchCategoryProducts = async (
   category: TypeCategory,
   pageParam: string | null,
-  orderByPrice: boolean = false,
+  orderByPrice: boolean = false
 ) => {
   const productsCol = collection(db, 'products')
 
@@ -26,10 +26,10 @@ export const fetchCategoryProducts = async (
       where('category', '==', category),
       orderBy(
         orderByPrice ? 'price' : 'createdAt',
-        orderByPrice ? 'asc' : 'desc',
+        orderByPrice ? 'asc' : 'desc'
       ), // 가격순은 오름차순으로 설정
       startAfter(pageParam || 0),
-      limit(4),
+      limit(4)
     )
   } else {
     q = query(
@@ -37,9 +37,9 @@ export const fetchCategoryProducts = async (
       where('category', '==', category),
       orderBy(
         orderByPrice ? 'price' : 'createdAt',
-        orderByPrice ? 'asc' : 'desc',
+        orderByPrice ? 'asc' : 'desc'
       ),
-      limit(4),
+      limit(4)
     )
   }
 
@@ -56,7 +56,7 @@ export const fetchCategoryProducts = async (
 // 상품 디테일 모달의 추천 상품 3가지
 export const fetchRecommendProduct = async (
   category: TypeCategory,
-  excludeProductId: string,
+  excludeProductId: string
 ) => {
   if (!category || !excludeProductId) {
     console.error('카테고리나 상품 ID가 undefined')
@@ -68,7 +68,7 @@ export const fetchRecommendProduct = async (
     where('category', '==', category),
     where(documentId(), '!=', excludeProductId),
     orderBy('createdAt', 'desc'),
-    limit(3),
+    limit(3)
   )
   const querySnapshot = await getDocs(q)
   const recommendProduct = querySnapshot.docs.map((doc) => ({
@@ -91,9 +91,13 @@ export const fetchSellerProducts = async () => {
 }
 
 // ORDER
-export const fetchOrderList = async () => {
+export const fetchOrderList = async (email: string) => {
   const orderCol = collection(db, 'orders')
-  const q = query(orderCol, orderBy('timestamp', 'desc'))
+  const q = query(
+    orderCol,
+    where('customer_email', '==', email),
+    orderBy('timestamp', 'desc')
+  )
 
   const querySnapshot = await getDocs(q)
   const orderlist = querySnapshot.docs.map((doc) => ({

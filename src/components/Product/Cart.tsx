@@ -37,6 +37,10 @@ const Cart = ({ isCartVisible }: Props) => {
   }
   // 장바구니 정보를 DB에 담을 데이터로 가공하고 PaymentProvider의 updateOrderData함수로 전달
   const handlePlaceOrder = () => {
+    if (userProfile === null) {
+      alert('로그인이 필요합니다.')
+      return
+    }
     if (orderType === null) {
       alert('주문 방식을 선택해주세요.')
       return
@@ -82,7 +86,7 @@ const Cart = ({ isCartVisible }: Props) => {
                 <Button
                   onClick={() => handlerOrderType('Dine in')}
                   className={`rounded-3xl b border hover:text-white ${getButtonStyle(
-                    'Dine in',
+                    'Dine in'
                   )}`}
                 >
                   Dine in
@@ -90,14 +94,14 @@ const Cart = ({ isCartVisible }: Props) => {
                 <Button
                   onClick={() => handlerOrderType('Take out')}
                   className={`rounded-3xl b border hover:text-white ${getButtonStyle(
-                    'Take out',
+                    'Take out'
                   )}`}
                 >
                   Take away
                 </Button>
                 <Button
                   className={`rounded-3xl b border hover:text-white ${getButtonStyle(
-                    'Delivery',
+                    'Delivery'
                   )}`}
                   disabled
                 >
