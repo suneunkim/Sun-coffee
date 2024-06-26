@@ -9,6 +9,7 @@ import { usePayment } from '@/context/PaymentContext'
 import { useCart } from '@/context/CartContext'
 import { Suspense, lazy } from 'react'
 import Loading from './Loading'
+import React from 'react'
 const Cart = lazy(() => import('../Product/Cart'))
 const PaymentModal = lazy(() => import('../Payment/PaymentModal'))
 
@@ -55,4 +56,4 @@ const PageLayout = ({ children }: TypeChildren) => {
   )
 }
 
-export default PageLayout
+export default React.memo(PageLayout)

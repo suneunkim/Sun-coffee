@@ -97,3 +97,18 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #a1a1a1; /* 핸들의 배경색 변경 */
 }
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('./assets/fonts/subset-PretendardVariable-Regular.woff2')
+      format('woff2'),
+    url('./assets/fonts/subset-PretendardVariable-Regular.woff') format('woff'),
+    url('./assets/fonts/subset-PretendardVariable-Regular.ttf')
+      format('truetype');
+  font-weight: 100 900;
+  font-display: fallback;
+}
+
+body {
+  font-family: 'Pretendard', 'sans-serif';
+}
