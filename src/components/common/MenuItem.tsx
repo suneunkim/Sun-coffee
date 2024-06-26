@@ -2,7 +2,6 @@ import { ReactElement } from 'react'
 import { NavLink } from 'react-router-dom'
 import { BiHomeSmile } from 'react-icons/bi'
 import { CiBookmarkMinus } from 'react-icons/ci'
-import { IoSettingsOutline } from 'react-icons/io5'
 import { CiCoffeeCup } from 'react-icons/ci'
 import React from 'react'
 interface MenuItemProps {
