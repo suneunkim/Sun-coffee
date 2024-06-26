@@ -1,7 +1,8 @@
-import { CiSearch } from "react-icons/ci";
-import { PiCoffeeLight } from "react-icons/pi";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import { CiSearch } from 'react-icons/ci'
+import { PiCoffeeLight } from 'react-icons/pi'
+import { Input } from '../ui/input'
+import { Button } from '../ui/button'
+import React from 'react'
 
 const SearchBar = () => {
   return (
@@ -19,7 +20,7 @@ const SearchBar = () => {
         </Button>
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default SearchBar;
+export default React.memo(SearchBar)

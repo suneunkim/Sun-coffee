@@ -1,32 +1,34 @@
-import { fireauth } from "@/firebase";
-import useCurrentUser from "@/hooks/useCurrentUser";
-import { signOut } from "firebase/auth";
-import { VscAccount } from "react-icons/vsc";
-import { SlLogin } from "react-icons/sl";
-import { SlLogout } from "react-icons/sl";
-import { Link } from "react-router-dom";
-import MenuItem, { customerMenu } from "./MenuItem";
-import { PiShoppingCartLight } from "react-icons/pi";
-import { useCart } from "@/context/CartContext";
+import { fireauth } from '@/firebase'
+import useCurrentUser from '@/hooks/useCurrentUser'
+import { signOut } from 'firebase/auth'
+import { VscAccount } from 'react-icons/vsc'
+import { SlLogin } from 'react-icons/sl'
+import { SlLogout } from 'react-icons/sl'
+import { Link } from 'react-router-dom'
+import MenuItem, { customerMenu } from './MenuItem'
+import { PiShoppingCartLight } from 'react-icons/pi'
+import { useCart } from '@/context/CartContext'
+import React from 'react'
 //TODO: 판매자 동작 다시 한번 해보고, dev로 머지하기. main으로 pr하기.
 interface Props {
-  customerMenu: typeof customerMenu;
-  sellerHome?: boolean;
+  customerMenu: typeof customerMenu
+  sellerHome?: boolean
 }
 const Nav = ({ customerMenu, sellerHome }: Props) => {
-  const userProfile = useCurrentUser();
+  console.log('Nav 컴포넌트 렌더링')
+  const userProfile = useCurrentUser()
 
-  const cartContext = useCart();
+  const cartContext = useCart()
   if (!cartContext) {
-    return;
+    return
   }
-  const { cart, toggleCart } = cartContext;
+  const { cart, toggleCart } = cartContext
 
   const logOut = async (e: any) => {
-    e.preventDefault();
-    await signOut(fireauth);
-    alert("로그아웃 하셨습니다.");
-  };
+    e.preventDefault()
+    await signOut(fireauth)
+    alert('로그아웃 하셨습니다.')
+  }
 
   return (
     <main className="min-w-[200px] py-8 text-[#3c3c3c] font-bold h-screen flex flex-col bg-[#FFFFFF]">
@@ -67,7 +69,7 @@ const Nav = ({ customerMenu, sellerHome }: Props) => {
             </div>
           </div>
         ) : (
-          ""
+          ''
         )}
         <div className="flex items-center space-x-3 text-sm">
           {userProfile ? (
@@ -86,7 +88,7 @@ const Nav = ({ customerMenu, sellerHome }: Props) => {
         </div>
       </div>
     </main>
-  );
-};
+  )
+}
 
-export default Nav;
+export default React.memo(Nav)

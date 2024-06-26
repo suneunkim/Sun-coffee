@@ -18,7 +18,11 @@ const CartItem = ({ data, onRemove, onChangeQuantity }: Props) => {
         >
           <div className="flex">
             <div className="bg-gray-100 rounded-xl w-24 h-32 flex items-center">
-              <img src={data.product.imageURL} className="" />
+              <img
+                src={data.product.imageURL}
+                className=""
+                alt={data.product.name}
+              />
             </div>
             <div className="p-3">
               <div className="flex">
