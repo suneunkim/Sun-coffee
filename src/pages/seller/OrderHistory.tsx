@@ -4,9 +4,11 @@ import { sellerMenu } from '@/components/common/MenuItem'
 import { useQueryOrderList } from '@/api/productQueries'
 import SellerOrderHistory from '@/components/SellerOrderHistory/SellerOrderList'
 import { Helmet } from 'react-helmet-async'
+import useCurrentUser from '@/hooks/useCurrentUser'
 
 const OrderHistory = () => {
-  const { data } = useQueryOrderList()
+  const { email } = useCurrentUser() || {}
+  const { data } = useQueryOrderList(email!)
   return (
     <main className="bg-gray-50 flex">
       <Helmet>
