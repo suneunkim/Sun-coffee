@@ -19,7 +19,7 @@ export const useQueryInitialProducts = (category: TypeCategory) => {
 // 카테고리 별 무한 스크롤 useInfiniteQuery
 export const useCategoryQueryProducts = (
   category: TypeCategory,
-  orderByPrice: boolean,
+  orderByPrice: boolean
 ) => {
   return useInfiniteQuery({
     queryKey: ['products', category, { orderByPrice }],
@@ -34,7 +34,7 @@ export const useCategoryQueryProducts = (
 
 export const useQueryRecommendProduct = (
   category: TypeCategory,
-  excludeProductId: string,
+  excludeProductId: string
 ) => {
   return useQuery({
     queryKey: ['Recommend', category, excludeProductId],
@@ -54,10 +54,11 @@ export const useQuerySellerProducts = () => {
 }
 
 // ORDER
-export const useQueryOrderList = () => {
+export const useQueryOrderList = (email: string) => {
   return useQuery({
-    queryKey: ['orders'],
-    queryFn: fetchOrderList,
+    queryKey: ['orders', email],
+    queryFn: () => fetchOrderList(email),
+    enabled: !!email,
     refetchOnWindowFocus: false,
   })
 }
