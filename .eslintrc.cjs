@@ -10,7 +10,7 @@ module.exports = {
     },
   },
   extends: [
-    'eslint:recommended', // 기본 ESLint 규칙
+    //'eslint:recommended', // 기본 ESLint 규칙
     //'plugin:react/recommended', // React 권장 규칙
     //'plugin:@typescript-eslint/recommended', // TypeScript 권장 규칙
     //'plugin:react-hooks/recommended', // React Hooks 권장 규칙
