@@ -1,7 +1,7 @@
-import Nav from "@/components/common/Nav";
-import SearchBar from "@/components/common/SearchBar";
-import { sellerMenu } from "@/components/common/MenuItem";
-import SellerProductList from "@/components/ProductManagement/SellerProductList";
+import Nav from '@/components/common/Nav'
+import SearchBar from '@/components/common/SearchBar'
+import { sellerMenu } from '@/components/common/MenuItem'
+import SellerProductList from '@/components/ProductManagement/SellerProductList'
 
 const SellerHome = () => {
   return (
@@ -12,7 +12,7 @@ const SellerHome = () => {
         <SellerProductList />
       </section>
     </main>
-  );
-};
+  )
+}
 
-export default SellerHome;
+export default SellerHome

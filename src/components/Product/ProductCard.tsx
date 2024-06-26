@@ -1,29 +1,29 @@
-import Button from "../elements/Button";
-import { Badge } from "../ui/badge";
-import { TypeProduct } from "@/types/common";
-import { useCart } from "@/context/CartContext";
-import { useToast } from "../ui/use-toast";
+import Button from '../elements/Button'
+import { Badge } from '../ui/badge'
+import { TypeProduct } from '@/types/common'
+import { useCart } from '@/context/CartContext'
+import { useToast } from '../ui/use-toast'
 
 interface ProductCardProps {
-  data: TypeProduct;
-  onModal: (data: TypeProduct) => void;
+  data: TypeProduct
+  onModal: (data: TypeProduct) => void
 }
 
 const ProductCard = ({ data, onModal }: ProductCardProps) => {
-  const cartContext = useCart();
+  const cartContext = useCart()
   if (!cartContext) {
-    return;
+    return
   }
-  const { addToCart } = cartContext;
-  const { toast } = useToast();
+  const { addToCart } = cartContext
+  const { toast } = useToast()
 
   const handlerAddToCart = () => {
-    addToCart(data);
+    addToCart(data)
     toast({
       title: `${data.name}를 장바구니에 추가 했습니다.`,
-      description: "Cart 탭을 선택하면 장바구니가 표시됩니다.",
-    });
-  };
+      description: 'Cart 탭을 선택하면 장바구니가 표시됩니다.',
+    })
+  }
 
   return (
     <div className="w-[420px] h-[280px] rounded-lg bg-white p-4 shadow-md mb-4">
@@ -47,7 +47,7 @@ const ProductCard = ({ data, onModal }: ProductCardProps) => {
           <div className="flex gap-4 items-center">
             <h3 className="font-semibold w-[170px]">{data.name}</h3>
             <p className="text-[#FFA16C] font-bold text-sm">
-              {Number(data.price).toLocaleString("ko-KR")}원
+              {Number(data.price).toLocaleString('ko-KR')}원
             </p>
           </div>
           <p className="text-sm text-gray-600 h-[70px]">{data.description}</p>
@@ -70,7 +70,7 @@ const ProductCard = ({ data, onModal }: ProductCardProps) => {
         </div>
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default ProductCard;
+export default ProductCard

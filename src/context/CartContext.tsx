@@ -55,7 +55,7 @@ export const CartProvider = ({ children }: TypeChildren) => {
 
   const addToCart = (item: TypeProduct) => {
     const existingItem = cart.find(
-      (cartItem) => cartItem.product.name === item.name
+      (cartItem) => cartItem.product.name === item.name,
     )
     if (existingItem) {
       const updateCart = cart.map((cartItem) => {
@@ -72,7 +72,7 @@ export const CartProvider = ({ children }: TypeChildren) => {
 
   const removeFromCart = (name: string) => {
     setCart((prev: any) =>
-      prev.filter((item: any) => item.product.name !== name)
+      prev.filter((item: any) => item.product.name !== name),
     )
   }
 

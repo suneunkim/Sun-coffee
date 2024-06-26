@@ -1,10 +1,10 @@
-import { Button } from "../ui/button";
-import { TypeProduct } from "@/types/common";
+import { Button } from '../ui/button'
+import { TypeProduct } from '@/types/common'
 
 interface ProductCardProps {
-  data: TypeProduct;
-  onEdit: (data: TypeProduct) => void;
-  onDelete: (data: TypeProduct) => void;
+  data: TypeProduct
+  onEdit: (data: TypeProduct) => void
+  onDelete: (data: TypeProduct) => void
 }
 
 const SellerProductCard = ({ data, onEdit, onDelete }: ProductCardProps) => {
@@ -18,7 +18,7 @@ const SellerProductCard = ({ data, onEdit, onDelete }: ProductCardProps) => {
           <div className="flex gap-4 items-center">
             <h3 className="font-semibold w-[170px]">{data.name}</h3>
             <p className="text-[#FFA16C] font-bold text-sm">
-              {Number(data.price).toLocaleString("ko-KR")}원
+              {Number(data.price).toLocaleString('ko-KR')}원
             </p>
           </div>
           <p className="text-sm text-gray-600 h-[70px]">{data.description}</p>
@@ -37,7 +37,7 @@ const SellerProductCard = ({ data, onEdit, onDelete }: ProductCardProps) => {
         </article>
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default SellerProductCard;
+export default SellerProductCard

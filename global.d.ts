@@ -1,7 +1,7 @@
-export {};
+export {}
 
 declare global {
   interface Window {
-    IMP: any;
+    IMP: any
   }
 }

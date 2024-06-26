@@ -1,13 +1,13 @@
-import { TypeOrderData } from "@/types/common";
-import formattedDate from "@/utils/formattedDate";
-import useOrderStatus from "@/api/updateOrderStatus";
+import { TypeOrderData } from '@/types/common'
+import formattedDate from '@/utils/formattedDate'
+import useOrderStatus from '@/api/updateOrderStatus'
 
 interface Props {
-  data: TypeOrderData;
+  data: TypeOrderData
 }
 
 const SellerOrderHistory = ({ data }: Props) => {
-  const { updateOrderStatus } = useOrderStatus();
+  const { updateOrderStatus } = useOrderStatus()
 
   return (
     <div className="border bg-white rounded-lg p-3 shadow-sm text-sm">
@@ -16,15 +16,15 @@ const SellerOrderHistory = ({ data }: Props) => {
           <div className="flex items-center space-x-3">
             <span
               className={`p-1 rounded-md ${
-                data.order_status === "주문 완료"
-                  ? "bg-orange-200"
-                  : data.order_status === "주문 취소"
-                    ? "bg-red-200"
-                    : data.order_status === "제조 대기"
-                      ? "bg-yellow-200"
-                      : data.order_status === "제조 완료"
-                        ? "bg-green-200"
-                        : "bg-gray-200"
+                data.order_status === '주문 완료'
+                  ? 'bg-orange-200'
+                  : data.order_status === '주문 취소'
+                    ? 'bg-red-200'
+                    : data.order_status === '제조 대기'
+                      ? 'bg-yellow-200'
+                      : data.order_status === '제조 완료'
+                        ? 'bg-green-200'
+                        : 'bg-gray-200'
               }`}
             >
               {data.order_status}
@@ -34,7 +34,7 @@ const SellerOrderHistory = ({ data }: Props) => {
             ?.toUpperCase()
             .slice(0, 6)}`}</h3>
 
-          {data.order_status !== "주문 취소" ? (
+          {data.order_status !== '주문 취소' ? (
             <p className="text-xs text-gray-600">결제가 완료되었습니다</p>
           ) : (
             <p className="text-xs text-gray-600">결제가 취소되었습니다</p>
@@ -43,7 +43,7 @@ const SellerOrderHistory = ({ data }: Props) => {
         <div className="flex flex-col">
           <span>{formattedDate(data?.timestamp)}</span>
           <p className="ml-auto font-semibold text-gray-800">
-            {data.total_amount.toLocaleString("ko-kr")}원
+            {data.total_amount.toLocaleString('ko-kr')}원
           </p>
         </div>
       </div>
@@ -61,29 +61,29 @@ const SellerOrderHistory = ({ data }: Props) => {
               <div className="flex flex-col my-2">
                 <h4>{product.name}</h4>
                 <div className="space-x-5">
-                  <span>{product.subtotal.toLocaleString("ko-kr")}원</span>
+                  <span>{product.subtotal.toLocaleString('ko-kr')}원</span>
                   <span className="text-gray-600">{`x ${product.quantity}`}</span>
                 </div>
               </div>
             </div>
           </div>
         ))}
-        {data?.order_status !== "주문 취소" && (
+        {data?.order_status !== '주문 취소' && (
           <div className="flex gap-5 mt-3">
             <button
-              onClick={() => updateOrderStatus(data.order_id!, "주문 취소")}
+              onClick={() => updateOrderStatus(data.order_id!, '주문 취소')}
               className="p-2 rounded-md bg-red-100"
             >
               주문 취소하기
             </button>
             <button
-              onClick={() => updateOrderStatus(data.order_id!, "제조 대기")}
+              onClick={() => updateOrderStatus(data.order_id!, '제조 대기')}
               className="p-2 rounded-md bg-yellow-100"
             >
               제조 대기로 변경하기
             </button>
             <button
-              onClick={() => updateOrderStatus(data.order_id!, "제조 완료")}
+              onClick={() => updateOrderStatus(data.order_id!, '제조 완료')}
               className="p-2 rounded-md bg-green-100"
             >
               제조 완료로 변경하기
@@ -92,7 +92,7 @@ const SellerOrderHistory = ({ data }: Props) => {
         )}
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default SellerOrderHistory;
+export default SellerOrderHistory

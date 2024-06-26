@@ -30,7 +30,15 @@ module.exports = {
       { allowConstantExport: true },
     ],
     'no-console': 'warn', // console.log 사용 시 경고
-    'prettier/prettier': 'error', // Prettier 규칙을 ESLint 규칙으로 추가
     'react/react-in-jsx-scope': 'off', // import React from 'react' 필요 없음
+    'prettier/prettier': [
+      // Prettier 규칙을 ESLint 규칙으로 추가
+      'error',
+      {
+        // 여기에 추가적인 Prettier 옵션을 설정할 수 있습니다.
+        semi: false,
+        singleQuote: true,
+      },
+    ],
   },
 }

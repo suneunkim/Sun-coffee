@@ -1,17 +1,17 @@
-import { TypeOrderData } from "@/types/common";
-import formattedDate from "@/utils/formattedDate";
-import useOrderStatus from "@/api/updateOrderStatus";
-import { Suspense, lazy } from "react";
-import Loading from "../common/Loading";
+import { TypeOrderData } from '@/types/common'
+import formattedDate from '@/utils/formattedDate'
+import useOrderStatus from '@/api/updateOrderStatus'
+import { Suspense, lazy } from 'react'
+import Loading from '../common/Loading'
 
-const DetailList = lazy(() => import("./DetailList"));
+const DetailList = lazy(() => import('./DetailList'))
 
 interface Props {
-  data: TypeOrderData;
+  data: TypeOrderData
 }
 
 const MyOrderList = ({ data }: Props) => {
-  const { updateOrderStatus } = useOrderStatus();
+  const { updateOrderStatus } = useOrderStatus()
 
   return (
     <div className="border bg-white rounded-lg p-3 shadow-sm text-sm">
@@ -20,24 +20,24 @@ const MyOrderList = ({ data }: Props) => {
           <div className="flex items-center space-x-3">
             <span
               className={`p-1 rounded-md ${
-                data.order_status === "주문 완료"
-                  ? "bg-orange-200"
-                  : data.order_status === "주문 취소"
-                    ? "bg-red-200"
-                    : data.order_status === "제조 대기"
-                      ? "bg-yellow-200"
-                      : data.order_status === "제조 완료"
-                        ? "bg-green-200"
-                        : "bg-gray-200"
+                data.order_status === '주문 완료'
+                  ? 'bg-orange-200'
+                  : data.order_status === '주문 취소'
+                    ? 'bg-red-200'
+                    : data.order_status === '제조 대기'
+                      ? 'bg-yellow-200'
+                      : data.order_status === '제조 완료'
+                        ? 'bg-green-200'
+                        : 'bg-gray-200'
               }`}
             >
               {data.order_status}
             </span>
-            {data.order_status === "주문 완료" ? (
+            {data.order_status === '주문 완료' ? (
               <div className="flex space-x-2 items-center">
                 <p className="text-xs">주문을 취소할 수 있습니다.</p>
                 <button
-                  onClick={() => updateOrderStatus(data.order_id!, "주문 취소")}
+                  onClick={() => updateOrderStatus(data.order_id!, '주문 취소')}
                   className="bg-gray-300 p-1 rounded-md"
                 >
                   주문 취소하기
@@ -51,7 +51,7 @@ const MyOrderList = ({ data }: Props) => {
             ?.toUpperCase()
             .slice(0, 6)}`}</h3>
 
-          {data.order_status !== "주문 취소" ? (
+          {data.order_status !== '주문 취소' ? (
             <p className="text-xs text-gray-600">결제가 완료되었습니다</p>
           ) : (
             <p className="text-xs text-gray-600">결제가 취소되었습니다</p>
@@ -60,7 +60,7 @@ const MyOrderList = ({ data }: Props) => {
         <div className="flex flex-col">
           <span>{formattedDate(data?.timestamp)}</span>
           <p className="ml-auto font-semibold text-gray-800">
-            {data.total_amount.toLocaleString("ko-kr")}원
+            {data.total_amount.toLocaleString('ko-kr')}원
           </p>
         </div>
       </div>
@@ -70,7 +70,7 @@ const MyOrderList = ({ data }: Props) => {
         </Suspense>
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default MyOrderList;
+export default MyOrderList

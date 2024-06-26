@@ -1,25 +1,25 @@
-import { useQueryInitialProducts } from "@/api/productQueries";
-import ProductCard from "./ProductCard";
-import { Link } from "react-router-dom";
-import { TypeCategory, TypeProduct } from "@/types/common";
-import useProductModal from "@/hooks/useProductModal";
-import { AnimatePresence } from "framer-motion";
-import { Suspense, lazy } from "react";
-import ProductCardSkelton from "./ProductCardSkelton";
-import React from "react";
-import Loading from "../common/Loading";
-const DetailModal = lazy(() => import("./DetailModal"));
+import { useQueryInitialProducts } from '@/api/productQueries'
+import ProductCard from './ProductCard'
+import { Link } from 'react-router-dom'
+import { TypeCategory, TypeProduct } from '@/types/common'
+import useProductModal from '@/hooks/useProductModal'
+import { AnimatePresence } from 'framer-motion'
+import { Suspense, lazy } from 'react'
+import ProductCardSkelton from './ProductCardSkelton'
+import React from 'react'
+import Loading from '../common/Loading'
+const DetailModal = lazy(() => import('./DetailModal'))
 
 const ProductList = () => {
   const { selectedProduct, showDetailModal, handleProductSelect, closeModal } =
-    useProductModal();
+    useProductModal()
 
-  const categories: TypeCategory[] = ["coffee", "non-coffee", "food"];
+  const categories: TypeCategory[] = ['coffee', 'non-coffee', 'food']
   const categoryHeader = {
-    coffee: "에스프레소",
-    food: "베이커리",
-    "non-coffee": "기타 제조 음료",
-  };
+    coffee: '에스프레소',
+    food: '베이커리',
+    'non-coffee': '기타 제조 음료',
+  }
 
   return (
     <div className="flex">
@@ -49,19 +49,19 @@ const ProductList = () => {
         ) : null}
       </AnimatePresence>
     </div>
-  );
-};
+  )
+}
 
-export default ProductList;
+export default ProductList
 
 type ProductPreviwProps = {
-  category: TypeCategory;
-  handleProductSelect: (data: TypeProduct) => void;
-};
+  category: TypeCategory
+  handleProductSelect: (data: TypeProduct) => void
+}
 
 const ProductPreview = React.memo(
   ({ category, handleProductSelect }: ProductPreviwProps) => {
-    const { data, isLoading } = useQueryInitialProducts(category);
+    const { data, isLoading } = useQueryInitialProducts(category)
 
     return (
       <div className="grid grid-cols-2 gap-1">
@@ -74,6 +74,6 @@ const ProductPreview = React.memo(
           />
         ))}
       </div>
-    );
+    )
   },
-);
+)

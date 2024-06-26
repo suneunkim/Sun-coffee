@@ -1,69 +1,69 @@
-import { db, fireauth } from "@/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { db, fireauth } from '@/firebase'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 import {
   useForm,
   SubmitHandler,
   FieldValues,
   FieldErrors,
-} from "react-hook-form";
-import InputUi from "@/components/elements/InputWithLabel";
-import Button from "@/components/elements/Button";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { doc, setDoc } from "firebase/firestore";
+} from 'react-hook-form'
+import InputUi from '@/components/elements/InputWithLabel'
+import Button from '@/components/elements/Button'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { doc, setDoc } from 'firebase/firestore'
 
 const Register = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FieldValues, FieldErrors>();
+  } = useForm<FieldValues, FieldErrors>()
 
-  const navigate = useNavigate();
-  const [errorMessage, setErrorMessage] = useState(""); // 회원가입 실패 메세지
-  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate()
+  const [errorMessage, setErrorMessage] = useState('') // 회원가입 실패 메세지
+  const [isLoading, setIsLoading] = useState(false)
 
   const onSubmit: SubmitHandler<FieldValues> = async (formData) => {
-    setIsLoading(true);
-    const { nickname, email, password, isSeller } = formData;
+    setIsLoading(true)
+    const { nickname, email, password, isSeller } = formData
 
     try {
       const userCredential = await createUserWithEmailAndPassword(
         fireauth,
         email,
         password,
-      );
-      const user = userCredential.user;
-      const userDoc = doc(db, "users", user.uid);
+      )
+      const user = userCredential.user
+      const userDoc = doc(db, 'users', user.uid)
       await setDoc(userDoc, {
         uid: user.uid,
         nickname,
         email,
         isSeller,
-      });
-      alert("회원가입이 완료되었습니다.");
-      navigate("/auth/login");
+      })
+      alert('회원가입이 완료되었습니다.')
+      navigate('/auth/login')
     } catch (error: any) {
-      const errorCode = error.code;
-      console.log("errorCode", errorCode);
-      console.log("errorMessage", error.message);
+      const errorCode = error.code
+      console.log('errorCode', errorCode)
+      console.log('errorMessage', error.message)
 
       // firebase의 회원가입 시 오류 코드들
-      if (errorCode === "auth/email-already-in-use") {
-        setErrorMessage("이미 가입된 이메일입니다.");
-      } else if (errorCode === "auth/invalid-email") {
-        setErrorMessage("올바른 이메일 형식이 아닙니다.");
-      } else if (errorCode === "auth/weak-password") {
+      if (errorCode === 'auth/email-already-in-use') {
+        setErrorMessage('이미 가입된 이메일입니다.')
+      } else if (errorCode === 'auth/invalid-email') {
+        setErrorMessage('올바른 이메일 형식이 아닙니다.')
+      } else if (errorCode === 'auth/weak-password') {
         setErrorMessage(
-          "비밀번호 8자리 이상은 //대문자, 소문자, 숫자, 특수문자 중 3종류 이상을 포함해야 합니다.",
-        );
+          '비밀번호 8자리 이상은 //대문자, 소문자, 숫자, 특수문자 중 3종류 이상을 포함해야 합니다.',
+        )
       } else {
-        setErrorMessage("회원가입에 실패하였습니다.");
+        setErrorMessage('회원가입에 실패하였습니다.')
       }
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   return (
     <div className="flex flex-col justify-center items-center mt-32 text-[#3c3c3c]">
@@ -73,7 +73,7 @@ const Register = () => {
           id="nickname"
           type="text"
           label="닉네임"
-          register={register("nickname", { required: true })}
+          register={register('nickname', { required: true })}
           errors={errors}
           disabled={isLoading}
         />
@@ -81,7 +81,7 @@ const Register = () => {
           id="email"
           type="email"
           label="이메일"
-          register={register("email", { required: true })}
+          register={register('email', { required: true })}
           errors={errors}
           disabled={isLoading}
         />
@@ -89,21 +89,21 @@ const Register = () => {
           id="password"
           type="password"
           label="비밀번호"
-          register={register("password", {
+          register={register('password', {
             required: true,
             minLength: {
               value: 8,
-              message: "8자리 이상 비밀번호를 입력하세요",
+              message: '8자리 이상 비밀번호를 입력하세요',
             },
             validate: {
               condition1: (value: string) => {
                 if (!/[!@#$%^&*()]/.test(value)) {
-                  return "특수문자를 포함해주세요";
+                  return '특수문자를 포함해주세요'
                 }
                 if (!/[A-Z]/.test(value)) {
-                  return "대문자를 포함해주세요";
+                  return '대문자를 포함해주세요'
                 }
-                return true;
+                return true
               },
             },
           })}
@@ -118,7 +118,7 @@ const Register = () => {
           label="판매자 계정 여부"
           id="isSeller"
           type="checkbox"
-          register={register("isSeller")}
+          register={register('isSeller')}
           errors={errors}
           disabled={isLoading}
           checkbox
@@ -132,7 +132,7 @@ const Register = () => {
         </Link>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register

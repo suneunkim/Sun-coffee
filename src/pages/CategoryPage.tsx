@@ -46,7 +46,7 @@ const CategoryPage = () => {
                   data={product}
                   key={product.name}
                 />
-              ))
+              )),
             )}
           <div ref={hasNextPage ? ref : undefined} />
           {isFetchingNextPage && <p>Loading more...</p>}

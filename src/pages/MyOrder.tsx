@@ -1,11 +1,11 @@
-import { useQueryOrderList } from "@/api/productQueries";
-import Loading from "@/components/common/Loading";
-import PageLayout from "@/components/common/PageLayout";
-import { Suspense, lazy } from "react";
-const MyOrderList = lazy(() => import("@/components/order/MyOrderList"));
+import { useQueryOrderList } from '@/api/productQueries'
+import Loading from '@/components/common/Loading'
+import PageLayout from '@/components/common/PageLayout'
+import { Suspense, lazy } from 'react'
+const MyOrderList = lazy(() => import('@/components/order/MyOrderList'))
 
 const MyOrder = () => {
-  const { data } = useQueryOrderList();
+  const { data } = useQueryOrderList()
 
   return (
     <PageLayout>
@@ -17,7 +17,7 @@ const MyOrder = () => {
         ))}
       </section>
     </PageLayout>
-  );
-};
+  )
+}
 
-export default MyOrder;
+export default MyOrder
