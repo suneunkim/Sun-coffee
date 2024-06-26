@@ -15,7 +15,6 @@ interface Props {
   sellerHome?: boolean
 }
 const Nav = ({ customerMenu, sellerHome }: Props) => {
-  console.log('Nav 컴포넌트 렌더링')
   const userProfile = useCurrentUser()
 
   const cartContext = useCart()

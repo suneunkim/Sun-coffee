@@ -22,11 +22,6 @@ export const customerMenu = [
     icon: <CiBookmarkMinus className="w-5 h-5" />,
     label: 'My orders',
   },
-  {
-    path: '/setting',
-    icon: <IoSettingsOutline className="w-5 h-5" />,
-    label: 'Setting',
-  },
 ]
 
 export const sellerMenu = [
