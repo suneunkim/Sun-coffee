@@ -1,15 +1,15 @@
-import { useQueryRecommendProduct } from '@/api/productQueries'
-import { TypeProduct } from '@/types/common'
-import { Badge } from '../ui/badge'
-import { motion } from 'framer-motion'
+import { useQueryRecommendProduct } from "@/api/productQueries";
+import { TypeProduct } from "@/types/common";
+import { Badge } from "../ui/badge";
+import { motion } from "framer-motion";
 interface Props {
-  product: TypeProduct | null
-  onClose: () => void
-  onModal: (data: TypeProduct) => void
+  product: TypeProduct | null;
+  onClose: () => void;
+  onModal: (data: TypeProduct) => void;
 }
 
 const DetailModal = ({ product, onClose, onModal }: Props) => {
-  const { data } = useQueryRecommendProduct(product?.category!, product?.name!)
+  const { data } = useQueryRecommendProduct(product?.category!, product?.name!);
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -104,7 +104,7 @@ const DetailModal = ({ product, onClose, onModal }: Props) => {
         </section>
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
-export default DetailModal
+export default DetailModal;

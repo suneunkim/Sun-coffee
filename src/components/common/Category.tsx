@@ -1,8 +1,8 @@
-import { Link, useMatch } from 'react-router-dom'
+import { Link, useMatch } from "react-router-dom";
 
 interface Props {
-  to: any
-  label: any
+  to: any;
+  label: any;
 }
 
 const Category = () => {
@@ -12,11 +12,11 @@ const Category = () => {
       <CategoryButton to="/non-coffee" label="Non Coffee" />
       <CategoryButton to="/food" label="Food" />
     </div>
-  )
-}
+  );
+};
 
 const CategoryButton = ({ to, label }: Props) => {
-  const match = useMatch(to)
+  const match = useMatch(to);
 
   return (
     <Link to={to} className="w-full ">
@@ -26,12 +26,12 @@ const CategoryButton = ({ to, label }: Props) => {
       my-2 w-full p-3 transition hover:opacity-80
       disabled:cursor-not-allowed
       disabled:opacity-70 py-3 text-sm
-      ${match && 'bg-gray-200'}
+      ${match && "bg-gray-200"}
       `}
       >
         {label}
       </button>
     </Link>
-  )
-}
-export default Category
+  );
+};
+export default Category;

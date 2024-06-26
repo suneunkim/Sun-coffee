@@ -1,13 +1,13 @@
-import { AccordionUI } from '../elements/Accordion'
+import { AccordionUI } from "../elements/Accordion";
 
 interface Props {
   products: {
-    name: string
-    quantity: number
-    subtotal: number
-    imageURL: string
-  }[]
-  id: string
+    name: string;
+    quantity: number;
+    subtotal: number;
+    imageURL: string;
+  }[];
+  id: string;
 }
 
 const DetailList = ({ products, id }: Props) => {
@@ -26,7 +26,7 @@ const DetailList = ({ products, id }: Props) => {
             <div className="flex flex-col my-2">
               <h4>{product.name}</h4>
               <div className="space-x-5">
-                <span>{product.subtotal.toLocaleString('ko-kr')}원</span>
+                <span>{product.subtotal.toLocaleString("ko-kr")}원</span>
                 <span className="text-gray-600">{`x ${product.quantity}`}</span>
               </div>
             </div>
@@ -34,7 +34,7 @@ const DetailList = ({ products, id }: Props) => {
         </div>
       ))}
     </AccordionUI>
-  )
-}
+  );
+};
 
-export default DetailList
+export default DetailList;

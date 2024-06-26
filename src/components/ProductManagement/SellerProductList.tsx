@@ -1,40 +1,40 @@
-import { TypeProduct } from '@/types/common'
-import { useState } from 'react'
-import SellerProductCard from './SellerProductCard'
-import EditProduct from './EditProduct'
-import { deleteDoc, doc } from 'firebase/firestore'
-import { db, storage } from '@/firebase'
-import { deleteObject, ref } from 'firebase/storage'
-import { useQuerySellerProducts } from '@/api/productQueries'
+import { TypeProduct } from "@/types/common";
+import { useState } from "react";
+import SellerProductCard from "./SellerProductCard";
+import EditProduct from "./EditProduct";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db, storage } from "@/firebase";
+import { deleteObject, ref } from "firebase/storage";
+import { useQuerySellerProducts } from "@/api/productQueries";
 
 const SellerProductList = () => {
-  const { data: products } = useQuerySellerProducts()
+  const { data: products } = useQuerySellerProducts();
   const [selectedProduct, setSelectedProduct] = useState<TypeProduct | null>(
-    null
-  )
-  const [showEditModal, setShowEditModal] = useState(false)
+    null,
+  );
+  const [showEditModal, setShowEditModal] = useState(false);
 
   const handleEditClick = (data: TypeProduct) => {
-    setSelectedProduct(data)
-    setShowEditModal(true)
-  }
+    setSelectedProduct(data);
+    setShowEditModal(true);
+  };
 
   const handleDeleteClick = async (data: TypeProduct) => {
-    const productDocRef = doc(db, 'products', data.name)
+    const productDocRef = doc(db, "products", data.name);
 
     try {
-      if (data.imageURL.startsWith('https://firebasestorage.googleapis.com')) {
-        const imageRef = ref(storage, data.imageURL)
-        await deleteDoc(productDocRef)
-        await deleteObject(imageRef)
+      if (data.imageURL.startsWith("https://firebasestorage.googleapis.com")) {
+        const imageRef = ref(storage, data.imageURL);
+        await deleteDoc(productDocRef);
+        await deleteObject(imageRef);
       }
-      await deleteDoc(productDocRef)
-      alert('상품이 삭제되었습니다.')
+      await deleteDoc(productDocRef);
+      alert("상품이 삭제되었습니다.");
     } catch (error) {
-      console.error('삭제 실패', error)
-      alert('상품 삭제에 실패했습니다.')
+      console.error("삭제 실패", error);
+      alert("상품 삭제에 실패했습니다.");
     }
-  }
+  };
 
   return (
     <div className="flex justify-center">
@@ -63,7 +63,7 @@ const SellerProductList = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default SellerProductList
+export default SellerProductList;

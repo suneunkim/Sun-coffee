@@ -1,37 +1,37 @@
-import { usePayment } from '@/context/PaymentContext'
-import { motion } from 'framer-motion'
-import TextInput from '../elements/TextInput'
-import { useForm } from 'react-hook-form'
-import { Button } from '@/components/ui/button'
-import { TypeOrderUserData } from '@/types/common'
-import { useEffect } from 'react'
+import { usePayment } from "@/context/PaymentContext";
+import { motion } from "framer-motion";
+import TextInput from "../elements/TextInput";
+import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
+import { TypeOrderUserData } from "@/types/common";
+import { useEffect } from "react";
 
 const PaymentModal = () => {
-  const paymentContext = usePayment()
+  const paymentContext = usePayment();
   if (!paymentContext) {
-    return
+    return;
   }
   const { closeModal, updateOrderUserData, handlePayment, orderUserData } =
-    paymentContext
+    paymentContext;
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<TypeOrderUserData>()
+  } = useForm<TypeOrderUserData>();
 
   // 입력값을 PG사에 보낼 data로 사용하기 위해 PaymentProvider의 updateOrderUserData로 전달
   const onSubmit = (data: TypeOrderUserData) => {
-    updateOrderUserData(data)
-    reset()
-  }
+    updateOrderUserData(data);
+    reset();
+  };
 
   useEffect(() => {
     if (orderUserData) {
-      handlePayment()
+      handlePayment();
     }
-  }, [orderUserData])
+  }, [orderUserData]);
 
   return (
     <>
@@ -88,7 +88,7 @@ const PaymentModal = () => {
         </div>
       </motion.div>
     </>
-  )
-}
+  );
+};
 
-export default PaymentModal
+export default PaymentModal;

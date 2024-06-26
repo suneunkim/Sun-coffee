@@ -1,34 +1,34 @@
-import { useInView } from 'react-intersection-observer'
-import { Suspense, lazy, useEffect, useState } from 'react'
-import { useCategoryQueryProducts } from '@/api/productQueries'
-import { Navigate, useParams } from 'react-router-dom'
-import ProductCard from '@/components/Product/ProductCard'
-import PageLayout from '@/components/common/PageLayout'
-import { TypeCategory } from '@/types/common'
-import useProductModal from '@/hooks/useProductModal'
-import Loading from '@/components/common/Loading'
-const DetailModal = lazy(() => import('@/components/Product/DetailModal'))
+import { useInView } from "react-intersection-observer";
+import { Suspense, lazy, useEffect, useState } from "react";
+import { useCategoryQueryProducts } from "@/api/productQueries";
+import { Navigate, useParams } from "react-router-dom";
+import ProductCard from "@/components/Product/ProductCard";
+import PageLayout from "@/components/common/PageLayout";
+import { TypeCategory } from "@/types/common";
+import useProductModal from "@/hooks/useProductModal";
+import Loading from "@/components/common/Loading";
+const DetailModal = lazy(() => import("@/components/Product/DetailModal"));
 
 const CategoryPage = () => {
   const { selectedProduct, showDetailModal, handleProductSelect, closeModal } =
-    useProductModal()
-  const { ref, inView } = useInView()
-  const { category } = useParams()
-  const [orderByPrice, setOrderByPrice] = useState(false)
+    useProductModal();
+  const { ref, inView } = useInView();
+  const { category } = useParams();
+  const [orderByPrice, setOrderByPrice] = useState(false);
 
-  const validCategories: TypeCategory[] = ['coffee', 'food', 'non-coffee']
+  const validCategories: TypeCategory[] = ["coffee", "food", "non-coffee"];
   if (!category || !validCategories.includes(category as TypeCategory)) {
-    return <Navigate to="/" replace />
+    return <Navigate to="/" replace />;
   }
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useCategoryQueryProducts(category as TypeCategory, orderByPrice)
+    useCategoryQueryProducts(category as TypeCategory, orderByPrice);
 
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
-      fetchNextPage()
+      fetchNextPage();
     }
-  }, [inView, hasNextPage, fetchNextPage, isFetchingNextPage])
+  }, [inView, hasNextPage, fetchNextPage, isFetchingNextPage]);
 
   return (
     <PageLayout>
@@ -44,7 +44,7 @@ const CategoryPage = () => {
                   data={product}
                   key={product.name}
                 />
-              ))
+              )),
             )}
           <div ref={hasNextPage ? ref : undefined} />
           {isFetchingNextPage && <p>Loading more...</p>}
@@ -60,7 +60,7 @@ const CategoryPage = () => {
         )}
       </div>
     </PageLayout>
-  )
-}
+  );
+};
 
-export default CategoryPage
+export default CategoryPage;

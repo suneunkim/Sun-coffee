@@ -1,59 +1,59 @@
-import { fireauth } from '@/firebase'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { fireauth } from "@/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import {
   useForm,
   SubmitHandler,
   FieldValues,
   FieldErrors,
-} from 'react-hook-form'
-import InputUi from '@/components/elements/InputWithLabel'
-import Button from '@/components/elements/Button'
-import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import useCurrentUser from '@/hooks/useCurrentUser'
+} from "react-hook-form";
+import InputUi from "@/components/elements/InputWithLabel";
+import Button from "@/components/elements/Button";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 const Login = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FieldValues, FieldErrors>()
+  } = useForm<FieldValues, FieldErrors>();
 
-  const userProfile = useCurrentUser()
-  const navigate = useNavigate()
-  const [errorMessage, setErrorMessage] = useState('') // 로그인 실패 메세지
-  const [isLoading, setIsLoading] = useState(false) // form 중복 제출 방지
-  const [isLogged, setIsLogged] = useState(false) // 회원가입 -> 바로 홈 이동 방지
+  const userProfile = useCurrentUser();
+  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState(""); // 로그인 실패 메세지
+  const [isLoading, setIsLoading] = useState(false); // form 중복 제출 방지
+  const [isLogged, setIsLogged] = useState(false); // 회원가입 -> 바로 홈 이동 방지
 
   const onSubmit: SubmitHandler<FieldValues> = async (formData) => {
-    setIsLoading(true)
-    const { email, password } = formData
+    setIsLoading(true);
+    const { email, password } = formData;
 
     try {
-      await signInWithEmailAndPassword(fireauth, email, password)
-      setIsLogged(true)
+      await signInWithEmailAndPassword(fireauth, email, password);
+      setIsLogged(true);
     } catch (error: any) {
-      const errorCode = error.code
-      console.log('errorCode', errorCode)
-      console.log('errorMessage', error.message)
+      const errorCode = error.code;
+      console.log("errorCode", errorCode);
+      console.log("errorMessage", error.message);
 
-      if (errorCode === 'auth/wrong-password') {
-        setErrorMessage('비밀번호가 틀렸습니다.')
-      } else if (errorCode === 'auth/user-not-fonud') {
-        setErrorMessage('가입된 계정이 아닙니다.')
+      if (errorCode === "auth/wrong-password") {
+        setErrorMessage("비밀번호가 틀렸습니다.");
+      } else if (errorCode === "auth/user-not-fonud") {
+        setErrorMessage("가입된 계정이 아닙니다.");
       } else {
-        setErrorMessage('로그인에 실패하였습니다.')
+        setErrorMessage("로그인에 실패하였습니다.");
       }
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
     if (isLogged && userProfile) {
-      navigate(userProfile?.isSeller ? '/seller-home' : '/')
+      navigate(userProfile?.isSeller ? "/seller-home" : "/");
     }
-  }, [userProfile, navigate, isLogged])
+  }, [userProfile, navigate, isLogged]);
 
   return (
     <div className="flex flex-col justify-center items-center mt-32 text-[#3c3c3c]">
@@ -63,7 +63,7 @@ const Login = () => {
           id="email"
           type="email"
           label="이메일"
-          register={register('email', { required: true })}
+          register={register("email", { required: true })}
           errors={errors}
           disabled={isLoading}
         />
@@ -71,11 +71,11 @@ const Login = () => {
           id="password"
           type="password"
           label="비밀번호"
-          register={register('password', {
+          register={register("password", {
             required: true,
             minLength: {
               value: 8,
-              message: '8자리 이상 비밀번호를 입력하세요',
+              message: "8자리 이상 비밀번호를 입력하세요",
             },
           })}
           errors={errors}
@@ -97,7 +97,7 @@ const Login = () => {
         <button>홈으로</button>
       </Link>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

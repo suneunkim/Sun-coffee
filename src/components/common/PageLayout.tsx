@@ -1,30 +1,30 @@
-import Category from './Category'
-import { customerMenu } from './MenuItem'
-import Nav from './Nav'
-import SearchBar from './SearchBar'
-import { TypeChildren } from './../../types/common'
-import { Toaster } from '@/components/ui/toaster'
-import { AnimatePresence } from 'framer-motion'
-import { usePayment } from '@/context/PaymentContext'
-import { useCart } from '@/context/CartContext'
-import { Suspense, lazy } from 'react'
-import Loading from './Loading'
-const Cart = lazy(() => import('../Product/Cart'))
-const PaymentModal = lazy(() => import('../Payment/PaymentModal'))
+import Category from "./Category";
+import { customerMenu } from "./MenuItem";
+import Nav from "./Nav";
+import SearchBar from "./SearchBar";
+import { TypeChildren } from "./../../types/common";
+import { Toaster } from "@/components/ui/toaster";
+import { AnimatePresence } from "framer-motion";
+import { usePayment } from "@/context/PaymentContext";
+import { useCart } from "@/context/CartContext";
+import { Suspense, lazy } from "react";
+import Loading from "./Loading";
+const Cart = lazy(() => import("../Product/Cart"));
+const PaymentModal = lazy(() => import("../Payment/PaymentModal"));
 
 const PageLayout = ({ children }: TypeChildren) => {
-  const cartContext = useCart()
+  const cartContext = useCart();
   if (!cartContext) {
-    return
+    return;
   }
-  const { isCartVisible } = cartContext
+  const { isCartVisible } = cartContext;
 
   // 결제 모달창
-  const paymentContext = usePayment()
+  const paymentContext = usePayment();
   if (!paymentContext) {
-    return
+    return;
   }
-  const { isOpen } = paymentContext
+  const { isOpen } = paymentContext;
 
   return (
     <main className="bg-gray-50 flex">
@@ -52,7 +52,7 @@ const PageLayout = ({ children }: TypeChildren) => {
       </AnimatePresence>
       <Toaster />
     </main>
-  )
-}
+  );
+};
 
-export default PageLayout
+export default PageLayout;

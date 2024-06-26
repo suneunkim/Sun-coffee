@@ -1,11 +1,11 @@
-import CountButton from './CountButton'
-import { cartItem } from '@/types/common'
-import { RiCloseCircleLine } from 'react-icons/ri'
+import CountButton from "./CountButton";
+import { cartItem } from "@/types/common";
+import { RiCloseCircleLine } from "react-icons/ri";
 
 interface Props {
-  data: cartItem[] | null
-  onRemove: (id: string) => void
-  onChangeQuantity: (name: string, quantity: number) => void
+  data: cartItem[] | null;
+  onRemove: (id: string) => void;
+  onChangeQuantity: (name: string, quantity: number) => void;
 }
 
 const CartItem = ({ data, onRemove, onChangeQuantity }: Props) => {
@@ -34,7 +34,7 @@ const CartItem = ({ data, onRemove, onChangeQuantity }: Props) => {
               <div className="flex items-center space-x-3 mt-5">
                 <p className="mr-5">
                   {(Number(data.product?.price) * data.quantity).toLocaleString(
-                    'ko-KR'
+                    "ko-KR",
                   )}
                   원
                 </p>
@@ -53,7 +53,7 @@ const CartItem = ({ data, onRemove, onChangeQuantity }: Props) => {
         </div>
       ))}
     </>
-  )
-}
+  );
+};
 
-export default CartItem
+export default CartItem;

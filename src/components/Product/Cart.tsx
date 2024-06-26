@@ -1,45 +1,45 @@
-import { Button } from '../ui/button'
-import CartItem from './CartItem'
-import ElButton from '../elements/Button'
-import { useCart } from '@/context/CartContext'
-import { motion } from 'framer-motion'
-import { usePayment } from '@/context/PaymentContext'
-import useCurrentUser from '@/hooks/useCurrentUser'
+import { Button } from "../ui/button";
+import CartItem from "./CartItem";
+import ElButton from "../elements/Button";
+import { useCart } from "@/context/CartContext";
+import { motion } from "framer-motion";
+import { usePayment } from "@/context/PaymentContext";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 interface Props {
-  isCartVisible?: boolean
+  isCartVisible?: boolean;
 }
 
 const Cart = ({ isCartVisible }: Props) => {
-  const userProfile = useCurrentUser()
-  const cartContext = useCart()
+  const userProfile = useCurrentUser();
+  const cartContext = useCart();
   if (!cartContext) {
-    return
+    return;
   }
   const { removeFromCart, cart, changeQuantity, orderType, handlerOrderType } =
-    cartContext
+    cartContext;
 
-  const paymentContext = usePayment()
+  const paymentContext = usePayment();
   if (!paymentContext) {
-    return
+    return;
   }
-  const { openModal, updateOrderData } = paymentContext
+  const { openModal, updateOrderData } = paymentContext;
 
   const totalAmount = cart.reduce((total, item) => {
-    return total + Number(item.product.price) * item.quantity
-  }, 0)
+    return total + Number(item.product.price) * item.quantity;
+  }, 0);
 
   // 주문 타입에 따른 버튼 스타일
   const getButtonStyle = (type: string) => {
     return orderType === type
-      ? 'bg-[#1f2937] text-white'
-      : 'bg-white text-gray-800'
-  }
+      ? "bg-[#1f2937] text-white"
+      : "bg-white text-gray-800";
+  };
   // 장바구니 정보를 DB에 담을 데이터로 가공하고 PaymentProvider의 updateOrderData함수로 전달
   const handlePlaceOrder = () => {
     if (orderType === null) {
-      alert('주문 방식을 선택해주세요.')
-      return
+      alert("주문 방식을 선택해주세요.");
+      return;
     }
     const newOrderData = {
       products: cart.map((item) => ({
@@ -49,22 +49,22 @@ const Cart = ({ isCartVisible }: Props) => {
         imageURL: item.product.imageURL,
       })),
       total_amount: totalAmount,
-      order_status: '주문 완료',
+      order_status: "주문 완료",
       order_type: orderType,
       timestamp: new Date(),
       customer_name: userProfile?.nickname,
       customer_email: userProfile?.email,
-    }
-    updateOrderData(newOrderData)
-    openModal()
-  }
+    };
+    updateOrderData(newOrderData);
+    openModal();
+  };
 
   return (
     <motion.div
       initial={{ x: 300 }}
       animate={{ x: isCartVisible ? 0 : 100 }}
       exit={{ x: isCartVisible ? 100 : 0, opacity: 0 }}
-      transition={{ type: 'spring', stiffness: 100 }}
+      transition={{ type: "spring", stiffness: 100 }}
     >
       <div className="min-h-[600px] max-h-[800px] bg-[#FFFFFF] py-10 rounded-lg shadow-lg w-[350px] px-6 overflow-y-auto">
         <div className="flex items-end justify-between mb-5">
@@ -80,24 +80,24 @@ const Cart = ({ isCartVisible }: Props) => {
             <>
               <div className="flex gap-2">
                 <Button
-                  onClick={() => handlerOrderType('Dine in')}
+                  onClick={() => handlerOrderType("Dine in")}
                   className={`rounded-3xl b border hover:text-white ${getButtonStyle(
-                    'Dine in'
+                    "Dine in",
                   )}`}
                 >
                   Dine in
                 </Button>
                 <Button
-                  onClick={() => handlerOrderType('Take out')}
+                  onClick={() => handlerOrderType("Take out")}
                   className={`rounded-3xl b border hover:text-white ${getButtonStyle(
-                    'Take out'
+                    "Take out",
                   )}`}
                 >
                   Take away
                 </Button>
                 <Button
                   className={`rounded-3xl b border hover:text-white ${getButtonStyle(
-                    'Delivery'
+                    "Delivery",
                   )}`}
                   disabled
                 >
@@ -112,7 +112,7 @@ const Cart = ({ isCartVisible }: Props) => {
               <div className="text-sm">
                 <div className="flex justify-between py-5 px-2 mb-3 border-b border-gray-200/50">
                   <p>Total</p>
-                  <span>{totalAmount.toLocaleString('ko-KR')}원</span>
+                  <span>{totalAmount.toLocaleString("ko-KR")}원</span>
                 </div>
                 <ElButton
                   onClick={handlePlaceOrder}
@@ -126,7 +126,7 @@ const Cart = ({ isCartVisible }: Props) => {
         </div>
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;

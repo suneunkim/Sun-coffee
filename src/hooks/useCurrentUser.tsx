@@ -1,45 +1,45 @@
-import { useEffect, useState } from 'react'
-import { db, fireauth } from '@/firebase'
-import { doc, getDoc } from 'firebase/firestore'
-import { onAuthStateChanged } from 'firebase/auth'
+import { useEffect, useState } from "react";
+import { db, fireauth } from "@/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 
 export type UserProfileType = {
-  email: string
-  isSeller: boolean
-  nickname: string
-  uid: string
-}
+  email: string;
+  isSeller: boolean;
+  nickname: string;
+  uid: string;
+};
 
 const useCurrentUser = () => {
-  const [userProfile, setUserProfile] = useState<UserProfileType | null>(null)
+  const [userProfile, setUserProfile] = useState<UserProfileType | null>(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(fireauth, async (user) => {
       // firestore에서 사용자 데이터 가져오기
       if (user) {
-        const userRef = doc(db, 'users', user.uid) // firestore에서 해당 사용자의 문서 참조 생성
-        const userSnapshot = await getDoc(userRef)
+        const userRef = doc(db, "users", user.uid); // firestore에서 해당 사용자의 문서 참조 생성
+        const userSnapshot = await getDoc(userRef);
 
         if (userSnapshot.exists()) {
-          const userData = userSnapshot.data()
+          const userData = userSnapshot.data();
           setUserProfile({
             email: userData.email,
             isSeller: userData.isSeller,
             nickname: userData.nickname,
             uid: userData.uid,
-          })
+          });
         } else {
-          setUserProfile(null)
+          setUserProfile(null);
         }
       } else {
-        setUserProfile(null)
+        setUserProfile(null);
       }
-    })
+    });
 
-    return () => unsubscribe()
-  }, [])
+    return () => unsubscribe();
+  }, []);
 
-  return userProfile
-}
+  return userProfile;
+};
 
-export default useCurrentUser
+export default useCurrentUser;

@@ -1,50 +1,50 @@
-import { ReactElement } from 'react'
-import { NavLink } from 'react-router-dom'
-import { BiHomeSmile } from 'react-icons/bi'
-import { CiBookmarkMinus } from 'react-icons/ci'
-import { IoSettingsOutline } from 'react-icons/io5'
-import { CiCoffeeCup } from 'react-icons/ci'
+import { ReactElement } from "react";
+import { NavLink } from "react-router-dom";
+import { BiHomeSmile } from "react-icons/bi";
+import { CiBookmarkMinus } from "react-icons/ci";
+import { IoSettingsOutline } from "react-icons/io5";
+import { CiCoffeeCup } from "react-icons/ci";
 interface MenuItemProps {
-  icon: ReactElement
-  children: React.ReactNode
-  to: string
+  icon: ReactElement;
+  children: React.ReactNode;
+  to: string;
 }
 
 export const customerMenu = [
   {
-    path: '/',
+    path: "/",
     icon: <BiHomeSmile className="w-5 h-5" />,
-    label: 'Home Page',
+    label: "Home Page",
   },
   {
-    path: '/my-orders',
+    path: "/my-orders",
     icon: <CiBookmarkMinus className="w-5 h-5" />,
-    label: 'My orders',
+    label: "My orders",
   },
   {
-    path: '/setting',
+    path: "/setting",
     icon: <IoSettingsOutline className="w-5 h-5" />,
-    label: 'Setting',
+    label: "Setting",
   },
-]
+];
 
 export const sellerMenu = [
   {
-    path: '/seller-home',
+    path: "/seller-home",
     icon: <BiHomeSmile className="w-5 h-5" />,
-    label: 'Home Page',
+    label: "Home Page",
   },
   {
-    path: '/orders-history',
+    path: "/orders-history",
     icon: <CiBookmarkMinus className="w-5 h-5" />,
-    label: 'Order History',
+    label: "Order History",
   },
   {
-    path: '/upload',
+    path: "/upload",
     icon: <CiCoffeeCup className="w-5 h-5" />,
-    label: 'Add Product',
+    label: "Add Product",
   },
-]
+];
 
 const MenuItem = ({ icon, children, to }: MenuItemProps) => {
   return (
@@ -53,15 +53,15 @@ const MenuItem = ({ icon, children, to }: MenuItemProps) => {
         to={to}
         className={({ isActive }) =>
           isActive
-            ? 'flex items-center text-[#FFA16C] border-r-[3px] border-[#FFA16C]'
-            : 'flex'
+            ? "flex items-center text-[#FFA16C] border-r-[3px] border-[#FFA16C]"
+            : "flex"
         }
       >
         {icon}
         <span className="ml-2">{children}</span>
       </NavLink>
     </li>
-  )
-}
+  );
+};
 
-export default MenuItem
+export default MenuItem;

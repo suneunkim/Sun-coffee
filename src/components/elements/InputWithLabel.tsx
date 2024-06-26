@@ -1,18 +1,18 @@
-import { FieldErrors, UseFormRegisterReturn } from 'react-hook-form'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { FieldErrors, UseFormRegisterReturn } from "react-hook-form";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 interface InputProps {
-  id: string
-  label: string
-  type: string
-  disabled?: boolean
-  formatPrice?: boolean
-  register: UseFormRegisterReturn
-  errors: FieldErrors
-  textarea?: boolean
-  checkbox?: boolean
-  [key: string]: any
+  id: string;
+  label: string;
+  type: string;
+  disabled?: boolean;
+  formatPrice?: boolean;
+  register: UseFormRegisterReturn;
+  errors: FieldErrors;
+  textarea?: boolean;
+  checkbox?: boolean;
+  [key: string]: any;
 }
 
 const InputUi = ({
@@ -29,12 +29,12 @@ const InputUi = ({
     <div
       className={`
       p-1
-      ${checkbox && 'flex justify-end items-center space-x-2'}
+      ${checkbox && "flex justify-end items-center space-x-2"}
       `}
     >
       <Label
         className={`
-      ${errors[id] && 'text-rose-500'}
+      ${errors[id] && "text-rose-500"}
       `}
         htmlFor={id}
       >
@@ -43,8 +43,8 @@ const InputUi = ({
       <div className="relative flex items-center">
         <Input
           className={`
-        ${checkbox && 'w-4'}
-        ${formatPrice && 'pl-8'}
+        ${checkbox && "w-4"}
+        ${formatPrice && "pl-8"}
         focus:border-[#FFA16C] focus:outline-none focus:ring-1 focus:ring-[#FFA16C]
         `}
           id={id}
@@ -57,7 +57,7 @@ const InputUi = ({
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default InputUi
+export default InputUi;

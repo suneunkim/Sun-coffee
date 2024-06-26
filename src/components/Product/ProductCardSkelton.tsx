@@ -1,7 +1,7 @@
-import { Skeleton } from '@/components/ui/skeleton'
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Props {
-  productsPerRow: number
+  productsPerRow: number;
 }
 
 const ProductCardSkelton = ({ productsPerRow }: Props) => {
@@ -17,7 +17,7 @@ const ProductCardSkelton = ({ productsPerRow }: Props) => {
         </div>
       ))}
     </>
-  )
-}
+  );
+};
 
-export default ProductCardSkelton
+export default ProductCardSkelton;

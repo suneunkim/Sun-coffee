@@ -1,11 +1,11 @@
-import Nav from '@/components/common/Nav'
-import SearchBar from '@/components/common/SearchBar'
-import { sellerMenu } from '@/components/common/MenuItem'
-import { useQueryOrderList } from '@/api/productQueries'
-import SellerOrderHistory from '@/components/SellerOrderHistory/SellerOrderList'
+import Nav from "@/components/common/Nav";
+import SearchBar from "@/components/common/SearchBar";
+import { sellerMenu } from "@/components/common/MenuItem";
+import { useQueryOrderList } from "@/api/productQueries";
+import SellerOrderHistory from "@/components/SellerOrderHistory/SellerOrderList";
 
 const OrderHistory = () => {
-  const { data } = useQueryOrderList()
+  const { data } = useQueryOrderList();
   return (
     <main className="bg-gray-50 flex">
       <Nav customerMenu={sellerMenu} sellerHome />
@@ -18,7 +18,7 @@ const OrderHistory = () => {
         </section>
       </section>
     </main>
-  )
-}
+  );
+};
 
-export default OrderHistory
+export default OrderHistory;

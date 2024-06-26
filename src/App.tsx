@@ -1,16 +1,18 @@
-import { Routes, Route } from 'react-router-dom'
-import './index.css'
-import { Suspense, lazy } from 'react'
-import Loading from './components/common/Loading'
-const Home = lazy(() => import('./pages/Home'))
-const Login = lazy(() => import('./pages/auth/Login'))
-const Register = lazy(() => import('./pages/auth/Register'))
-const SellerHome = lazy(() => import('./pages/seller/SellerHome'))
-const ProtectedRoute = lazy(() => import('./components/routing/ProtectedRoute'))
-const UploadProduct = lazy(() => import('./pages/seller/UploadProduct'))
-const CategoryPage = lazy(() => import('./pages/CategoryPage'))
-const MyOrder = lazy(() => import('./pages/MyOrder'))
-const OrderHistory = lazy(() => import('./pages/seller/OrderHistory'))
+import { Routes, Route } from "react-router-dom";
+import "./index.css";
+import { Suspense, lazy } from "react";
+import Loading from "./components/common/Loading";
+const Home = lazy(() => import("./pages/Home"));
+const Login = lazy(() => import("./pages/auth/Login"));
+const Register = lazy(() => import("./pages/auth/Register"));
+const SellerHome = lazy(() => import("./pages/seller/SellerHome"));
+const ProtectedRoute = lazy(
+  () => import("./components/routing/ProtectedRoute"),
+);
+const UploadProduct = lazy(() => import("./pages/seller/UploadProduct"));
+const CategoryPage = lazy(() => import("./pages/CategoryPage"));
+const MyOrder = lazy(() => import("./pages/MyOrder"));
+const OrderHistory = lazy(() => import("./pages/seller/OrderHistory"));
 
 function App() {
   return (
@@ -33,7 +35,7 @@ function App() {
         <Route path="/upload" element={<UploadProduct />} />
       </Routes>
     </Suspense>
-  )
+  );
 }
 
-export default App
+export default App;
