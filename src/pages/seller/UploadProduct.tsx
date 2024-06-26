@@ -12,6 +12,7 @@ import { doc, setDoc } from 'firebase/firestore'
 import { db } from '@/firebase'
 import UploadCategoryBtn from '@/components/Product/UploadCategoryBtn'
 import { useNavigate } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 
 const UploadProduct = () => {
   const userProfile = useCurrentUser()
@@ -80,6 +81,9 @@ const UploadProduct = () => {
 
   return (
     <main className="bg-gray-50 flex">
+      <Helmet>
+        <meta name="robots" content="noindex,nofollow" />
+      </Helmet>
       <Nav customerMenu={sellerMenu} sellerHome />
       <section className="flex flex-col px-5 w-[30rem] bg-white p-9 ml-10 rounded-xl shadow-lg">
         <h3 className="font-semibold mb-5">상품 등록하기</h3>
