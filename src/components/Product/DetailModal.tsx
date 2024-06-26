@@ -95,6 +95,7 @@ const DetailModal = ({ product, onClose, onModal }: Props) => {
               <div key={product.name} onClick={() => onModal(product)}>
                 <img
                   src={product?.imageURL}
+                  alt={product.name}
                   className="w-[270px] object-contain bg-gray-100"
                 />
                 <h4 className="text-center p-2">{product?.name}</h4>

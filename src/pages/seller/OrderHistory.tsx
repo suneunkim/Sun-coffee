@@ -3,11 +3,15 @@ import SearchBar from '@/components/common/SearchBar'
 import { sellerMenu } from '@/components/common/MenuItem'
 import { useQueryOrderList } from '@/api/productQueries'
 import SellerOrderHistory from '@/components/SellerOrderHistory/SellerOrderList'
+import { Helmet } from 'react-helmet-async'
 
 const OrderHistory = () => {
   const { data } = useQueryOrderList()
   return (
     <main className="bg-gray-50 flex">
+      <Helmet>
+        <meta name="robots" content="noindex,nofollow" />
+      </Helmet>
       <Nav customerMenu={sellerMenu} sellerHome />
       <section className="flex flex-col px-5">
         <SearchBar />
