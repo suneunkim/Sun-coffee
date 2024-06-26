@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 const useProductModal = () => {
   const [selectedProduct, setSelectedProduct] = useState<TypeProduct | null>(
-    null
+    null,
   )
   const [showDetailModal, setShowDetailModal] = useState(false)
 

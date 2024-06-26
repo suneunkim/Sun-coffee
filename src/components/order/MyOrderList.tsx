@@ -23,12 +23,12 @@ const MyOrderList = ({ data }: Props) => {
                 data.order_status === '주문 완료'
                   ? 'bg-orange-200'
                   : data.order_status === '주문 취소'
-                  ? 'bg-red-200'
-                  : data.order_status === '제조 대기'
-                  ? 'bg-yellow-200'
-                  : data.order_status === '제조 완료'
-                  ? 'bg-green-200'
-                  : 'bg-gray-200'
+                    ? 'bg-red-200'
+                    : data.order_status === '제조 대기'
+                      ? 'bg-yellow-200'
+                      : data.order_status === '제조 완료'
+                        ? 'bg-green-200'
+                        : 'bg-gray-200'
               }`}
             >
               {data.order_status}

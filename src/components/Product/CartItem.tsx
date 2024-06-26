@@ -38,7 +38,7 @@ const CartItem = ({ data, onRemove, onChangeQuantity }: Props) => {
               <div className="flex items-center space-x-3 mt-5">
                 <p className="mr-5">
                   {(Number(data.product?.price) * data.quantity).toLocaleString(
-                    'ko-KR'
+                    'ko-KR',
                   )}
                   원
                 </p>

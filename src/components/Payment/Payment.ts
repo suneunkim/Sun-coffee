@@ -15,7 +15,7 @@ const initialzeIMP = () => {
 const startPayment = (
   paymentData: paymentDataProps,
   orderData: TypeOrderData,
-  onSuccess: () => void
+  onSuccess: () => void,
 ) => {
   initialzeIMP()
 

@@ -8,7 +8,7 @@ const useOrderStatus = () => {
 
   const updateOrderStatus = async (
     orderId: string,
-    newStatus: TypeOrderStatus
+    newStatus: TypeOrderStatus,
   ) => {
     const orderRef = doc(db, 'orders', orderId)
     try {

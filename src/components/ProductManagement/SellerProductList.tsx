@@ -10,7 +10,7 @@ import { useQuerySellerProducts } from '@/api/productQueries'
 const SellerProductList = () => {
   const { data: products } = useQuerySellerProducts()
   const [selectedProduct, setSelectedProduct] = useState<TypeProduct | null>(
-    null
+    null,
   )
   const [showEditModal, setShowEditModal] = useState(false)
 

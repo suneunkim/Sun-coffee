@@ -1,6 +1,6 @@
 const formattedDate = (timestamp: any) => {
   const date = new Date(
-    timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000
+    timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000,
   )
   const formattedDate = date.toLocaleString('ko-kr', {
     year: 'numeric',

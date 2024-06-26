@@ -31,7 +31,7 @@ const Register = () => {
       const userCredential = await createUserWithEmailAndPassword(
         fireauth,
         email,
-        password
+        password,
       )
       const user = userCredential.user
       const userDoc = doc(db, 'users', user.uid)
@@ -55,7 +55,7 @@ const Register = () => {
         setErrorMessage('올바른 이메일 형식이 아닙니다.')
       } else if (errorCode === 'auth/weak-password') {
         setErrorMessage(
-          '비밀번호 8자리 이상은 //대문자, 소문자, 숫자, 특수문자 중 3종류 이상을 포함해야 합니다.'
+          '비밀번호 8자리 이상은 //대문자, 소문자, 숫자, 특수문자 중 3종류 이상을 포함해야 합니다.',
         )
       } else {
         setErrorMessage('회원가입에 실패하였습니다.')

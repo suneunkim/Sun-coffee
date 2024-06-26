@@ -75,5 +75,5 @@ const ProductPreview = React.memo(
         ))}
       </div>
     )
-  }
+  },
 )

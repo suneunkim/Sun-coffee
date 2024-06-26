@@ -33,7 +33,7 @@ export const PaymentProvider = ({ children }: TypeChildren) => {
   const [isOpen, setIsOpen] = useState(false)
   const [orderData, setOrderData] = useState<TypeOrderData | null>(null) // DB에 저장할 데이터
   const [orderUserData, setOrderUserData] = useState<TypeOrderUserData | null>(
-    null
+    null,
   ) // 결제모달창 유저 정보
 
   const openModal = () => setIsOpen(true)

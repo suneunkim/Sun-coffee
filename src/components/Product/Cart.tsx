@@ -82,7 +82,7 @@ const Cart = ({ isCartVisible }: Props) => {
                 <Button
                   onClick={() => handlerOrderType('Dine in')}
                   className={`rounded-3xl b border hover:text-white ${getButtonStyle(
-                    'Dine in'
+                    'Dine in',
                   )}`}
                 >
                   Dine in
@@ -90,14 +90,14 @@ const Cart = ({ isCartVisible }: Props) => {
                 <Button
                   onClick={() => handlerOrderType('Take out')}
                   className={`rounded-3xl b border hover:text-white ${getButtonStyle(
-                    'Take out'
+                    'Take out',
                   )}`}
                 >
                   Take away
                 </Button>
                 <Button
                   className={`rounded-3xl b border hover:text-white ${getButtonStyle(
-                    'Delivery'
+                    'Delivery',
                   )}`}
                   disabled
                 >
