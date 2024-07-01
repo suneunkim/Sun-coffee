@@ -3,6 +3,7 @@ import './index.css'
 import { Suspense, lazy } from 'react'
 import Loading from './components/common/Loading'
 import { HelmetProvider } from 'react-helmet-async'
+import SearchProduct from './pages/search/SearchProduct'
 const Home = lazy(() => import('./pages/Home'))
 const Login = lazy(() => import('./pages/auth/Login'))
 const Register = lazy(() => import('./pages/auth/Register'))
@@ -33,6 +34,7 @@ function App() {
           <Route path="/auth/register" element={<Register />} />
           <Route path="/auth/login" element={<Login />} />
           <Route path="/upload" element={<UploadProduct />} />
+          <Route path="/search/:keyword" element={<SearchProduct />} />
         </Routes>
       </HelmetProvider>
     </Suspense>

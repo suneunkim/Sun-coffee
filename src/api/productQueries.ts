@@ -4,6 +4,7 @@ import {
   fetchCategoryProducts,
   fetchOrderList,
   fetchRecommendProduct,
+  fetchSearchProducts,
   fetchSellerProducts,
 } from './fetchProducts'
 
@@ -12,6 +13,16 @@ export const useQueryInitialProducts = (category: TypeCategory) => {
   return useQuery({
     queryKey: ['initial-products', category],
     queryFn: () => fetchCategoryProducts(category, null),
+    refetchOnWindowFocus: false,
+  })
+}
+
+// 검색
+export const useQuerySearched = (searchTerm: string) => {
+  return useQuery({
+    queryKey: ['searched', searchTerm],
+    queryFn: () => fetchSearchProducts(searchTerm),
+    enabled: !!searchTerm,
     refetchOnWindowFocus: false,
   })
 }

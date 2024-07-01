@@ -18,7 +18,12 @@ const CategoryPage = () => {
   const [orderByPrice, setOrderByPrice] = useState(false)
 
   const validCategories: TypeCategory[] = ['coffee', 'food', 'non-coffee']
-  if (!category || !validCategories.includes(category as TypeCategory)) {
+  const isSearchPath = location.pathname.startsWith('/search')
+  if (
+    !category ||
+    !validCategories.includes(category as TypeCategory) ||
+    isSearchPath
+  ) {
     return <Navigate to="/" replace />
   }
 
