@@ -94,7 +94,7 @@ const Login = () => {
         </Link>
       </div>
       <Link to="/">
-        <button>홈으로</button>
+        <button className="p-5">홈으로</button>
       </Link>
     </div>
   )

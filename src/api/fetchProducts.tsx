@@ -48,9 +48,24 @@ export const fetchCategoryProducts = async (
   const products = querySnapshot.docs.map((doc) => ({
     ...(doc.data() as TypeProduct),
   }))
-  //console.log('Last Visible Document:', lastVisible)
-  //console.log('querySnapshot', querySnapshot)
   return { products, nextPage: lastVisible }
+}
+
+// 검색
+export const fetchSearchProducts = async (searchTerm: string) => {
+  const productsCol = collection(db, 'products')
+  const q = query(
+    productsCol,
+    where('name', '>=', searchTerm),
+    where('name', '<=', searchTerm + '\uf8ff'),
+    orderBy('name')
+  )
+
+  const querySnapshot = await getDocs(q)
+  const products = querySnapshot.docs.map((doc) => ({
+    ...doc.data(),
+  }))
+  return products
 }
 
 // 상품 디테일 모달의 추천 상품 3가지
